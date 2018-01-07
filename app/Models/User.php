@@ -17,5 +17,8 @@ class User extends Model
      protected $dateFormat = 'U';
      protected $guarded = [];
 
-
+     public function setPasswordAttribute($password)
+     {
+         $this->attributes['password'] = password_hash($password, PASSWORD_BCRYPT);
+     }
 }
