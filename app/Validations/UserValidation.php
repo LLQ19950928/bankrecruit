@@ -4,6 +4,8 @@
  * User: Administrator
  * Date: 2018/1/6
  * Time: 11:24
+ *
+ * 用户注册登录校验
  */
 
 namespace App\Validations;
@@ -11,10 +13,15 @@ namespace App\Validations;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+
 
 class UserValidation
 {
+    /**
+     * @param Request $request
+     * @return mixed
+     * 用户注册校验
+     */
     public function validateRegister(Request $request)
     {
          $rules = [
@@ -54,6 +61,11 @@ class UserValidation
          return Validator::make($request->post(), $rules, $messages, $attributes);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * 用户登录校验
+     */
     public function validateLogin(Request $request)
     {
         $rules = [

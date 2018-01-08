@@ -9,9 +9,8 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
 
-class SchoolResume extends Model
+class SchoolResume extends BaseModel
 {
     protected $table = "school_resume";
     protected $dateFormat = 'U';

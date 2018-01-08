@@ -13,7 +13,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
+use App\Models\Education;
 use App\Models\SchoolResume;
+use App\Models\User;
 use App\Models\UserInfo;
 use App\Validations\ResumeValidation;
 use Illuminate\Http\Request;
@@ -21,39 +23,6 @@ use Illuminate\Http\Request;
 class ResumeController extends Controller
 {
 
-    /**
-     * 编辑简历
-     */
-    public function editResume()
-    {
-
-    }
-
-    /**
-     * 预览简历
-     */
-    public function previewResume()
-    {
-        
-    }
-
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     * 显示个人基本信息
-     */
-    public function displayUserInfo()
-    {
-        $schoolResume = SchoolResume::where('user_id', session('userId', 0))->first();
-        $infoId = $schoolResume->info_id;
-        if ($infoId) {
-            $userInfo = UserInfo::find($infoId);
-            $userInfoArr = $userInfo->toArray();
-            return response()->json(ApiException::success('', $userInfoArr));
-        }else {
-            return response()->json(ApiException::success('', []));
-        }
-
-    }
 
     /**
      * @param Request $request
@@ -77,6 +46,67 @@ class ResumeController extends Controller
         }
         if ($result) {
             return response()->json(ApiException::success());
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 编辑用户最高学历
+     */
+    public function editUserHighestEducation(Request $request)
+    {
+         $resumeValidation = new ResumeValidation();
+         $validator = $resumeValidation->validateHighestEducation($request);
+         if ($validator->fails()) {
+             return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                 $validator->errors()->first()));
+         }
+         $user = User::find(session('userId', 0));
+         if (!$user) {
+             return response()->json(ApiException::error(ApiException::USER_NOT_EXISTS));
+         }
+         //修改用户的最高简历
+         $result = $user->update($request->post());
+         if ($result) {
+             return response()->json(ApiException::success());
+         }else {
+             return response()->json(ApiException::error(ApiException::FAILED));
+         }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 编辑用户教育背景
+     */
+    public function editUserEducation(Request $request)
+    {
+        $resumeValidation = new ResumeValidation();
+        $validator = $resumeValidation->validateUserEducation($request);
+        if ($validator->fails()) {
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                $validator->errors()->first()));
+        }
+        $education = Education::create($request->post());
+        if (!$education) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        $schoolResume = SchoolResume::where('user_id', session('userId', 0))->first();
+        $result = $education->update(['resume_id' => $schoolResume->id]);
+        if ($result) {
+
+            $selectedArr = [
+                'entrance_time' => $education->entrance_time,
+                'graduation_time' => $education->graduation_time,
+                'school_name' => $education->school_name,
+                'academy_name' => $education->academy_name,
+                'profession_name' => $education->profession_name,
+                'acquire_education' => $education->acquire_education
+            ];
+            return response()->json(ApiException::success('', $selectedArr));
         }else {
             return response()->json(ApiException::error(ApiException::FAILED));
         }

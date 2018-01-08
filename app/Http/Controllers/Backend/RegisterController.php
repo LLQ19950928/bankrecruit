@@ -20,13 +20,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    /**
-     * 显示注册页面
-     */
-    public function display()
-    {
-         return 'hhh';
-    }
+
 
     /**
      * 处理用户注册
@@ -37,7 +31,7 @@ class RegisterController extends Controller
         $validator = $userValidation->validateRegister($request);
         //验证数据的合法性
         if ($validator->fails()) {
-            return response()->json($validator->errors()->first());
+            return response()->json(ApiException::error(ApiException::FAILED, $validator->errors()->first()));
         }
         //存入数据库
         $result = User::create($request->except('password_confirmation'));

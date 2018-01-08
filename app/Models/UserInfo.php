@@ -9,9 +9,8 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
 
-class UserInfo extends Model
+class UserInfo extends BaseModel
 {
     protected $table = 'user_info';
     protected $dateFormat = 'U';

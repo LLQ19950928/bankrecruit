@@ -14,7 +14,6 @@ namespace App\Http\Controllers\Backend;
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 
-use App\Models\SchoolResume;
 use App\Models\User;
 use App\Validations\UserValidation;
 use Illuminate\Http\Request;
@@ -22,13 +21,7 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
 
-    /**
-     * 显示登录页面
-     */
-    public function display()
-    {
 
-    }
 
     /**
      * @param Request $request
@@ -40,7 +33,7 @@ class LoginController extends Controller
           $userValidation = new UserValidation();
           $validator = $userValidation->validateLogin($request);
           if ($validator->fails()) {
-              return response()->json($validator->errors()->first());
+              return response()->json(ApiException::error(ApiException::FAILED, $validator->errors()->first()));
           }
           //验证密码是否正确
           $username = $request->post('username');
