@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-01-05 13:38:03
+Date: 2018-01-08 17:06:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,17 +96,40 @@ CREATE TABLE `education` (
   `entrance_time` int(11) NOT NULL DEFAULT '0' COMMENT '入学时间',
   `graduation_time` int(11) NOT NULL DEFAULT '0' COMMENT '毕业时间',
   `school_location` tinyint(4) NOT NULL DEFAULT '0' COMMENT '学校属地',
-  `academy_name` varchar(20) DEFAULT NULL COMMENT '院系',
-  `profession_name` varchar(20) DEFAULT NULL COMMENT '专业',
+  `school_name` tinyint(4) NOT NULL DEFAULT '0' COMMENT '学校名称',
+  `academy_name` varchar(20) NOT NULL DEFAULT '' COMMENT '院系',
+  `profession_name` varchar(20) NOT NULL DEFAULT '' COMMENT '专业',
   `train_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '培养方式',
   `education_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '教育类型',
-  `user_id` int(11) NOT NULL DEFAULT '1' COMMENT '求职者的id',
+  `resume_id` int(11) NOT NULL DEFAULT '0' COMMENT '简历id',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of education
 -- ----------------------------
+INSERT INTO `education` VALUES ('1', '1', '1', '1', '1', '1', '1', '计算科学学院', '软件工程', '1', '1', '1', '1515384484', '1515384484');
+INSERT INTO `education` VALUES ('7', '1', '1', '1515384484', '1515384484', '1', '1', '计算科学学院', '软件工程', '1', '1', '1', '1515398501', '1515398501');
+
+-- ----------------------------
+-- Table structure for education_type
+-- ----------------------------
+DROP TABLE IF EXISTS `education_type`;
+CREATE TABLE `education_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(10) NOT NULL DEFAULT '' COMMENT '教育类型',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of education_type
+-- ----------------------------
+INSERT INTO `education_type` VALUES ('1', '全日制');
+INSERT INTO `education_type` VALUES ('2', '在职');
+INSERT INTO `education_type` VALUES ('3', '成人教育');
+INSERT INTO `education_type` VALUES ('4', '电大');
 
 -- ----------------------------
 -- Table structure for evaluate
@@ -122,6 +145,41 @@ CREATE TABLE `evaluate` (
 -- ----------------------------
 -- Records of evaluate
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for h_degree
+-- ----------------------------
+DROP TABLE IF EXISTS `h_degree`;
+CREATE TABLE `h_degree` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL DEFAULT '' COMMENT '最高学历名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of h_degree
+-- ----------------------------
+INSERT INTO `h_degree` VALUES ('1', '学士');
+INSERT INTO `h_degree` VALUES ('2', '硕士');
+INSERT INTO `h_degree` VALUES ('3', '博士');
+
+-- ----------------------------
+-- Table structure for h_education
+-- ----------------------------
+DROP TABLE IF EXISTS `h_education`;
+CREATE TABLE `h_education` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL DEFAULT '' COMMENT '最高学位',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of h_education
+-- ----------------------------
+INSERT INTO `h_education` VALUES ('1', '高中');
+INSERT INTO `h_education` VALUES ('2', '高职');
+INSERT INTO `h_education` VALUES ('3', '中专');
+INSERT INTO `h_education` VALUES ('4', '大学本科');
 
 -- ----------------------------
 -- Table structure for job
@@ -181,6 +239,42 @@ CREATE TABLE `language_type` (
 -- ----------------------------
 -- Records of language_type
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for nation
+-- ----------------------------
+DROP TABLE IF EXISTS `nation`;
+CREATE TABLE `nation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nation` varchar(6) NOT NULL DEFAULT '' COMMENT '民族名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of nation
+-- ----------------------------
+INSERT INTO `nation` VALUES ('1', '汉族');
+INSERT INTO `nation` VALUES ('2', '满族');
+INSERT INTO `nation` VALUES ('3', '壮族');
+INSERT INTO `nation` VALUES ('4', '畲族');
+
+-- ----------------------------
+-- Table structure for polity
+-- ----------------------------
+DROP TABLE IF EXISTS `polity`;
+CREATE TABLE `polity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `political_name` varchar(20) NOT NULL DEFAULT '' COMMENT '政治面貌',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of polity
+-- ----------------------------
+INSERT INTO `polity` VALUES ('1', '群众');
+INSERT INTO `polity` VALUES ('2', '中共预备党员');
+INSERT INTO `polity` VALUES ('3', '共青团员');
+INSERT INTO `polity` VALUES ('4', '中共党员');
 
 -- ----------------------------
 -- Table structure for practice
@@ -265,28 +359,69 @@ CREATE TABLE `recurit_company` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for school_location
+-- ----------------------------
+DROP TABLE IF EXISTS `school_location`;
+CREATE TABLE `school_location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_name` varchar(10) NOT NULL DEFAULT '' COMMENT '学校属地',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of school_location
+-- ----------------------------
+INSERT INTO `school_location` VALUES ('1', '广东省');
+INSERT INTO `school_location` VALUES ('2', '北京市');
+INSERT INTO `school_location` VALUES ('3', '上海市');
+INSERT INTO `school_location` VALUES ('4', '江苏省');
+INSERT INTO `school_location` VALUES ('5', '浙江省');
+
+-- ----------------------------
+-- Table structure for school_name
+-- ----------------------------
+DROP TABLE IF EXISTS `school_name`;
+CREATE TABLE `school_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_name` varchar(20) NOT NULL DEFAULT '' COMMENT '学校名称',
+  `location_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of school_name
+-- ----------------------------
+INSERT INTO `school_name` VALUES ('1', '中山大学', '1');
+INSERT INTO `school_name` VALUES ('2', '华南理工大学', '1');
+INSERT INTO `school_name` VALUES ('3', '华南农业大学', '1');
+INSERT INTO `school_name` VALUES ('4', '仲恺农业工程学院', '1');
+
+-- ----------------------------
 -- Table structure for school_resume
 -- ----------------------------
 DROP TABLE IF EXISTS `school_resume`;
 CREATE TABLE `school_resume` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `info_id` int(11) NOT NULL DEFAULT '1' COMMENT '个人基本信息id',
-  `education_id` int(11) NOT NULL DEFAULT '1' COMMENT '教育背景id',
-  `language_id` int(11) NOT NULL DEFAULT '1' COMMENT '外语能力id',
-  `credit_id` int(11) NOT NULL DEFAULT '1' COMMENT '学分绩点id',
-  `bonus_id` int(11) NOT NULL DEFAULT '1' COMMENT '奖励情况id',
-  `punish_id` int(11) NOT NULL DEFAULT '1' COMMENT '处分情况id',
-  `practice_id` int(11) NOT NULL DEFAULT '1' COMMENT '社会实践id',
-  `skill_id` int(11) NOT NULL DEFAULT '1' COMMENT '技能id',
-  `evaluate_id` int(11) NOT NULL DEFAULT '1' COMMENT '自我评价id',
+  `info_id` int(11) NOT NULL DEFAULT '0' COMMENT '个人基本信息id',
+  `language_id` int(11) NOT NULL DEFAULT '0' COMMENT '外语能力id',
+  `credit_id` int(11) NOT NULL DEFAULT '0' COMMENT '学分绩点id',
+  `bonus_id` int(11) NOT NULL DEFAULT '0' COMMENT '奖励情况id',
+  `punish_id` int(11) NOT NULL DEFAULT '0' COMMENT '处分情况id',
+  `practice_id` int(11) NOT NULL DEFAULT '0' COMMENT '社会实践id',
+  `skill_id` int(11) NOT NULL DEFAULT '0' COMMENT '技能id',
+  `evaluate_id` int(11) NOT NULL DEFAULT '0' COMMENT '自我评价id',
   `resume_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '简历类型：0表示校园招聘简历，1表示社会招聘简历',
   `resume_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '简历状态：0表示未提交，1表示提交',
+  `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of school_resume
 -- ----------------------------
+INSERT INTO `school_resume` VALUES ('1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '4', '1515378130', '1515378885');
 
 -- ----------------------------
 -- Table structure for skill
@@ -317,6 +452,23 @@ CREATE TABLE `social_resume` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for train_type
+-- ----------------------------
+DROP TABLE IF EXISTS `train_type`;
+CREATE TABLE `train_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(10) NOT NULL DEFAULT '' COMMENT '培养方式名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of train_type
+-- ----------------------------
+INSERT INTO `train_type` VALUES ('1', '统分');
+INSERT INTO `train_type` VALUES ('2', '自筹');
+INSERT INTO `train_type` VALUES ('3', '定向');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -332,14 +484,16 @@ CREATE TABLE `user` (
   `certificates_number` varchar(18) NOT NULL DEFAULT '' COMMENT '证件号码',
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
-  `resume_id` int(11) NOT NULL DEFAULT '1' COMMENT '简历id',
-  `resume_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '简历类型',
+  `resume_type` int(11) NOT NULL DEFAULT '0' COMMENT '简历类型',
+  `highest_education` int(11) NOT NULL DEFAULT '0' COMMENT '最高学位',
+  `highest_degree` int(11) NOT NULL DEFAULT '0' COMMENT '最高学历',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('4', 'llq', '刘柳青', '2844019004@qq.com', '0', '18814142219', '$2y$10$umgZ14Lj5hrBAFf66USS9OObdelUECGE4WfUfsjJVEClogm2P9sgO', '0', '0', '1515378130', '1515383776', '0', '1', '1');
 
 -- ----------------------------
 -- Table structure for user_info
@@ -350,19 +504,20 @@ CREATE TABLE `user_info` (
   `name` varchar(20) NOT NULL DEFAULT '' COMMENT '姓名',
   `borth_at` varchar(12) NOT NULL DEFAULT '' COMMENT '出生年月',
   `gender` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别：0表示男，1表示女',
-  `nation` varchar(5) NOT NULL DEFAULT '' COMMENT '民族',
-  `family_at` varchar(20) NOT NULL DEFAULT '' COMMENT '家庭常住地',
-  `place_of_origin` varchar(20) NOT NULL DEFAULT '' COMMENT '籍贯',
+  `nation` tinyint(5) NOT NULL DEFAULT '0' COMMENT '民族',
+  `family_at` varchar(100) NOT NULL DEFAULT '' COMMENT '家庭常住地',
+  `place_of_origin` varchar(100) NOT NULL DEFAULT '' COMMENT '籍贯',
   `marry` tinyint(4) NOT NULL DEFAULT '0' COMMENT '婚姻状况',
   `political_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '政治面貌',
   `id_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '证件类别',
-  `id_number` varchar(100) NOT NULL DEFAULT '' COMMENT '证件类别',
+  `id_number` varchar(100) NOT NULL DEFAULT '' COMMENT '证件号码',
   `phone_number` varchar(20) NOT NULL DEFAULT '' COMMENT '联系方式',
-  `highest_education` tinyint(4) NOT NULL DEFAULT '0' COMMENT '最高学历',
-  `highest_degree` tinyint(4) NOT NULL DEFAULT '0' COMMENT '最高学位',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
+INSERT INTO `user_info` VALUES ('1', '刘柳青', '1995-09-28', '0', '1', '广东/梅州/梅江区', '广东/梅州/梅江区', '0', '0', '0', '0', '18814142219', '1515378885', '1515378885');
