@@ -61,9 +61,9 @@ class ResumeController extends Controller
     public function displayUserEducation()
     {
         //显示用户的最高学历
-        $userH = User::select('highest_education', 'highest_degree')->first(session('userId'));
+        $userH = User::findFirstById(session('userId'), ['highest_education', 'highest_degree']);
         //显示用户的教育背景
-        $resumeId = SchoolResume::select('id')->first(session('userId'));
+        $resumeId = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
         $educationBgs = Education::select('entrance_time', 'graduation_time', 'school_name',
             'academy_name', 'profession_name', 'acquire_education')->where('resume_id', $resumeId)->get();
         //返回数据

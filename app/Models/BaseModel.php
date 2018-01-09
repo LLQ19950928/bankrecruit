@@ -53,7 +53,28 @@ class BaseModel extends Model
     }
 
 
+    public static function findMoreByKey($key, $value, $columns=['*'], $toArray=false)
+    {
+        $models = self::where($key, $value)->get($columns);
 
+        if ($models) {
+
+            if ($toArray) {
+                $modelArr = [];
+                foreach ($models as $model) {
+                    $modelArr[] = $model->toArray();
+                }
+
+                return $modelArr;
+            }else {
+               return $models;
+            }
+
+        }
+
+        return $models->count();
+
+    }
 
 
 
