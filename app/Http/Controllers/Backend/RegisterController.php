@@ -31,7 +31,7 @@ class RegisterController extends Controller
         $validator = $userValidation->validateRegister($request);
         //验证数据的合法性
         if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::FAILED, $validator->errors()->first()));
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, $validator->errors()->first()));
         }
         //存入数据库
         $result = User::create($request->except('password_confirmation'));
@@ -39,7 +39,7 @@ class RegisterController extends Controller
             SchoolResume::create(['user_id' => $result->id]);
             return response()->json(ApiException::success('注册成功'));
         }else {
-            return response()->json(ApiException::error(ApiException::FAILED, '注册失败'));
+            return response()->json(ApiException::error(ApiException::REGISTER_FAILED));
         }
     }
 }

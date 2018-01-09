@@ -32,6 +32,8 @@ Route::group(['namespace' => 'Backend',
         Route::any('editusereducation', 'ResumeController@editUserEducation');
         Route::any('edituserinfo', 'ResumeController@editUserInfo');
     });
+
+    Route::any('test', 'TestController@test');
 });
 
 Route::group(['namespace' => 'Frontend',

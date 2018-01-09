@@ -33,19 +33,19 @@ class LoginController extends Controller
           $userValidation = new UserValidation();
           $validator = $userValidation->validateLogin($request);
           if ($validator->fails()) {
-              return response()->json(ApiException::error(ApiException::FAILED, $validator->errors()->first()));
+              return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, [$validator->errors()->first()]));
           }
           //验证密码是否正确
           $username = $request->post('username');
           $password = $request->post('password');
-          $user = User::where('username', $username)->first();
+          $user = User::findFirstByKey('username', $username);
           $hash = $user->password;
           if (password_verify($password, $hash)) {
               session(['userId' => $user->id]);
-              return response()->json(ApiException::success('登录成功'));
+              return response()->json(ApiException::success(ApiException::LOGIN_SUCCESS));
           }else {
               return response()->json(ApiException::error(
-                  ApiException::FAILED, '密码不正确'));
+                  ApiException::PASSWORD_ERROR));
           }
     }
 
@@ -55,6 +55,6 @@ class LoginController extends Controller
     public function loginOut(Request $request)
     {
         $request->session()->forget('user_id');
-        return response()->json(ApiException::success('退出登录成功'));
+        return response()->json(ApiException::success(ApiException::LOGIN_OUT_SUCCESS));
     }
 }

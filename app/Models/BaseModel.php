@@ -10,18 +10,28 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BaseModel extends Model
 {
-    public static function findById($id, $toArray=false)
+    public static function findFirstById($id, $columns=['*'], $toArray=false)
     {
-        $model = self::find($id);
+        try {
+            $model = self::findOrFail($id, $columns);
+        }catch (ModelNotFoundException $exception) {
+            return false;
+        }
+
         return $toArray ? $model->toArray() : $model;
     }
 
-    public static function findByIds(array $ids=[], $toArray=false)
+    public static function findMoreByIds(array $ids=[], $columns=['*'], $toArray=false)
     {
-        $models = self::find($ids);
+        try {
+            $models = self::findOrFail($ids, $columns);
+        }catch (ModelNotFoundException $exception) {
+            return false;
+        }
         $modelArr = [];
         if ($toArray) {
             foreach ($models as $model) {
@@ -31,11 +41,20 @@ class BaseModel extends Model
         return $toArray ? $modelArr : $models;
     }
 
-    public static function findByKey($key, $value, $toArray=false, $condition='=')
+    public static function findFirstByKey($key, $value, $columns=['*'], $toArray=false, $condition='=')
     {
-         $model = self::where($key, $condition, $value)->first();
+         try {
+             $model = self::where($key, $condition, $value)->firstOrFail($columns);
+         }catch (ModelNotFoundException $exception) {
+             return false;
+         }
+
          return $toArray ? $model->toArray() : $model;
     }
+
+
+
+
 
 
 }

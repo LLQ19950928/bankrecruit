@@ -37,12 +37,12 @@ class ResumeController extends Controller
             return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
                 $validator->errors()->first()));
         }
-        $schoolResume = SchoolResume::where('user_id', session('userId', 0))->first();
+        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId'));
         if ($schoolResume->info_id == 0) {
             $userInfo = UserInfo::create($request->post());
             $result = $schoolResume->update(['info_id' => $userInfo->id]);
         }else {
-            $result = UserInfo::where('id', $schoolResume->info_id)->update($request->post());
+            $result = UserInfo::findFirstById($schoolResume->info_id)->update($request->post());
         }
         if ($result) {
             return response()->json(ApiException::success());
@@ -64,7 +64,7 @@ class ResumeController extends Controller
              return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
                  $validator->errors()->first()));
          }
-         $user = User::find(session('userId', 0));
+         $user = User::findFirstById(session('userId', 0));
          if (!$user) {
              return response()->json(ApiException::error(ApiException::USER_NOT_EXISTS));
          }
@@ -94,7 +94,10 @@ class ResumeController extends Controller
         if (!$education) {
             return response()->json(ApiException::error(ApiException::FAILED));
         }
-        $schoolResume = SchoolResume::where('user_id', session('userId', 0))->first();
+        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId', 0));
+        if (!$schoolResume) {
+            return response()->json(ApiException::error(ApiException::RESUME_NOT_EXISTS));
+        }
         $result = $education->update(['resume_id' => $schoolResume->id]);
         if ($result) {
 
@@ -106,7 +109,7 @@ class ResumeController extends Controller
                 'profession_name' => $education->profession_name,
                 'acquire_education' => $education->acquire_education
             ];
-            return response()->json(ApiException::success('', $selectedArr));
+            return response()->json(ApiException::success(ApiException::SUCCESS, $selectedArr));
         }else {
             return response()->json(ApiException::error(ApiException::FAILED));
         }

@@ -42,12 +42,16 @@ class ResumeController extends Controller
      */
     public function displayUserInfo()
     {
-        $schoolResume = SchoolResume::where('user_id', session('userId', 0))->first();
+        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId', 0));
         $infoId = $schoolResume->info_id;
         if ($infoId) {
-            $userInfo = UserInfo::find($infoId);
-            $userInfoArr = $userInfo->toArray();
-            return response()->json(ApiException::success('', $userInfoArr));
+            $userInfoArr = UserInfo::findFirstById($infoId, ['*'], true);
+            if ($userInfoArr) {
+                return response()->json(ApiException::success(ApiException::SUCCESS, $userInfoArr));
+            }else {
+                return response()->json(ApiException::success(ApiException::FAILED));
+            }
+
         }else {
             return response()->json(ApiException::success());
         }
