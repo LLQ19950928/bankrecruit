@@ -32,13 +32,7 @@ class BaseModel extends Model
         }catch (ModelNotFoundException $exception) {
             return false;
         }
-        $modelArr = [];
-        if ($toArray) {
-            foreach ($models as $model) {
-                $modelArr[] = $model->toArray();
-            }
-        }
-        return $toArray ? $modelArr : $models;
+        return $toArray ? $models->all() : $models;
     }
 
     public static function findFirstByKey($key, $value, $columns=['*'], $toArray=false, $condition='=')
@@ -59,21 +53,21 @@ class BaseModel extends Model
 
         if ($models) {
 
-            if ($toArray) {
-                $modelArr = [];
-                foreach ($models as $model) {
-                    $modelArr[] = $model->toArray();
-                }
-
-                return $modelArr;
-            }else {
-               return $models;
-            }
-
+            return $toArray ? $models->all() : $models;
         }
 
-        return $models->count();
+        return false;
 
+    }
+
+    public static function findAll($columns=['*'], $toArray=false)
+    {
+        $models = self::all($columns);
+        if ($models) {
+
+            return $toArray ? $models->all() : $models;
+        }
+        return false;
     }
 
 

@@ -29,8 +29,12 @@ Route::group(['namespace' => 'Backend',
 
     Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
         Route::any('high', 'ResumeController@editUserHighestEducation');
-        Route::any('editusereducation', 'ResumeController@editUserEducation');
-        Route::any('edituserinfo', 'ResumeController@editUserInfo');
+        Route::any('editedu', 'ResumeController@editUserEducation');
+        Route::any('editinfo', 'ResumeController@editUserInfo');
+        Route::any('update', 'ResumeController@updateUserEducation');
+        Route::any('editlang', 'ResumeController@editUserForeignLanguage');
+        Route::any('updatelang', 'ResumeController@updateUserForeignLanguage');
+        Route::any('editcredit', 'ResumeController@editCredit');
     });
 
     Route::any('test', 'TestController@test');
@@ -50,7 +54,14 @@ Route::group(['namespace' => 'Frontend',
     Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
         Route::get('edit', 'ResumeController@editResume');
         Route::get('preview', 'ResumeController@previewResume');
-        Route::get('display', 'ResumeController@displayUserInfo');
+        Route::get('info', 'ResumeController@displayUserInfo');
+        Route::get('education', 'ResumeController@displayUserEducation');
+        Route::get('appointededu', 'ResumeController@displayAppointedUserEducation');
+        Route::get('acquiresn', 'ResumeController@acquireSchoolName');
+        Route::get('lang', 'ResumeController@displayUserForeignLanguages');
+        Route::get('appointedlang', 'ResumeController@displayAppointedUserForeignLanguages');
+        Route::get('acquirece', 'ResumeController@acquireCertificate');
+
     });
 });
 

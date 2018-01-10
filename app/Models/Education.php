@@ -18,12 +18,12 @@ class Education extends BaseModel
 
     public function getAcquireEducationAttribute($key)
     {
-         return (HEducation::findById($key))->name;
+         return (HEducation::findFirstById($key))->name;
     }
 
     public function getAcquireDegreeAttribute($key)
     {
-         return (HDegree::findById($key))->name;
+         return (HDegree::findFirstById($key))->name;
     }
 
     public function getEntranceTimeAttribute($key)
@@ -38,16 +38,16 @@ class Education extends BaseModel
 
     public function getSchoolNameAttribute($key)
     {
-         return (SchoolName::findById($key))->school_name;
+         return (SchoolName::findFirstById($key))->school_name;
     }
 
     public function getTrainTypeAttribute($key)
     {
-         return (TrainType::findById($key))->type;
+         return (TrainType::findFirstById($key))->type;
     }
 
     public function getEducationTypeAttribute($key)
     {
-        return (EducationType::findById($key))->type;
+        return (EducationType::findFirstById($key))->type;
     }
 }

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class ResumeValidation
+class ResumeValidation extends BaseValidation
 {
     /**
      * @param Request $request
@@ -112,6 +112,69 @@ class ResumeValidation
             'school_name'         => '学校名称',
             'train_type'          => '培养方式',
             'education_type'      => '教育类型'
+        ];
+
+        return Validator::make($request->post(), $rules, $messages, $attributes);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * 用户外语数据验证
+     */
+    public function validateUserForeignLanguage(Request $request)
+    {
+        $rules = [
+            'order'   => 'required|integer',
+            'type_id' => 'required|integer',
+            'certificate_level_id' => 'required|integer',
+            'grade' => 'required|numeric',
+            'acquire_date' => 'required|integer',
+            'content'      => 'between:0,500'
+        ];
+
+        $messages = [
+            'required' => ':attribute不能为空',
+            'integer'  => ':attribute必须是整数',
+            'numeric'  => ':attribute必须是数字',
+            'between'  => ':attribute字数范围必须在:max内'
+        ];
+
+        $attributes = [
+            'order' => '外语顺序',
+            'type_id' => '外语类型',
+            'certificate_level_id' => '证书级别',
+            'grade' => '成绩',
+            'acquire_date' => '获证日期',
+            'content' => '语种能力的描述'
+        ];
+
+        return Validator::make($request->post(), $rules, $messages, $attributes);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * 验证学分绩点
+     */
+    public function validateUserCredit(Request $request)
+    {
+        $rules = [
+            'course_count' => 'required|integer',
+            'gpa' => 'require|numeric',
+            'total_credit' => 'require|numeric',
+        ];
+
+        $messages = [
+            'required' => ':attribute不能为空',
+            'integer'  => ':attribute必须是整数',
+            'numeric'  => ':attribute必须是数字',
+        ];
+
+        $attributes = [
+            'course_count' => '必修课程科目数量',
+            'gpa' => '必修课学分绩点',
+            'total_credit' => '必修课程总学分',
         ];
 
         return Validator::make($request->post(), $rules, $messages, $attributes);

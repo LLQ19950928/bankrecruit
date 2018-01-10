@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 
-class UserValidation
+class UserValidation extends BaseValidation
 {
     /**
      * @param Request $request
