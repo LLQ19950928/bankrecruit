@@ -28,13 +28,22 @@ Route::group(['namespace' => 'Backend',
     });
 
     Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
+
         Route::any('high', 'ResumeController@editUserHighestEducation');
         Route::any('editedu', 'ResumeController@editUserEducation');
         Route::any('editinfo', 'ResumeController@editUserInfo');
         Route::any('update', 'ResumeController@updateUserEducation');
         Route::any('editlang', 'ResumeController@editUserForeignLanguage');
         Route::any('updatelang', 'ResumeController@updateUserForeignLanguage');
-        Route::any('editcredit', 'ResumeController@editCredit');
+        Route::any('editcredit', 'ResumeController@editUserCredit');
+        Route::any('editbonus', 'ResumeController@editUserBonus');
+        Route::any('updatebonus', 'ResumeController@updateUserBonus');
+
+        Route::any('editpunishment', 'ResumeController@editUserPunishment');
+        Route::any('updatepunishment', 'ResumeController@updateUserPunishment');
+
+        Route::any('editfamily', 'ResumeController@editFamilyMember');
+        Route::any('updatefamily', 'ResumeController@updateFamilyMember');
     });
 
     Route::any('test', 'TestController@test');
@@ -61,7 +70,13 @@ Route::group(['namespace' => 'Frontend',
         Route::get('lang', 'ResumeController@displayUserForeignLanguages');
         Route::get('appointedlang', 'ResumeController@displayAppointedUserForeignLanguages');
         Route::get('acquirece', 'ResumeController@acquireCertificate');
-
+        Route::get('credit', 'ResumeController@displayUserCredit');
+        Route::get('bonus', 'ResumeController@displayUserBonus');
+        Route::get('appointedbonus', 'ResumeController@displayAppointedUserBonus');
+        Route::get('punishment', 'ResumeController@displayUserPunishment');
+        Route::get('appointedpunishment', 'ResumeController@displayAppointedUserPunishment');
+        Route::get('familymember', 'ResumeController@displayFamilyMember');
+        Route::get('appointedfamilymember', 'ResumeController@displayAppointedFamilyMember');
     });
 });
 

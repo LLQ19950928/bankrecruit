@@ -13,6 +13,7 @@ namespace App\Validations;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 
 class ResumeValidation extends BaseValidation
@@ -161,8 +162,8 @@ class ResumeValidation extends BaseValidation
     {
         $rules = [
             'course_count' => 'required|integer',
-            'gpa' => 'require|numeric',
-            'total_credit' => 'require|numeric',
+            'gpa' => 'required|numeric',
+            'total_credit' => 'required|numeric',
         ];
 
         $messages = [
@@ -180,5 +181,85 @@ class ResumeValidation extends BaseValidation
         return Validator::make($request->post(), $rules, $messages, $attributes);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * 验证受到的奖励数据
+     */
+    public function validateUserBonus(Request $request)
+    {
+        $rules = [
+            'bonus_type' => ['required', Rule::in([0, 1])],
+            'bonus_belong' => ['required', Rule::in([0, 1])],
+            'bonus_company' => 'required',
+            'bonus_name' => 'required',
+            'bonus_date' => 'required'
+        ];
+
+        $messages = [
+            'required' => ':attribute不能为空',
+            'in' => ':attribute必须在0和1之间'
+        ];
+
+        $attributes = [
+            'bonus_type' => '奖励类别',
+            'bonus_belong' => '奖励归属',
+            'bonus_company' => '奖励单位',
+            'bonus_name' => '奖励名称',
+            'bonus_date' => '奖励时间'
+        ];
+        
+        return Validator::make($request->post(), $rules, $messages, $attributes);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * 检验受到的处分数据
+     */
+    public function validateUserPunishment(Request $request)
+    {
+        $rules = [
+            'punish_name' => 'required',
+            'punish_company' => 'required'
+        ];
+
+        $messages = [
+            'required' => ':attribute不能为空',
+
+        ];
+
+        $attributes = [
+            'punish_name' => '处分名称',
+            'punish_company' => '处分单位',
+        ];
+
+        return Validator::make($request->post(), $rules, $messages, $attributes);
+    }
+
+    public function validateFamilyMember(Request $request)
+    {
+        $rules = [
+            'call' => 'required',
+            'name' => 'required',
+            'broth_at' => 'required',
+            'company' => 'required',
+            'job' => 'required'
+        ];
+
+        $messages = [
+            'required' => ':attribute不能为空'
+        ];
+
+        $attributes = [
+            'call' => '称谓',
+            'name' => '姓名',
+            'broth_at' => '出生年月',
+            'company' => '工作单位',
+            'job' => '担任职务'
+        ];
+
+        return Validator::make($request->post(), $rules, $messages, $attributes);
+    }
 
 }

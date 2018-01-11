@@ -11,14 +11,17 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
+use App\Models\Bonus;
 use App\Models\Certificate;
 use App\Models\Credit;
 use App\Models\Education;
 use App\Models\EducationType;
+use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
 use App\Models\HDegree;
 use App\Models\HEducation;
 use App\Models\LanguageType;
+use App\Models\Punishment;
 use App\Models\SchoolLocation;
 use App\Models\SchoolName;
 use App\Models\SchoolResume;
@@ -174,10 +177,106 @@ class ResumeController extends Controller
      */
     public function displayUserCredit()
     {
-        $creditId = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->credit_id;
-        $credit = Credit::findFirstById($creditId, ['*'], true);
-
+        $creditId = (SchoolResume::findFirstByKey('user_id', session('userId'), ['credit_id']))->credit_id;
+        $credit = Credit::findFirstById($creditId, ['course_count', 'total_credit', 'gpa'], true);
         return response()->json(ApiException::success(ApiException::SUCCESS, $credit ? $credit : []));
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * 显示用户奖励情况
+     */
+    public function displayUserBonus()
+    {
+         $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+         $bonusArr = Bonus::findMoreByKey('resume_id', $id, ['*'], true);
+         return response()->json(ApiException::success(ApiException::SUCCESS, $bonusArr ? $bonusArr : []));
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 获取指定的奖励情况
+     */
+    public function displayAppointedUserBonus(Request $request)
+    {
+        $resumeValidation = new ResumeValidation();
+        $validator = $resumeValidation->validateId($request, 'bonusId', 'bonusId');
+        if ($validator->fails()) {
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                $validator->errors()->first()));
+        }
+        $bonus = Bonus::findFirstById($request->get('bonusId'), ['*'], true);
+        if (!$bonus) {
+            return response()->json(ApiException::error(ApiException::FAILED, $bonus));
+        }
+        return response()->json(ApiException::success(ApiException::SUCCESS, $bonus));
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * 显示用户处分情况
+     */
+    public function displayUserPunishment()
+    {
+        $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $punishArr = Punishment::findMoreByKey('resume_id', $id, ['id', 'punish_name', 'punish_company'], true);
+        return response()->json(ApiException::success(ApiException::SUCCESS, $punishArr ? $punishArr : []));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 获取指定的处分情况
+     */
+    public function displayAppointedUserPunishment(Request $request)
+    {
+        $resumeValidation = new ResumeValidation();
+        $validator = $resumeValidation->validateId($request, 'punishmentId', 'punishmentId');
+        if ($validator->fails()) {
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                $validator->errors()->first()));
+        }
+        $punishment = Punishment::findFirstById($request->get('punishmentId'),
+            ['id', 'punish_name', 'punish_company'], true);
+        if (!$punishment) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        return response()->json(ApiException::success(ApiException::SUCCESS, $punishment));
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * 显示用户的家庭成员
+     */
+    public function displayFamilyMember()
+    {
+        $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $data = FamilyMember::findMoreByKey('resume_id', $id, ['call', 'name',
+            'broth_at', 'company', 'job'], true);
+        return response()->json(ApiException::success(ApiException::SUCCESS, $data ? $data : []));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 显示指定的家庭成员信息
+     */
+    public function displayAppointedFamilyMember(Request $request)
+    {
+        $resumeValidation = new ResumeValidation();
+        $validator = $resumeValidation->validateId($request, 'familyId', 'familyId');
+        if ($validator->fails()) {
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                $validator->errors()->first()));
+        }
+        $familyMember = FamilyMember::findFirstById($request->get('familyId'), ['id', 'call', 'name',
+            'broth_at', 'company', 'job'], true);
+        if (!$familyMember) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        return response()->json(ApiException::success(ApiException::SUCCESS, $familyMember));
     }
 
     /**
