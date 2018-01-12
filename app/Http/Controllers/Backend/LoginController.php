@@ -14,6 +14,8 @@ namespace App\Http\Controllers\Backend;
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 
+
+use App\Logic\Backend\LoginLogic;
 use App\Models\User;
 use App\Validations\UserValidation;
 use Illuminate\Http\Request;
@@ -36,12 +38,9 @@ class LoginController extends Controller
               return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, [$validator->errors()->first()]));
           }
           //验证密码是否正确
-          $username = $request->post('username');
-          $password = $request->post('password');
-          $user = User::findFirstByKey('username', $username);
-          $hash = $user->password;
-          if (password_verify($password, $hash)) {
-              session(['userId' => $user->id]);
+          $loginLogic = new LoginLogic();
+          if ($loginLogic->checkPassword($request)) {
+
               return response()->json(ApiException::success(ApiException::LOGIN_SUCCESS));
           }else {
               return response()->json(ApiException::error(

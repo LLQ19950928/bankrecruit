@@ -11,26 +11,22 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
+use App\Logic\Frontend\ResumeLogic;
 use App\Models\Bonus;
 use App\Models\Certificate;
 use App\Models\Credit;
 use App\Models\Education;
-use App\Models\EducationType;
 use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
-use App\Models\HDegree;
-use App\Models\HEducation;
 use App\Models\LanguageType;
+use App\Models\Nation;
+use App\Models\Polity;
 use App\Models\Punishment;
-use App\Models\SchoolLocation;
 use App\Models\SchoolName;
 use App\Models\SchoolResume;
-use App\Models\TrainType;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Validations\ResumeValidation;
-use DeepCopy\f002\A;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -50,7 +46,9 @@ class ResumeController extends Controller
      */
     public function previewResume()
     {
-
+        $resumeLogic = new ResumeLogic();
+        $data = $resumeLogic->acquireResumeInfo();
+        return response()->json(ApiException::success(ApiException::SUCCESS, $data));
     }
 
     /**
@@ -70,7 +68,14 @@ class ResumeController extends Controller
             }
 
         }else {
-            return response()->json(ApiException::success());
+            //获取民族信息
+            $nation = Nation::findAll(['*'], true);
+            //获取政治面貌
+            $policy = Polity::findAll(['*'], true);
+            return response()->json(ApiException::success(ApiException::SUCCESS,
+                [
+                    'nation' => $nation, 'policy' => $policy
+                ]));
         }
 
     }
@@ -90,7 +95,8 @@ class ResumeController extends Controller
         $educationArr = Education::findMoreByKey('resume_id', $resumeId, ['id', 'entrance_time', 'graduation_time', 'school_name',
             'academy_name', 'profession_name', 'acquire_education'], true);
         $data['userE'] = $educationArr ? $educationArr : [];
-        $this->_acquireEducationInfo($data);
+        $resumeLogic = new ResumeLogic();
+        $resumeLogic->acquireEducationInfo($data);
         return response()->json(ApiException::success(ApiException::SUCCESS, $data));
     }
 
@@ -114,7 +120,8 @@ class ResumeController extends Controller
             return response()->json(ApiException::error(ApiException::FAILED));
         }
         $data['userE'] = $education;
-        $this->_acquireEducationInfo($data);
+        $resumeLogic = new ResumeLogic();
+        $resumeLogic->acquireEducationInfo($data);
         if ($data) {
            return response()->json(ApiException::success(ApiException::SUCCESS, $data));
         }else {
@@ -334,44 +341,6 @@ class ResumeController extends Controller
         }
         return response()->json(ApiException::success(ApiException::SUCCESS, $schoolData));
     }
-
-
-    private function _acquireEducationInfo(&$data)
-    {
-        //获取学历数据
-        $educationData = HEducation::findAll(['*'], true);
-        if (!$educationData) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $data['edu'] = $educationData;
-        //获取学位数据
-        $degreeData = HDegree::findAll(['*'], true);
-        if (!$degreeData) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $data['degree'] = $degreeData;
-        //获取学校属地
-        $locationData = SchoolLocation::findAll(['*'], true);
-        if (!$locationData) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $data['location'] = $locationData;
-
-        //获取培养方式信息
-        $trainData = TrainType::findAll(['*'], true);
-        if (!$trainData) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $data['train'] = $trainData;
-        //获取教育类型
-        $eduType = EducationType::findAll(['*'], true);
-        if (!$eduType) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $data['eduType'] = $eduType;
-    }
-
-
 
 
 

@@ -50,4 +50,9 @@ class Education extends BaseModel
     {
         return (EducationType::findFirstById($key))->type;
     }
+
+    public function getSchoolLocationAttribute($key)
+    {
+        return (SchoolLocation::findFirstById($key, ['location_name']))->location_name;
+    }
 }
