@@ -37,7 +37,7 @@ class RegisterController extends Controller
         $result = User::create($request->except('password_confirmation'));
         if ($result) {
             SchoolResume::create(['user_id' => $result->id]);
-            return response()->json(ApiException::success('注册成功'));
+            return response()->json(ApiException::success(ApiException::REGISTER_SUCCESS));
         }else {
             return response()->json(ApiException::error(ApiException::REGISTER_FAILED));
         }

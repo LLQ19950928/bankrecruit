@@ -21,7 +21,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-
+         return view('frontend/login/display');
     }
 
 

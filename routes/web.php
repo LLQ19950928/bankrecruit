@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['namespace' => 'Backend',
-    'prefix' => 'backend'], function () {
+    'prefix' => 'frontend'], function () {
 
     Route::group(['prefix' => 'register'], function () {
           Route::any('register', 'RegisterController@register');

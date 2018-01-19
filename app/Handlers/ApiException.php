@@ -25,10 +25,12 @@ class ApiException
      const PASSWORD_ERROR  = 10005;
      const REGISTER_FAILED = 10006;
      const RESUME_NOT_EXISTS = 10007;
+     const REGISTER_SUCCESS = 10008;
 
      protected static $_codeList = [
          
          self::SUCCESS    => '操作成功',
+         self::REGISTER_SUCCESS => '注册成功',
          self::LOGIN_SUCCESS => '登录成功',
          self::LOGIN_OUT_SUCCESS => '退出登录成功',
          self::FAILED     => '操作失败',

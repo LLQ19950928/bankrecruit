@@ -21,6 +21,6 @@ class RegisterController extends Controller
      */
     public function display()
     {
-        return 'hhh';
+        return view('frontend/register/display');
     }
 }
