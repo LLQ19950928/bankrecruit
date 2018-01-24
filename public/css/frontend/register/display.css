@@ -5,3 +5,8 @@
 .register-form{margin-top: 20px}
 .register-button{margin-left: 220px}
 #mpanel2{display: inline-block}
+a:hover{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}

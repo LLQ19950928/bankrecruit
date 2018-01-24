@@ -3,7 +3,7 @@ $(document).ready(function () {
     $("#registerButton").click(function () {
        
         $.ajax({
-            url: 'http://bank.recruit.cn/frontend/register/register',
+            url: 'http://bank.recruit.cn/backend/register/register',
             dataType: 'json',
             data: $("#form").serialize(),
             success: function (res) {

@@ -13,7 +13,7 @@
         <span class="register-bar-turnright">
             <span class="glyphicon glyphicon-user"></span>
             &nbsp;
-            <a href="#" class="register-color-white">登录</a>
+            <a href="http://bank.recruit.cn/frontend/login/display" class="register-color-white">登录</a>
         </span>
     </div>
     <div class="container register-main">

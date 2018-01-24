@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['namespace' => 'Backend',
-    'prefix' => 'frontend'], function () {
+    'prefix' => 'backend'], function () {
 
     Route::group(['prefix' => 'register'], function () {
           Route::any('register', 'RegisterController@register');
@@ -58,6 +58,10 @@ Route::group(['namespace' => 'Frontend',
 
     Route::group(['prefix' => 'login'], function () {
         Route::get('display', 'LoginController@display');
+    });
+
+    Route::group(['prefix' => 'homepage'], function () {
+        Route::get('display', 'HomePageController@display');
     });
 
     Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
