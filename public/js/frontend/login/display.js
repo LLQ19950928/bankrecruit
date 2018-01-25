@@ -1,7 +1,7 @@
 $("#loginButton").click(function () {
 
      $.ajax({
-         url: 'http://bank.recruit.cn/backend/login/login',
+         url: 'http://bank.recruit.blade.php.cn/backend/login/login',
          dataType: 'json',
          type: 'post',
          data: $('#loginForm').serialize(),

@@ -34,11 +34,19 @@ class ResumeController extends Controller
 {
 
     /**
+     * 简历入口
+     */
+    public function index()
+    {
+        return view('frontend/resume/index');
+    }
+
+    /**
      * 编辑简历
      */
     public function editResume()
     {
-
+        return view('frontend/resume/edit');
     }
 
     /**
