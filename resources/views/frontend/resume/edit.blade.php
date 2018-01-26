@@ -6,9 +6,14 @@
     <link href="/css/datepicker/foundation.min.css" rel="stylesheet" type="text/css">
     <link href="/css/datepicker/foundation-datepicker.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/css/frontend/resume/edit.css">
+    <link rel="stylesheet" href="/css/distpicker/city-picker.css">
     <script src="/js/datepicker/foundation-datepicker.js"></script>
     <script src="/js/datepicker/locales/foundation-datepicker.zh-CN.js"></script>
+    <script src="/js/vue.js"></script>
     <script src="/js/frontend/resume/edit.js"></script>
+    <script src="/js/distpicker/city-picker.data.js"></script>
+    <script src="/js/distpicker/city-picker.js"></script>
+    <script src="/js/distpicker/main.js"></script>
 @endsection
 
 @section('position')
@@ -37,7 +42,7 @@
 @section('content')
     <div class="col-md-4">
         <div class="v_navi">
-            <div class="title">我的招聘</div>
+            <div class="title-resume">我的招聘</div>
             <div class="li_box">
                 <div class="navi_resume on">
                     <div class="txt">
@@ -81,19 +86,19 @@
     <div class="col-md-7">
         <div class="main_you2">
             <div class="main_you22_3">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="resumeForm">
                     <div class="form-group">
                         <label class="col-md-2 control-label">真实姓名</label>
                         <div class="col-sm-4 form-margin">
-                            <input type="text" class="form-control" placeholder="真实姓名" name="realname">
+                            <input type="text" class="form-control" placeholder="真实姓名" name="name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-md-2 control-label">性别</label>
                         <div class="col-sm-4 form-margin">
-                            <select class="form-control" name="gender">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                            <select  name="gender">
+                                <option value="1" selected="selected">男</option>
+                                <option value="2">女</option>
                             </select>
                         </div>
                     </div>
@@ -106,72 +111,70 @@
                     <div class="form-group">
                         <label  class="col-md-2 control-label">民族</label>
                         <div class="col-sm-4 form-margin">
-                            <select class="form-control" name="gender">
-                                <option value="0">汉族</option>
-                                <option value="1">满族</option>
+                            <select name="nation" id="nation">
+                                <option v-for="n in nationData" v-bind:value="n.id">@{{ n.nation }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">家庭常住地</label>
                         <div class="col-sm-4 form-margin">
-                            <input type="text" class="form-control" placeholder="家庭常住地" name="borth_at">
+                            <input class="form-control" readonly type="text" data-toggle="city-picker">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">籍贯</label>
                         <div class="col-sm-4 form-margin">
-                            <input type="text" class="form-control" placeholder="籍贯" name="borth_at">
+                            <input type="text" class="form-control" placeholder="籍贯" name="place_of_origin">
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-md-2 control-label">婚姻状况</label>
                         <div class="col-sm-4 form-margin">
-                            <select class="form-control" name="gender">
-                                <option value="0">未婚</option>
-                                <option value="1">已婚</option>
-                                <option value="1">离异</option>
-                                <option value="1">其它</option>
+                            <select name="marry">
+                                <option value="1" selected="selected">未婚</option>
+                                <option value="2">已婚</option>
+                                <option value="3">离异</option>
+                                <option value="4">其它</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-md-2 control-label">政治面貌</label>
                         <div class="col-sm-4 form-margin">
-                            <select class="form-control" name="gender">
-                                <option value="0">未婚</option>
-                                <option value="1">已婚</option>
-                                <option value="1">离异</option>
-                                <option value="1">其它</option>
+                            <select name="political_status" id="polity">
+                                <option v-for="polity in polityData" v-bind:value="polity.id">@{{ polity.political_name }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-md-2 control-label">证件类别</label>
                         <div class="col-sm-4 form-margin">
-                            <select class="form-control" name="gender">
-                                <option value="0">未婚</option>
-                                <option value="1">已婚</option>
-                                <option value="1">离异</option>
-                                <option value="1">其它</option>
+                            <select name="id_type">
+                                <option value="1" selected="selected">身份证</option>
+                                <option value="2">护照</option>
+                                <option value="3">军官证</option>
+                                <option value="4">港澳通行证</option>
+                                <option value="5">台胞通行证</option>
+                                <option value="6">其它</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">证件号码</label>
                         <div class="col-sm-4 form-margin">
-                            <input type="text" class="form-control" placeholder="证件号码" name="borth_at">
+                            <input type="text" class="form-control" placeholder="证件号码" name="id_number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">联系方式</label>
                         <div class="col-sm-4 form-margin">
-                            <input type="text" class="form-control" placeholder="联系方式" name="borth_at">
+                            <input type="text" class="form-control" placeholder="联系方式" name="phone_number">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10 save-button">
-                            <button type="button" class="btn btn-primary col-sm-3" id="registerButton">保存</button>
+                            <button type="button" class="btn btn-primary col-sm-3" id="saveButton">保存</button>
                         </div>
                     </div>
                 </form>

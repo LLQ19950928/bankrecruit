@@ -16,4 +16,54 @@ $(document).ready(function () {
         checkin.hide();
         $('#brothAt')[0].focus();
     }).data('datepicker');
+
+
+    $.ajax({
+        url: 'http://bank.recruit.cn/backend/json/nation',
+        dataType: 'json',
+        type: 'get',
+        success: function (res) {
+
+            new Vue({
+                el: '#nation',
+                data: {
+                    nationData: res.data
+                }
+            });
+
+        }
+    });
+
+    $.ajax({
+        url: 'http://bank.recruit.cn/backend/json/polity',
+        dataType: 'json',
+        type: 'get',
+        success: function (res) {
+
+            new Vue({
+                el: '#polity',
+                data: {
+                    polityData: res.data
+                }
+            });
+        }
+    });
+
+    $("#saveButton").click(function () {
+
+        $.ajax({
+            url: 'http://bank.recruit.cn/backend/resume/editinfo',
+            dataType: 'json',
+            type: 'post',
+            data: $("#resumeForm").serialize(),
+            success: function (res) {
+                if (res.code != 200) {
+                    alert(res.message);
+                }else {
+                    window.location.href = '';
+                }
+            }
+        });
+    });
+
 });

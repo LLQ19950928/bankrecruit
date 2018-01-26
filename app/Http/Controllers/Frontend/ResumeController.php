@@ -19,6 +19,7 @@ use App\Models\Education;
 use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
 use App\Models\LanguageType;
+
 use App\Models\Nation;
 use App\Models\Polity;
 use App\Models\Punishment;
@@ -47,6 +48,11 @@ class ResumeController extends Controller
     public function editResume()
     {
         return view('frontend/resume/edit');
+    }
+
+    public function editEducation()
+    {
+
     }
 
     /**

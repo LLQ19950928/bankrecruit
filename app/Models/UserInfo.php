@@ -36,11 +36,47 @@ class UserInfo extends BaseModel
 
     public function getMarryAttribute($key)
     {
-        return $key == 0 ? '未婚' : '已婚';
+        $marry = '';
+        switch ($key) {
+            case 1:
+                $marry = '未婚';
+                break;
+            case 2:
+                $marry = '已婚';
+                break;
+            case 3:
+                $marry = '离异';
+                break;
+            case 4:
+                $marry = '其它';
+                break;
+        }
+        return $marry;
     }
 
     public function getIdTypeAttribute($key)
     {
-        return $key == 0 ? '身份证' : '港澳身份证';
+        $idType = '';
+        switch ($key) {
+            case 1:
+                $idType = '身份证';
+                break;
+            case 2:
+                $idType = '护照';
+                break;
+            case 3:
+                $idType = '军官证';
+                break;
+            case 4:
+                $idType = '港澳通行证';
+                break;
+            case 5:
+                $idType = '台胞通行证';
+                break;
+            case 6:
+                $idType = '其它';
+                break;
+        }
+        return $idType;
     }
 }

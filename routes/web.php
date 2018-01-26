@@ -46,6 +46,11 @@ Route::group(['namespace' => 'Backend',
         Route::any('updatefamily', 'ResumeController@updateFamilyMember');
     });
 
+    Route::group(['prefix' => 'json'], function () {
+        Route::get('nation', 'JsonController@acquireNationInfo');
+        Route::get('polity', 'JsonController@acquirePolityInfo');
+    });
+
     Route::any('test', 'TestController@test');
 });
 
