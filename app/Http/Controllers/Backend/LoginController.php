@@ -34,7 +34,7 @@ class LoginController extends Controller
           $userValidation = new UserValidation();
           $validator = $userValidation->validateLogin($request);
           if ($validator->fails()) {
-              return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, [$validator->errors()->first()]));
+              return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, $validator->errors()->first()));
           }
           //验证密码是否正确
           $loginLogic = new LoginLogic();
@@ -52,7 +52,9 @@ class LoginController extends Controller
      */
     public function loginOut(Request $request)
     {
-        $request->session()->forget('user_id');
-        return response()->json(ApiException::success(ApiException::LOGIN_OUT_SUCCESS));
+        $request->session()->forget('userId');
+        return redirect('http://bank.recruit.cn/frontend/homepage/display');
     }
+
+
 }

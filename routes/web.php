@@ -71,9 +71,8 @@ Route::group(['namespace' => 'Frontend',
 
     Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
         Route::get('index', 'ResumeController@index');
-        Route::get('edit', 'ResumeController@editResume');
         Route::get('preview', 'ResumeController@previewResume');
-        Route::get('info', 'ResumeController@displayUserInfo');
+        Route::get('userinfo', 'ResumeController@displayUserInfo');
         Route::get('education', 'ResumeController@displayUserEducation');
         Route::get('appointededu', 'ResumeController@displayAppointedUserEducation');
         Route::get('acquiresn', 'ResumeController@acquireSchoolName');

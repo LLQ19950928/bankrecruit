@@ -66,7 +66,7 @@
                     <td align="center" style="color: #333333">1</td>
                     <td align="center" style="color: #333333">我的简历</td>
                     <td align="center">
-                        <a href="http://bank.recruit.cn/frontend/resume/edit" style="color: #2281d9">编辑</a>
+                        <a href="http://bank.recruit.cn/frontend/resume/userinfo" style="color: #2281d9">编辑</a>
                         <span style="color: #2281d9">&nbsp;|&nbsp;</span>
                         <a href="#" style="color: #2281d9">预览</a>
                     </td>

@@ -16,9 +16,10 @@ class ResumeMiddleware
      */
     public function handle($request, Closure $next)
     {
-//        if (!$request->session()->get('userId')) {
-//            return response()->json(ApiException::error(ApiException::PLEASE_LOGIN));
-//        }
+        if (!$request->session()->get('userId')) {
+            return redirect('http://bank.recruit.cn/frontend/login/display');
+        }
+
         return $next($request);
     }
 }

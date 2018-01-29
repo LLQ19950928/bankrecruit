@@ -18,37 +18,6 @@ $(document).ready(function () {
     }).data('datepicker');
 
 
-    $.ajax({
-        url: 'http://bank.recruit.cn/backend/json/nation',
-        dataType: 'json',
-        type: 'get',
-        success: function (res) {
-
-            new Vue({
-                el: '#nation',
-                data: {
-                    nationData: res.data
-                }
-            });
-
-        }
-    });
-
-    $.ajax({
-        url: 'http://bank.recruit.cn/backend/json/polity',
-        dataType: 'json',
-        type: 'get',
-        success: function (res) {
-
-            new Vue({
-                el: '#polity',
-                data: {
-                    polityData: res.data
-                }
-            });
-        }
-    });
-
     $("#saveButton").click(function () {
 
         $.ajax({
@@ -57,10 +26,10 @@ $(document).ready(function () {
             type: 'post',
             data: $("#resumeForm").serialize(),
             success: function (res) {
-                if (res.code != 200) {
-                    alert(res.message);
+                if (res.code == 10003) {
+                    alert(res.msg);
                 }else {
-                    window.location.href = '';
+                    alert('操作成功')
                 }
             }
         });

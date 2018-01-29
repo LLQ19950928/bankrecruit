@@ -23,6 +23,7 @@ class LoginLogic
         $hash = $user->password;
         if (password_verify($password, $hash)) {
             session(['userId' => $user->id]);
+            session(['username' => $user->username]);
             return true;
         }
         return false;

@@ -15,12 +15,22 @@
             <ul>
                 <li>
                     <span class="glyphicon glyphicon-pencil" style="color: white"></span>
-                    <a href="http://bank.recruit.cn/frontend/register/display" style="color: white">注册</a>
+                    @if(session('userId'))
+                      <span style="color: white">{{ session('username') }}</span>
+                    @else
+                        <a href="http://bank.recruit.cn/frontend/register/display" style="color: white">注册</a>
+                    @endif
                 </li>
                 <li style="color: white">&nbsp;|&nbsp;</li>
                 <li>
-                    <span class="glyphicon glyphicon-user" style="color: white"></span>
-                    <a href="http://bank.recruit.cn/frontend/login/display" style="color: white">登录</a>
+                    @if(session('userId'))
+                      <span class="glyphicon glyphicon-th-large" style="color: white"></span>
+                      <a href="http://bank.recruit.cn/backend/login/loginout" style="color: white">退出登录</a>
+                    @else
+                      <span class="glyphicon glyphicon-user" style="color: white"></span>
+                      <a href="http://bank.recruit.cn/frontend/login/display" style="color: white">登录</a>
+                    @endif
+
                 </li>
             </ul>
         </div>

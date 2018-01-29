@@ -43,19 +43,6 @@ class ResumeController extends Controller
     }
 
     /**
-     * 编辑简历
-     */
-    public function editResume()
-    {
-        return view('frontend/resume/edit');
-    }
-
-    public function editEducation()
-    {
-
-    }
-
-    /**
      * 预览简历
      */
     public function previewResume()
@@ -71,26 +58,23 @@ class ResumeController extends Controller
      */
     public function displayUserInfo()
     {
+        //获取民族信息
+        $nation = Nation::findAll(['*'], true);
+        //获取政治面貌
+        $polity = Polity::findAll(['*'], true);
+
+        $data['userInfo'] = [];
+
         $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId', 0));
         $infoId = $schoolResume->info_id;
         if ($infoId) {
             $userInfoArr = UserInfo::findFirstById($infoId, ['*'], true);
-            if ($userInfoArr) {
-                return response()->json(ApiException::success(ApiException::SUCCESS, $userInfoArr));
-            }else {
-                return response()->json(ApiException::success(ApiException::FAILED));
-            }
-
-        }else {
-            //获取民族信息
-            $nation = Nation::findAll(['*'], true);
-            //获取政治面貌
-            $policy = Polity::findAll(['*'], true);
-            return response()->json(ApiException::success(ApiException::SUCCESS,
-                [
-                    'nation' => $nation, 'policy' => $policy
-                ]));
+            $data['userInfo'] = $userInfoArr;
         }
+        $data['nation'] = $nation;
+        $data['polity'] = $polity;
+
+        return view('frontend/resume/userinfo', ['data' => $data]);
 
     }
 
@@ -111,7 +95,7 @@ class ResumeController extends Controller
         $data['userE'] = $educationArr ? $educationArr : [];
         $resumeLogic = new ResumeLogic();
         $resumeLogic->acquireEducationInfo($data);
-        return response()->json(ApiException::success(ApiException::SUCCESS, $data));
+        return view('frontend/resume/usereducation', ['data' => $data]);
     }
 
 

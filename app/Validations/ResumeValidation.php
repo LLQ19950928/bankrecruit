@@ -27,7 +27,7 @@ class ResumeValidation extends BaseValidation
     {
         $rules = [
             'name'  => 'required',
-            'borth_at' => 'required',
+            'broth_at' => 'required',
             'gender'   => 'required',
             'nation'   => 'required',
             'family_at' => 'required',
@@ -44,7 +44,7 @@ class ResumeValidation extends BaseValidation
         ];
         $attributes = [
             'name'  => '姓名',
-            'borth_at' => '出生年月',
+            'broth_at' => '出生年月',
             'gender'   => '性别',
             'nation'   => '民族',
             'family_at' => '家庭常住地',

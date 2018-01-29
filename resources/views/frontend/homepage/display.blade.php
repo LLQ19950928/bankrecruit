@@ -24,7 +24,7 @@
             <a href="#">提问与回答</a>
         </li>
         <li>
-            <a href="http://bank.recruit.cn/frontend/resume/index">我的招聘</a>
+            <a href="http://bank.recruit.cn/frontend/resume/index" id="myResume">我的招聘</a>
         </li>
     </ul>
 @endsection

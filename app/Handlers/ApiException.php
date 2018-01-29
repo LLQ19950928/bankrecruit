@@ -49,11 +49,11 @@ class ApiException
              'data' => $data];
      }
 
-    public static function error($code, $data=[])
+    public static function error($code, $msg='', $data=[])
     {
         return [
             'code' => $code,
-            'msg'  => self::$_codeList[$code],
+            'msg'  => $msg ? $msg : self::$_codeList[$code],
             'data' => $data
         ];
     }
