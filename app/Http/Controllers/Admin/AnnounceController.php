@@ -18,7 +18,7 @@ class AnnounceController
     public function editAnnounce(Request $request)
     {
         $announceValidation = new AnnounceValidation();
-        $validator =$announceValidation->validateAnnounce($request);
-        
+        $validator = $announceValidation->validateAnnounce($request);
+
     }
 }

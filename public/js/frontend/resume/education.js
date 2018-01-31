@@ -26,7 +26,7 @@ $(document).ready(function () {
                 if (res.code == 10003) {
                     alert(res.msg);
                 }else {
-                    alert('操作成功')
+                    alert('操作成功');
                 }
             }
         });

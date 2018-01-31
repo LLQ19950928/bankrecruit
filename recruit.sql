@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-01-11 17:25:25
+Date: 2018-01-31 09:36:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -457,12 +457,14 @@ CREATE TABLE `school_resume` (
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of school_resume
 -- ----------------------------
 INSERT INTO `school_resume` VALUES ('1', '1', '5', '0', '0', '0', '0', '0', '4', '1515378130', '1515641435');
+INSERT INTO `school_resume` VALUES ('2', '0', '0', '0', '0', '0', '0', '0', '5', '1517205662', '1517205662');
+INSERT INTO `school_resume` VALUES ('3', '2', '0', '0', '0', '0', '0', '0', '6', '1517205938', '1517211427');
 
 -- ----------------------------
 -- Table structure for skill
@@ -529,12 +531,13 @@ CREATE TABLE `user` (
   `highest_education` int(11) NOT NULL DEFAULT '0' COMMENT '最高学位',
   `highest_degree` int(11) NOT NULL DEFAULT '0' COMMENT '最高学历',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('4', 'llq', '刘柳青', '2844019004@qq.com', '0', '18814142219', '$2y$10$umgZ14Lj5hrBAFf66USS9OObdelUECGE4WfUfsjJVEClogm2P9sgO', '0', '0', '1515378130', '1515383776', '0', '1', '1');
+INSERT INTO `user` VALUES ('6', 'liuQ', '刘柳青', '2844019004@qq.com', '0', '18814142219', '$2y$10$WC/CxTfpO.0vNswtFoXluOwkvwH1c7gD16hS6Com7iyMiRlsRw1cO', '0', '441402199509282038', '1517205938', '1517205938', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for user_info
@@ -543,7 +546,7 @@ DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL DEFAULT '' COMMENT '姓名',
-  `borth_at` varchar(12) NOT NULL DEFAULT '' COMMENT '出生年月',
+  `broth_at` varchar(12) NOT NULL DEFAULT '' COMMENT '出生年月',
   `gender` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别：0表示男，1表示女',
   `nation` tinyint(5) NOT NULL DEFAULT '0' COMMENT '民族',
   `family_at` varchar(100) NOT NULL DEFAULT '' COMMENT '家庭常住地',
@@ -556,9 +559,10 @@ CREATE TABLE `user_info` (
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('1', '刘柳青', '1995-09-28', '0', '1', '广东/梅州/梅江区', '广东/梅州/梅江区', '0', '0', '0', '0', '18814142219', '1515378885', '1515378885');
+INSERT INTO `user_info` VALUES ('1', '刘柳青', '1995-09-28', '0', '1', '广东/梅州/梅江区', '广东/梅州/梅江区', '0', '1', '0', '0', '18814142219', '1515378885', '1515378885');
+INSERT INTO `user_info` VALUES ('2', '刘柳青', '01/30/2018', '2', '1', '山东/菏泽市/郓城县', '广东/中山市/板芙镇', '1', '1', '1', '441402199509282038', '18814142219', '1517211427', '1517211486');
