@@ -16,43 +16,84 @@ class Education extends BaseModel
      protected $dateFormat = 'U';
      protected $guarded = [];
 
-    public function getAcquireEducationAttribute($key)
+    public function getEducationAttribute($key)
     {
-         return (HEducation::findFirstById($key))->name;
+         $edu = '';
+         switch ($key) {
+             case 1:
+                 $edu = '大专';
+                 break;
+             case 2:
+                 $edu = '本科';
+                 break;
+             case 3:
+                 $edu = '硕士研究生';
+                 break;
+             case 4:
+                 $edu = '博士研究生';
+                 break;
+             case 5:
+                 $edu = '无';
+                 break;
+         }
+         return $edu;
     }
 
-    public function getAcquireDegreeAttribute($key)
+    public function getDegreeAttribute($key)
     {
-         return (HDegree::findFirstById($key))->name;
+        $degree = '';
+        switch ($key) {
+            case 1:
+                $degree = '学士';
+                break;
+            case 2:
+                $degree = '硕士';
+                break;
+            case 3:
+                $degree = '博士';
+                break;
+            case 4:
+                $degree = '无';
+                break;
+        }
+        return $degree;
     }
 
-    public function getEntranceTimeAttribute($key)
+    public function getStudyStyleAttribute($key)
     {
-         return date('Y-m-d', $key);
+        $study = '';
+        switch ($key) {
+            case 1:
+                $study = '全日制';
+                break;
+            case 2:
+                $study = '非全日制';
+                break;
+        }
+        return $study;
     }
 
-    public function getGraduationTimeAttribute($key)
+    public function getRankAttribute($key)
     {
-         return date('Y-m-d', $key);
+        $rank = '';
+        switch ($key) {
+            case 1:
+                $rank = '前10%';
+                break;
+            case 2:
+                $rank = '前20%';
+                break;
+            case 3:
+                $rank = '前30%';
+                break;
+            case 4:
+                $rank = '前50%';
+                break;
+            case 5:
+                $rank = '其它';
+                break;
+        }
+        return $rank;
     }
 
-    public function getSchoolNameAttribute($key)
-    {
-         return (SchoolName::findFirstById($key))->school_name;
-    }
-
-    public function getTrainTypeAttribute($key)
-    {
-         return (TrainType::findFirstById($key))->type;
-    }
-
-    public function getEducationTypeAttribute($key)
-    {
-        return (EducationType::findFirstById($key))->type;
-    }
-
-    public function getSchoolLocationAttribute($key)
-    {
-        return (SchoolLocation::findFirstById($key, ['location_name']))->location_name;
-    }
 }

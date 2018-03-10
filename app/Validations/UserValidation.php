@@ -25,38 +25,24 @@ class UserValidation extends BaseValidation
     public function validateRegister(Request $request)
     {
          $rules = [
-             'username'              => 'required|min:3',
-             'realname'              => 'required',
              'email'                 => 'required|email',
-             'gender'                => 'required',
-             'phone'                 => 'required|digits:11',
-             'password'              => 'required|min:8|confirmed',
+             'password'              => 'required|confirmed',
              'password_confirmation' => 'required',
-             'resume_type'           => 'required',
-             'certificates_type'     => 'required',
-             'certificates_number'   => 'required'
+             'cpt'               => 'required|captcha'
          ];
+
          $messages = [
              'required' => ':attribute不能为空',
-             'min'      => ':attribute长度至少:min位',
              'email'    => ':attribute格式不符合要求',
-             'digits'   => ':attribute长度必须是:digits位',
              'confirmed' => '两次密码不一致',
-             'resume_type' => ':attribute不能为空',
-             'certificates_type' => ':attribute不能为空',
-             'certificates_number' => ':attribute不能为空'
+             'captcha'   => '验证码错误，请重试'
          ];
+
          $attributes = [
-             'username' => '用户名',
-             'realname' => '真实姓名',
              'email'    => '电子邮箱',
-             'gender'   => '性别',
-             'phone'    => '手机号码',
              'password' => '密码',
              'password_confirmation' => '确认密码',
-             'resume_type' => '简历类型',
-             'certificates_type'     => '证件类型',
-             'certificates_number'   => '证件号码'
+             'cpt'      => '验证码'
          ];
          return Validator::make($request->post(), $rules, $messages, $attributes);
     }
@@ -69,18 +55,21 @@ class UserValidation extends BaseValidation
     public function validateLogin(Request $request)
     {
         $rules = [
-            'username' => 'required|exists:user,username',
-            'password' => 'required'
+            'email' => 'required|exists:user,email',
+            'password' => 'required',
+            'cpt'   => 'required|captcha',
         ];
 
         $messages = [
             'required' => ':attribute不能为空',
             'exists'   => ':attribute不存在，请注册',
+            'captcha'   => '验证码错误，请重试'
         ];
 
         $attributes = [
-            'username' => '用户名',
-            'password' => '密码'
+            'email' => '邮箱地址',
+            'password' => '密码',
+            'cpt'      => '验证码'
         ];
 
         return Validator::make($request->post(), $rules, $messages, $attributes);

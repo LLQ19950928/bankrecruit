@@ -3,6 +3,19 @@ div {
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+.main {
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+
 .v_navi {
     margin-top: 30px;
     width: 240px;
@@ -18,7 +31,7 @@ div {
     font-size: 14px;
     line-height: 40px;
     padding-left: 20px;
-    background: url("https://job.bankcomm.com/images/position/1.gif") no-repeat;
+    background: url(../../../image/resume/1.gif) no-repeat;
 }
 
 .v_navi .on {
@@ -50,6 +63,8 @@ div {
     width: 730px;
     margin-top: 30px;
 }
+
+
 
 
 

@@ -1,12 +1,116 @@
-.register-bar-bg{background-color: dodgerblue; padding: 5px 0px;}
-.register-bar-turnright{float: right; color: white}
-.register-color-white{color: white;}
-.register-main{border: 1px solid; margin-top: 20px}
-.register-form{margin-top: 20px}
-.register-button{margin-left: 220px}
-#mpanel2{display: inline-block}
-a:hover{
-    color:white;
-    text-decoration:none;
-    cursor:pointer;
+body{
+    background:url(../../../image/web_login_bg.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.register_body {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.register_body .register_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 478px;
+    margin-left: -300px;
+    margin-top: -239px;
+}
+
+.register_content h3 {
+    font: 16px/70px "微软雅黑", "黑体";
+    color: #333333;
+    text-align: center;
+}
+
+.register_body .register_content .register_info {
+    width: 600px;
+    height: 478px;
+    background-color: white;
+}
+
+.input_style {
+    width: 336px;
+    height: 32px;
+    border: 1px solid #dddddd;
+    line-height: 32px;
+    padding-left: 30px;
+    color: #b1a9a9;
+    margin: 20px auto;
+    display: block;
+}
+
+.code_style {
+    margin: 20px auto;
+}
+
+.div_captcha {
+    width: 336px;
+    height: 32px;
+    margin: 20px auto;
+    font: 12px/60px "";
+    line-height: 32px;
+}
+
+.email {
+    background: url(../../../image/login/zc_06.jpg) no-repeat 10px 10px;
+}
+
+.password {
+    background: url(../../../image/login/zc_12.jpg) no-repeat 10px 10px;
+}
+
+.confirm_password {
+    background: url(../../../image/login/zc_16.jpg) no-repeat 10px 10px;
+}
+
+.code {
+    background: url(../../../image/login/zc_19.jpg) no-repeat 10px 10px;
+}
+
+
+.div_img {
+    float: left;
+    width: 97px;
+    height: 31px;
+    border: 1px solid #dddddd;
+}
+
+.div_refresh {
+    float: left;
+    margin: 0px 0 0 150px;
+    width: 14px;
+    height: 14px;
+}
+
+.register_btn {
+    width: 336px;
+    height: 33px;
+    background: #37b5f9;
+    font-size: 14px;
+    line-height: 33px;
+    text-align: center;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+}
+
+.has_account {
+    width: 135px;
+    margin: 0px auto;
+    font: 12px/60px "";
+    color: #999999;
+}
+
+.has_account a {
+    color: #37b5f9;
+}
+
+a {
+    text-decoration: none;
 }

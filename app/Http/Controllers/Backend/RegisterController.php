@@ -13,7 +13,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
-use App\Models\SchoolResume;
+use App\Models\Resume;
 use App\Models\User;
 use App\Validations\UserValidation;
 use Illuminate\Http\Request;
@@ -31,12 +31,16 @@ class RegisterController extends Controller
         $validator = $userValidation->validateRegister($request);
         //验证数据的合法性
         if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED, $validator->errors()->first()));
+            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
+                $validator->errors()->first()));
         }
         //存入数据库
-        $result = User::create($request->except('password_confirmation'));
-        if ($result) {
-            SchoolResume::create(['user_id' => $result->id]);
+        $user = User::create($request->except(['password_confirmation', 'cpt']));
+        if ($user) {
+            //为该用户添加一份简历
+            $resume = new Resume();
+            $resume->user_id = $user->id;
+            $resume->save();
             return response()->json(ApiException::success(ApiException::REGISTER_SUCCESS));
         }else {
             return response()->json(ApiException::error(ApiException::REGISTER_FAILED));

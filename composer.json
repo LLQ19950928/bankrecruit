@@ -10,7 +10,9 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "predis/predis": "1.1.1",
-        "twbs/bootstrap": "3.3.7"
+        "twbs/bootstrap": "3.3.7",
+        "intervention/image": "~2.2",
+        "mews/captcha": "2.1.7"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

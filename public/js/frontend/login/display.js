@@ -12,5 +12,11 @@ $("#loginButton").click(function () {
                  window.location.href = 'http://bank.recruit.cn/frontend/homepage/display';
              }
          }
-     })
+     });
+});
+
+$("#changeCaptcha").click(function () {
+
+    $("#image").attr('src', 'http://bank.recruit.cn/frontend/register/captcha?r='
+        + Math.random());
 });

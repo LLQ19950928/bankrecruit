@@ -19,9 +19,9 @@ use App\Models\Education;
 use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
 use App\Models\Punishment;
-use App\Models\SchoolResume;
-use App\Models\User;
+use App\Models\Resume;
 use App\Models\UserInfo;
+use App\Models\WorkExperience;
 use App\Validations\ResumeValidation;
 use Illuminate\Http\Request;
 
@@ -34,20 +34,14 @@ class ResumeController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * 编辑个人基本信息
      */
-    public function editUserInfo(Request $request)
+    public function editResumeBaseInfo(Request $request)
     {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateUserInfo($request);
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
-        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId'));
-        if ($schoolResume->info_id == 0) {
+        $resume = Resume::findFirstByKey('user_id', session('userId'));
+        if ($resume->info_id == 0) {
             $userInfo = UserInfo::create($request->post());
-            $result = $schoolResume->update(['info_id' => $userInfo->id]);
+            $result = $resume->update(['info_id' => $userInfo->id]);
         }else {
-            $result = UserInfo::findFirstById($schoolResume->info_id)->update($request->post());
+            $result = UserInfo::findFirstById($resume->info_id)->update($request->post());
         }
         if ($result) {
             return response()->json(ApiException::success());
@@ -59,63 +53,21 @@ class ResumeController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
-     * 编辑用户最高学历
-     */
-    public function editUserHighestEducation(Request $request)
-    {
-         $resumeValidation = new ResumeValidation();
-         $validator = $resumeValidation->validateHighestEducation($request);
-         if ($validator->fails()) {
-             return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                 $validator->errors()->first()));
-         }
-         $user = User::findFirstById(session('userId', 0));
-         if (!$user) {
-             return response()->json(ApiException::error(ApiException::USER_NOT_EXISTS));
-         }
-         //修改用户的最高简历
-         $result = $user->update($request->post());
-         if ($result) {
-             return response()->json(ApiException::success());
-         }else {
-             return response()->json(ApiException::error(ApiException::FAILED));
-         }
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      * 编辑用户教育背景
      */
-    public function editUserEducation(Request $request)
+    public function editEduSituation(Request $request)
     {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateUserEducation($request);
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
         $education = Education::create($request->post());
         if (!$education) {
             return response()->json(ApiException::error(ApiException::FAILED));
         }
-        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId', 0));
-        if (!$schoolResume) {
+        $resume = Resume::findFirstByKey('user_id', session('userId', 0));
+        if (!$resume) {
             return response()->json(ApiException::error(ApiException::RESUME_NOT_EXISTS));
         }
-        $result = $education->update(['resume_id' => $schoolResume->id]);
+        $result = $education->update(['resume_id' => $resume->id]);
         if ($result) {
-
-            $selectedArr = [
-                'id' => $education->id,
-                'entrance_time' => $education->entrance_time,
-                'graduation_time' => $education->graduation_time,
-                'school_name' => $education->school_name,
-                'academy_name' => $education->academy_name,
-                'profession_name' => $education->profession_name,
-                'acquire_education' => $education->acquire_education
-            ];
-            return response()->json(ApiException::success(ApiException::SUCCESS, $selectedArr));
+            return response()->json(ApiException::success(ApiException::SUCCESS));
         }else {
             return response()->json(ApiException::error(ApiException::FAILED));
         }
@@ -149,6 +101,78 @@ class ResumeController extends Controller
     }
 
     /**
+     * 编辑工作经历
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
+    public function editWorkExperienceInfo(Request $request)
+    {
+        $workExperience = WorkExperience::create($request->post());
+        if (!$workExperience) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        $resume = Resume::findFirstByKey('user_id', session('userId', 0));
+        if (!$resume) {
+            return response()->json(ApiException::error(ApiException::RESUME_NOT_EXISTS));
+        }
+        $result = $workExperience->update(['resume_id' => $resume->id]);
+        if ($result) {
+            return response()->json(ApiException::success(ApiException::SUCCESS));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 编辑受到的奖励情况
+     */
+    public function editBonusInfo(Request $request)
+    {
+
+        $bonus = Bonus::create($request->post());
+        if (!$bonus) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $result = $bonus->update(['resume_id' => $id]);
+        if ($result) {
+            return response()->json(ApiException::success(ApiException::SUCCESS, $bonus->toArray()));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * 编辑用户家庭成员信息
+     */
+    public function editFamilyMember(Request $request)
+    {
+        $familyMember = FamilyMember::create($request->post());
+        if (!$familyMember) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $result = $familyMember->update(['resume_id' => $id]);
+        if (!$result) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        return response()->json(ApiException::success(ApiException::SUCCESS));
+    }
+
+
+
+
+
+
+
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * 编辑用户的外语能力
@@ -165,7 +189,7 @@ class ResumeController extends Controller
         if (!$lang) {
             return response()->json(ApiException::error(ApiException::FAILED));
         }
-        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId', 0));
+        $schoolResume = Resume::findFirstByKey('user_id', session('userId', 0));
         if (!$schoolResume) {
             return response()->json(ApiException::error(ApiException::RESUME_NOT_EXISTS));
         }
@@ -221,7 +245,7 @@ class ResumeController extends Controller
             return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
                 $validator->errors()->first()));
         }
-        $schoolResume = SchoolResume::findFirstByKey('user_id', session('userId'), ['id']);
+        $schoolResume = Resume::findFirstByKey('user_id', session('userId'), ['id']);
         $creditId = $schoolResume->credit_id;
         if (!$creditId) {
             $credit = Credit::create($request->post());
@@ -238,32 +262,7 @@ class ResumeController extends Controller
         return response()->json(ApiException::success(ApiException::SUCCESS));
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * 编辑用户受到的奖励情况
-     */
-    public function editUserBonus(Request $request)
-    {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateUserBonus($request);
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
-        $bonus = Bonus::create($request->post());
-        if (!$bonus) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
-        $result = $bonus->update(['resume_id' => $id]);
-        if ($result) {
-            return response()->json(ApiException::success(ApiException::SUCCESS, $bonus->toArray()));
-        }else {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
 
-    }
 
     /**
      * @param Request $request
@@ -309,7 +308,7 @@ class ResumeController extends Controller
         if (!$punishment) {
             return response()->json(ApiException::error(ApiException::FAILED));
         }
-        $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
         $result = $punishment->update(['resume_id' => $id]);
         if ($result) {
             $data = [
@@ -350,30 +349,7 @@ class ResumeController extends Controller
 
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * 编辑用户家庭成员信息
-     */
-    public function editFamilyMember(Request $request)
-    {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateFamilyMember($request);
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
-        $familyMember = FamilyMember::create($request->post());
-        if (!$familyMember) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        $id = (SchoolResume::findFirstByKey('user_id', session('userId'), ['id']))->id;
-        $result = $familyMember->update(['resume_id' => $id]);
-        if (!$result) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        return response()->json(ApiException::success(ApiException::SUCCESS, $familyMember->toArray()));
-    }
+
 
     /**
      * @param Request $request

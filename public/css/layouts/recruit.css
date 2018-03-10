@@ -1,70 +1,6 @@
-
-.nav {
-    width: 75%;
-    min-width: 940px;
-    background: #008FD1;
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-}
-
-.nav ul {
-    width: 940px;
-    margin: 0 auto;
-    background: #008FD1;
-    font-size: 0;
-    letter-spacing: -0.31em;
-    clear: both;
-}
-
-.nav ul li {
-    margin: 0px;
-}
-
-.nav ul li a {
-    width: 110px;
-    float: left;
-    text-align: center;
-    height: 43px;
-    line-height: 43px;
-    color: #FFF;
-    font-size: 15px;
-    letter-spacing: normal;
-    word-spacing: normal;
-    overflow: hidden;
-}
-
-.nav ul li a {
-    text-decoration: none;
-}
-
-.pictureplace {
-    width: 100%;
-    min-width: 940px;
-    max-height: 270px;
-    overflow: hidden;
-    /* margin: 0 auto; */
-    position: relative;
-}
-
-.pictureplacecenter {
-    max-width: 1440px;
-    margin: 0 auto;
-}
-
-.pictureplace img {
-    width: 100%;
-    max-width: 1440px;
-}
-
-.nav ul li a.current {
-    background: #0074AA;
-    text-decoration: none;
-}
-
 .head-title-box {
     background-color: #2381D9;
-    width: 75%;
+    max-width: 1280px;
     height: 30px;
     margin: 0px auto;
 }
@@ -76,7 +12,6 @@
 }
 
 .head-title ul {
-    padding-top: 5px;
     margin: 0 auto;
     list-style-type: none;
 }
@@ -88,10 +23,85 @@
     vertical-align: middle;
 }
 
-.main {
-    width: 1000px;
-    margin: 0 auto;
+.head-title ul li span{
+    color: white;
+}
+
+.head-title ul li a {
+    vertical-align: middle;
+    margin: 8px auto;
     font-size: 12px;
-    overflow: hidden;
-    margin-bottom: 30px;
+    padding-left: 5px;
+    line-height: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+.head-menu {
+    width: 1000px;
+    margin: 0px auto;
+    height: 79px;
+    vertical-align: middle;
+    clear: right;
+}
+
+.head-menu img {
+    margin: 12px 0px;
+    width: 243px;
+    height: 55px;
+    float: left;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.head-menu ul {
+    float: right;
+    margin-top: 25px;
+    cursor: default;
+    height: 30px;
+    width: 630px;
+}
+
+.head-menu ul li {
+    list-style-type: none;
+    width: 75px;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+    margin-left: 30px;
+    height: 30px;
+}
+
+.head-menu ul li .text_color {
+    vertical-align: middle;
+    line-height: 30px;
+    width: 60px;
+}
+
+.head-menu ul li a {
+    display: block;
+    float: right;
+    text-align: center;
+    height: 30px;
+    text-decoration: none;
+}
+
+.title_font {
+    font-size: 18px;
+    color: #114d8a;
+}
+
+.head-menu ul li .title_color {
+    vertical-align: top;
+    width: 75px;
+    border-bottom: 2px solid #114D8A;
+}
+
+.banner {
+    text-align: center;
+    min-width: 1000px;
+    margin: 0px auto;
 }

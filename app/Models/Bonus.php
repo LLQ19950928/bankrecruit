@@ -17,13 +17,7 @@ class Bonus extends BaseModel
 
      public function getBonusTypeAttribute($key)
      {
-         return $key == 0 ? '校内奖励' : '校外奖励';
+         return $key == 1 ? '校内奖励' : '校外奖励';
      }
-
-     public function getBonusBelongAttribute($key)
-     {
-         return $key == 0 ? '个人' : '集体';
-     }
-
 
 }

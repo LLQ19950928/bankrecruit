@@ -23,7 +23,7 @@ a{
     cursor:pointer;
 }
 .login{
-    margin: 150px auto 0 auto;
+    margin: 70px auto 0 auto;
     min-height: 420px;
     max-width: 420px;
     padding: 40px;
@@ -121,4 +121,12 @@ hr.hr20 {
     position:absolute;
     bottom:15px;
     right:15px;
+}
+
+.div_captcha {
+    width: 336px;
+    height: 22px;
+    margin: 20px auto;
+    font: 12px/60px "";
+    line-height: 32px;
 }

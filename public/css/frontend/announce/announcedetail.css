@@ -1,0 +1,41 @@
+table {
+    table-layout: fixed;
+}
+
+body, td {
+    font-size: 12px;
+    color: #000000;
+}
+
+td.headWord {
+    font-size: 30px;
+    font-family: 隶书;
+    color: rgb(3, 168, 127);
+    line-height: 30px;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+.form_style {
+    margin: 0 auto;
+    width: 600px;
+    margin-top: 20px;
+}
+
+.table_style {
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.btn_style {
+    margin: 20px auto;
+    width: 100px;
+}
+
+.announce_desc {
+    width: 900px;
+    margin: 0 auto;
+}

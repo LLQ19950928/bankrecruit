@@ -19,7 +19,7 @@ class UserInfo extends BaseModel
 
     public function getGenderAttribute($key)
     {
-        return $key == 0 ? '男' : '女';
+        return $key == 1 ? '男' : '女';
     }
 
     public function getNationAttribute($key)
@@ -30,8 +30,22 @@ class UserInfo extends BaseModel
 
     public function getPoliticalStatusAttribute($key)
     {
-       $policy = Polity::findFirstById($key, ['political_name'])->political_name;
-       return $policy;
+        $polity = '';
+        switch ($key) {
+            case 1:
+                $polity = '中共党员';
+                break;
+            case 2:
+                $polity = '共青团员';
+                break;
+            case 3:
+                $polity = '民主党派';
+                break;
+            case 4:
+                $polity = '群众';
+                break;
+        }
+        return $polity;
     }
 
     public function getMarryAttribute($key)
@@ -78,5 +92,22 @@ class UserInfo extends BaseModel
                 break;
         }
         return $idType;
+    }
+
+    public function getHealthyStatusAttribute($key)
+    {
+        $healthy = '';
+        switch ($key) {
+            case 1:
+                $healthy = '健康';
+                break;
+            case 2:
+                $healthy = '良好';
+                break;
+            case 3:
+                $healthy = '较差';
+                break;
+        }
+        return $healthy;
     }
 }

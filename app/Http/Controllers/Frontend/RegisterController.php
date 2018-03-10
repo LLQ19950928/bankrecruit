@@ -12,6 +12,8 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use Mews\Captcha\Facades\Captcha;
+
 
 class RegisterController extends Controller
 {
@@ -23,4 +25,14 @@ class RegisterController extends Controller
     {
         return view('frontend/register/display');
     }
+
+    /**
+     * 显示验证码
+     */
+    public function captcha()
+    {
+        return Captcha::create();
+    }
+
+
 }

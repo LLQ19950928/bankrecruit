@@ -9,9 +9,6 @@
 namespace App\Models;
 
 
-
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 class User extends BaseModel
 {
      protected $table = "user";
@@ -23,23 +20,5 @@ class User extends BaseModel
          $this->attributes['password'] = password_hash($password, PASSWORD_BCRYPT);
      }
 
-     public function getHighestEducationAttribute($key)
-     {
-         try{
-             $result = HEducation::findOrFail($key);
-             return $result->name;
-         }catch (ModelNotFoundException $e) {
-             return '';
-         }
-     }
 
-     public function getHighestDegreeAttribute($key)
-     {
-        try{
-            $result = HDegree::findOrFail($key);
-            return $result->name;
-        }catch (ModelNotFoundException $e) {
-            return '';
-        }
-     }
 }

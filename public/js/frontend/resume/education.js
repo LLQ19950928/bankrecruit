@@ -1,24 +1,23 @@
 $(document).ready(function () {
 
-    $("#entranceTime").fdatepicker();
-    $("#graduationTime").fdatepicker();
+    $(".navi_education").addClass('on');
 
-    $("#schoolLocation").change(function () {
+    $("#addButton").click(function () {
 
-         $.ajax({
-            url: 'http://bank.recruit.cn/frontend/resume/acquiresn?locationId=' + $(this).val(),
-            dataType: 'json',
-            success: function (res) {
+        var css = $(".main_you22_3").css('display');
+        if(css == 'none') {
+            $(".main_you22_3").show();
+        }else {
+            alert('请先保存教育信息');
+        }
 
 
-            }
-         });
     });
 
     $("#saveButton").click(function () {
 
         $.ajax({
-            url: 'http://bank.recruit.cn/backend/resume/editinfo',
+            url: 'http://bank.schoolrecruit.cn/backend/resume/editWorkExperienceInfo',
             dataType: 'json',
             type: 'post',
             data: $("#resumeForm").serialize(),
@@ -27,9 +26,11 @@ $(document).ready(function () {
                     alert(res.msg);
                 }else {
                     alert('操作成功');
+                    window.location.href = '';
                 }
             }
         });
     });
+
 
 });

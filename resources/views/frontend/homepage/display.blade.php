@@ -9,22 +9,23 @@
 @section('position')
     <ul>
         <li>
-            <a href="http://bank.recruit.cn/frontend/homepage/display" class="current">招聘首页</a>
+            <a href="#" class="text-color">招聘首页</a>
         </li>
         <li>
-            <a href="#">校园招聘</a>
+            <a href="#" class="text-color">校园招聘</a>
         </li>
         <li>
-            <a href="#">社会招聘</a>
+            <a href="#" class="text-color">社会招聘</a>
         </li>
         <li>
-            <a href="#">重要公告</a>
+            <a href="#" class="text-color">关于银行</a>
         </li>
         <li>
-            <a href="#">提问与回答</a>
+            <a href="#" class="text-color">重要公告</a>
         </li>
         <li>
-            <a href="http://bank.recruit.cn/frontend/resume/index" id="myResume">我的招聘</a>
+            <a href="javascript:void(0)"
+               class="text-color" id="myRecruit" username="{{ session('username') }}">我的招聘</a>
         </li>
     </ul>
 @endsection

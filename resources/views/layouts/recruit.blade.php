@@ -9,64 +9,71 @@
     @yield('style')
 </head>
 <body>
-<div>
-    <div class="head-title-box">
-        <div class="head-title">
-            <ul>
-                <li>
-                    <span class="glyphicon glyphicon-pencil" style="color: white"></span>
-                    @if(session('userId'))
-                      <span style="color: white">{{ session('username') }}</span>
-                    @else
-                        <a href="http://bank.recruit.cn/frontend/register/display" style="color: white">注册</a>
-                    @endif
-                </li>
-                <li style="color: white">&nbsp;|&nbsp;</li>
-                <li>
-                    @if(session('userId'))
-                      <span class="glyphicon glyphicon-th-large" style="color: white"></span>
-                      <a href="http://bank.recruit.cn/backend/login/loginout" style="color: white">退出登录</a>
-                    @else
-                      <span class="glyphicon glyphicon-user" style="color: white"></span>
-                      <a href="http://bank.recruit.cn/frontend/login/display" style="color: white">登录</a>
-                    @endif
-
-                </li>
-            </ul>
-        </div>
+  <div class="head-title-box">
+    <div class="head-title">
+        <ul>
+            <li>
+                @if(session('userId'))
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span style="color: white;line-height: 30px">{{ session('username') }}</span>
+                @else
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <a href="http://bank.recruit.cn/frontend/register/display">注册</a>
+                @endif
+            </li>
+            <li>
+                @if(session('userId'))
+                    <span class="glyphicon glyphicon-th-large" style="color: white"></span>
+                    <a href="http://bank.recruit.cn/backend/login/loginout" style="color: white">退出登录</a>
+                @else
+                    <span class="glyphicon glyphicon-user" style="color: white"></span>
+                    <a href="http://bank.recruit.cn/frontend/login/display">登录</a>
+                @endif
+            </li>
+        </ul>
     </div>
-    <div class="nav">
-        @section('position')
-            <ul>
-                <li>
-                    <a href="#">招聘首页</a>
-                </li>
-                <li>
-                    <a href="#">校园招聘</a>
-                </li>
-                <li>
-                    <a href="#">社会招聘</a>
-                </li>
-                <li>
-                    <a href="#">重要公告</a>
-                </li>
-                <li>
-                    <a href="#">提问与回答</a>
-                </li>
-                <li>
-                    <a href="#">我的招聘</a>
-                </li>
-            </ul>
-        @show
-    </div>
-    <div class="pictureplace">
-        <div class="pictureplacecenter">
-            <img src="/image/commonbanner.jpg">
-        </div>
-    </div>
-    <div class="container">
-        @yield('content')
-    </div>
-</div>
+  </div>
+  <div class="head-menu">
+    <img src="/image/homepage/9.jpg">
+    <ul>
+        <li>
+           <a href="#" class="text-color">招聘首页</a>
+        </li>
+        <li>
+            <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitInfo"
+               class="text-color">校园招聘</a>
+        </li>
+        <li>
+            <a href="#" class="text-color">社会招聘</a>
+        </li>
+        <li>
+            <a href="#" class="text-color">关于银行</a>
+        </li>
+        <li>
+            <a href="http://bank.recruit.cn/frontend/announce/getAnnounceInfo" class="text-color">重要公告</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)"
+               class="text-color" id="myRecruit" username="{{ session('username') }}">我的招聘</a>
+        </li>
+    </ul>
+  </div>
+  <div class="banner">
+    <img src="/image/homepage/2.gif">
+  </div>
+  <div class="main">
+      @yield('content')
+  </div>
 </body>
+<script type="application/javascript">
+    $("#myRecruit").click(function () {
+
+        var username = $(this).attr('username');
+        if(!username) {
+            alert('请先登录');
+        }else {
+            window.location.href = 'http://bank.recruit.cn/frontend/resume/index';
+        }
+    });
+</script>
 </html>

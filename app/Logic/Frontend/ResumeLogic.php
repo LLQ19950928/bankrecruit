@@ -20,7 +20,7 @@ use App\Models\HDegree;
 use App\Models\HEducation;
 use App\Models\Punishment;
 use App\Models\SchoolLocation;
-use App\Models\SchoolResume;
+use App\Models\Resume;
 use App\Models\TrainType;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -65,7 +65,7 @@ class ResumeLogic
     public function acquireResumeInfo()
     {
         $userId = session('userId');
-        $schoolResume = SchoolResume::findFirstByKey('user_id', $userId, ['*']);
+        $schoolResume = Resume::findFirstByKey('user_id', $userId, ['*']);
         //获取个人基本信息
         $userInfo = UserInfo::findFirstById($schoolResume->info_id, ['*'], true);
         //获取教育背景
