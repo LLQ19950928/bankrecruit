@@ -107,6 +107,11 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getSchoolRecruitInfo', 'SchoolRecruitController@getSchoolRecruitInfo');
         Route::get('getSchoolRecruitDetail', 'SchoolRecruitController@getSchoolRecruitDetail');
     });
+
+    Route::group(['prefix' => 'aboutbank'], function () {
+
+        Route::get('getBankInfo', 'AboutBankController@getBankInfo');
+    });
 });
 
     Route::group(['namespace' => 'Admin',

@@ -105,11 +105,16 @@
             </dd>
         </dl>
         <dl id="menu-comments">
-            <dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt>
+                <i class="Hui-iconfont">&#xe622;</i> 银行信息
+                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
             <dd>
                 <ul>
-                    <li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
-                    <li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>
+                    <li>
+                        <a href="http://bank.recruit.cn/admin/aboutbank/getBankInfo"
+                           title="评论列表">编辑银行信息</a>
+                    </li>
                 </ul>
             </dd>
         </dl>

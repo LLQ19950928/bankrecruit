@@ -47,10 +47,12 @@
             <a href="#" class="text-color">社会招聘</a>
         </li>
         <li>
-            <a href="#" class="text-color">关于银行</a>
+            <a href="http://bank.recruit.cn/frontend/aboutbank/getBankInfo"
+               class="text-color">关于银行</a>
         </li>
         <li>
-            <a href="http://bank.recruit.cn/frontend/announce/getAnnounceInfo" class="text-color">重要公告</a>
+            <a href="http://bank.recruit.cn/frontend/announce/getAnnounceInfo"
+               class="text-color">重要公告</a>
         </li>
         <li>
             <a href="javascript:void(0)"
