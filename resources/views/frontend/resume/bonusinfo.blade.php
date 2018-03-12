@@ -45,7 +45,8 @@
                     <tr>
                         <td width="115">受到奖励的时间</td>
                         <td>
-                            <input type="text" name="bonus_date" value="" id="bonusDate">
+                            <input type="text" name="bonus_date"
+                                   value="" id="bonusDate"  onClick="WdatePicker()">
                         </td>
                         <td width="115">奖励类别</td>
                         <td>

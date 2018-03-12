@@ -2,7 +2,10 @@
 
 @section('resumeStyle')
     <link rel="stylesheet" href="/css/common/resume.css">
+    <link rel="stylesheet" href="/layer/mobile/need/layer.css">
+    <script src="/layer/layer.js"></script>
     <script src="/js/frontend/resume/education.js"></script>
+    <script src="/My97DatePicker/WdatePicker.js"></script>
 @endsection
 
 @section('detail')
@@ -28,7 +31,8 @@
                             <td>{{ $edu['degree'] }}</td>
                             <td>{{ $edu['start_date'] }}</td>
                             <td>
-                                <a href="javascript:void(0)">修改</a>
+                                <a href="javascript:void(0)"
+                                    onclick="updateEdu('http://bank.recruit.cn/frontend/resume/updateEduInfo')">修改</a>
                                 <a href="javascript:void(0)">删除</a>
                             </td>
                         </tr>
@@ -43,11 +47,13 @@
                     <tr>
                         <td width="115">起始日期</td>
                         <td>
-                            <input type="text" name="start_date" value="" id="startDate">
+                            <input type="text" name="start_date" value=""
+                                   id="startDate"  onClick="WdatePicker()">
                         </td>
                         <td width="115">结束日期</td>
                         <td>
-                            <input type="text" name="end_date" value="" id="endDate">
+                            <input type="text" name="end_date"
+                                   value="" id="endDate" onClick="WdatePicker()">
                         </td>
                     </tr>
                     <tr>
@@ -111,4 +117,19 @@
             <button id="saveButton" class="button">保存</button>
         </div>
     </div>
+    <script type="application/javascript">
+        function updateEdu(url) {
+
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['740px', '400px'],
+                anim: 2,
+                maxmin: true,
+                content: [url, 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        }
+    </script>
 @endsection

@@ -1,5 +1,16 @@
 .about_bank {
+    float: right;
+    width: 730px;
+    height: auto;
+    display: block;
     margin-top: 20px;
-    width: 700px;
-    float: left;
 }
+
+#introduction {
+    display: block;
+}
+
+#culture, #train {
+    display: none;
+}
+

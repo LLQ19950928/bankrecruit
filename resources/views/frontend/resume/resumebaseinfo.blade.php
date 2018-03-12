@@ -166,11 +166,13 @@
                     <tr>
                         <td width="115">出生时间</td>
                         <td>
-                            <input type="text" id="broth" name="broth_at" value="{{ $data['userInfo']['broth_at'] }}">
+                            <input type="text" id="broth"
+                                   name="broth_at" value="{{ $data['userInfo']['broth_at'] }}" onClick="WdatePicker()">
                         </td>
                         <td width="115">毕业时间</td>
                         <td>
-                            <input type="text" id="graduate" name="graduate_at" value="{{ $data['userInfo']['graduate_at'] }}">
+                            <input type="text" id="graduate" name="graduate_at"
+                                   value="{{ $data['userInfo']['graduate_at'] }}" onClick="WdatePicker()">
                         </td>
                     </tr>
                 </table>

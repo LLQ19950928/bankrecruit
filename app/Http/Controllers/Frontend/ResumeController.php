@@ -13,22 +13,16 @@ use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 use App\Logic\Frontend\ResumeLogic;
 use App\Models\Bonus;
-use App\Models\Certificate;
-use App\Models\Credit;
 use App\Models\Education;
 use App\Models\FamilyMember;
-use App\Models\ForeignLanguage;
-use App\Models\LanguageType;
 
 use App\Models\Nation;
-use App\Models\Punishment;
-use App\Models\SchoolName;
 use App\Models\Resume;
 use App\Models\UserInfo;
 use App\Models\WorkExperience;
 use App\Validations\ResumeValidation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+
 
 class ResumeController extends Controller
 {
@@ -81,6 +75,11 @@ class ResumeController extends Controller
         $id = $resume->id;
         $data = Education::findMoreByKey('resume_id', $id, ['*'], true);
         return view('frontend/resume/edusituation', ['data' => $data ? $data : []]);
+    }
+
+    public function updateEduInfo(Request $request)
+    {
+        return view('frontend/resume/updateeduinfo');
     }
 
     /**
@@ -139,36 +138,5 @@ class ResumeController extends Controller
         }
         return response()->json(ApiException::success(ApiException::SUCCESS, $familyMember));
     }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * 获取对应外语的证书
-     */
-    public function acquireCertificate(Request $request)
-    {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateId($request, 'languageId', 'languageId');
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
-        $languageId = $request->get('languageId');
-        $cacheKey = 'language:' . $languageId;
-        $certificateData = Cache::get($cacheKey);
-        if (!$certificateData) {
-            $certificateData = Certificate::findMoreByKey('type_id', $languageId, ['*'], true);
-            if (!$certificateData) {
-                return response()->json(ApiException::error(ApiException::FAILED));
-            }
-            //存入缓存中
-            Cache::put($cacheKey, $certificateData, 3 * 60);
-            return response()->json(ApiException::success(ApiException::SUCCESS, $certificateData));
-        }
-        return response()->json(ApiException::success(ApiException::SUCCESS, $certificateData));
-    }
-
-
-
 
 }

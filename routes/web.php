@@ -82,18 +82,7 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getWorkExperienceInfo', 'ResumeController@getWorkExperienceInfo');
         Route::get('getBonusInfo', 'ResumeController@getBonusInfo');
         Route::get('getFamilyMember', 'ResumeController@getFamilyMember');
-
-        Route::get('appointededu', 'ResumeController@displayAppointedUserEducation');
-        Route::get('acquiresn', 'ResumeController@acquireSchoolName');
-        Route::get('lang', 'ResumeController@displayUserForeignLanguages');
-        Route::get('appointedlang', 'ResumeController@displayAppointedUserForeignLanguages');
-        Route::get('acquirece', 'ResumeController@acquireCertificate');
-        Route::get('credit', 'ResumeController@displayUserCredit');
-        Route::get('appointedbonus', 'ResumeController@displayAppointedUserBonus');
-        Route::get('punishment', 'ResumeController@displayUserPunishment');
-        Route::get('appointedpunishment', 'ResumeController@displayAppointedUserPunishment');
-        Route::get('familymember', 'ResumeController@displayFamilyMember');
-        Route::get('appointedfamilymember', 'ResumeController@displayAppointedFamilyMember');
+        Route::get('updateEduInfo', 'ResumeController@updateEduInfo');
     });
 
     Route::group(['prefix' => 'announce'], function () {
@@ -111,6 +100,11 @@ Route::group(['namespace' => 'Frontend',
     Route::group(['prefix' => 'aboutbank'], function () {
 
         Route::get('getBankInfo', 'AboutBankController@getBankInfo');
+    });
+
+    Route::group(['prefix' => 'applyfor'], function () {
+
+        Route::get('applyInfo', 'ApplyForController@applyInfo');
     });
 });
 

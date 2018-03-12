@@ -6,8 +6,8 @@
 
     <link rel="stylesheet" href="/css/layouts/resume.css">
     <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/frontend/aboutbank/bankinfo.css">
     <script src="/js/jquery-ui.js"></script>
-    <script src="/js/layouts/resume.js"></script>
     <script src="/js/frontend/bankinfo/bankinfo.js"></script>
 @endsection
 
@@ -36,6 +36,14 @@
         </div>
     </div>
     <div class="about_bank">
-        hello world
+        <div id="introduction">
+             {{ $data['introduction'] }}
+        </div>
+        <div id="culture">
+             {{ $data['culture'] }}
+        </div>
+        <div id="train">
+             {{ $data['train'] }}
+        </div>
     </div>
 @endsection

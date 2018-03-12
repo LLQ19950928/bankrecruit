@@ -54,7 +54,7 @@ class LoginController extends Controller
     public function loginOut(Request $request)
     {
         $request->session()->forget('userId');
-        return redirect('http://bank.schoolrecruit.cn/frontend/homepage/display');
+        return redirect('http://bank.recruit.cn/frontend/homepage/display');
     }
 
 

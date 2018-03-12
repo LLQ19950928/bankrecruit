@@ -5,9 +5,8 @@
 @section('style')
 
     <link rel="stylesheet" href="/css/layouts/resume.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
-    <script src="/js/jquery-ui.js"></script>
     <script src="/js/layouts/resume.js"></script>
+    <script src="/My97DatePicker/WdatePicker.js"></script>
     @yield('resumeStyle')
 @endsection
 

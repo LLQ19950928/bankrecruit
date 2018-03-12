@@ -2,8 +2,6 @@ $(document).ready(function () {
 
     $(".navi_resume").addClass('on');
 
-    $("#broth").datepicker();
-    $("#graduate").datepicker();
 
     $("#saveButton").click(function () {
 

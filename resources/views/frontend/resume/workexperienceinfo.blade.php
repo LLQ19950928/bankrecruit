@@ -43,11 +43,13 @@
                     <tr>
                         <td width="115">起始日期</td>
                         <td>
-                            <input type="text" name="start_date" value="" id="startDate">
+                            <input type="text" name="start_date"
+                                   value="" id="startDate" onClick="WdatePicker()">
                         </td>
                         <td width="115">结束日期</td>
                         <td>
-                            <input type="text" name="end_date" value="" id="endDate">
+                            <input type="text" name="end_date"
+                                   value="" id="endDate" onClick="WdatePicker()">
                         </td>
                     </tr>
                     <tr>
