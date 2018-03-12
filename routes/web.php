@@ -35,24 +35,12 @@ Route::group(['namespace' => 'Backend',
         Route::any('editBonusInfo', 'ResumeController@editBonusInfo');
         Route::any('editFamilyMember', 'ResumeController@editFamilyMember');
 
-        Route::any('update', 'ResumeController@updateUserEducation');
-        Route::any('editlang', 'ResumeController@editUserForeignLanguage');
-        Route::any('updatelang', 'ResumeController@updateUserForeignLanguage');
-        Route::any('editcredit', 'ResumeController@editUserCredit');
+        Route::any('updateEduInfo', 'ResumeController@updateEduInfo');
+        Route::any('updateBonusInfo', 'ResumeController@updateBonusInfo');
 
-        Route::any('updatebonus', 'ResumeController@updateUserBonus');
-
-        Route::any('editpunishment', 'ResumeController@editUserPunishment');
-        Route::any('updatepunishment', 'ResumeController@updateUserPunishment');
-
-
-        Route::any('updatefamily', 'ResumeController@updateFamilyMember');
+        Route::any('updateFamilyMember', 'ResumeController@updateFamilyMember');
     });
 
-    Route::group(['prefix' => 'json'], function () {
-        Route::get('nation', 'JsonController@acquireNationInfo');
-        Route::get('polity', 'JsonController@acquirePolityInfo');
-    });
 
     Route::any('test', 'TestController@test');
 });
@@ -83,6 +71,9 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getBonusInfo', 'ResumeController@getBonusInfo');
         Route::get('getFamilyMember', 'ResumeController@getFamilyMember');
         Route::get('updateEduInfo', 'ResumeController@updateEduInfo');
+        Route::get('updateBonusInfo', 'ResumeController@updateBonusInfo');
+        Route::get('updateFamilyMember', 'ResumeController@updateFamilyMember');
+        Route::get('previewResume', 'ResumeController@previewResume');
     });
 
     Route::group(['prefix' => 'announce'], function () {

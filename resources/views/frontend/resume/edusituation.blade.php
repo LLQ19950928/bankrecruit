@@ -15,6 +15,7 @@
         </div>
         <div>
             <button class="add_button" id="addButton">继续添加</button>
+            <button class="cancel_button" id="cancelButton">取消</button>
         </div>
         <div>
             @if($data)
@@ -28,11 +29,21 @@
                     @foreach($data as $edu)
                         <tr>
                             <td>{{ $edu['school_name'] }}</td>
-                            <td>{{ $edu['degree'] }}</td>
+                            <td>
+                                @if($edu['degree'] == 1)
+                                     学士
+                                @elseif($edu['degree'] == 2)
+                                     硕士
+                                @elseif($edu['degree'] == 3)
+                                     博士
+                                @endif
+                            </td>
                             <td>{{ $edu['start_date'] }}</td>
                             <td>
                                 <a href="javascript:void(0)"
-                                    onclick="updateEdu('http://bank.recruit.cn/frontend/resume/updateEduInfo')">修改</a>
+                                    onclick="updateEdu('http://bank.recruit.cn/frontend/resume/updateEduInfo?id={{ $edu['id'] }}')">
+                                    修改
+                                </a>
                                 <a href="javascript:void(0)">删除</a>
                             </td>
                         </tr>
@@ -122,14 +133,16 @@
 
             layer.open({
                 type: 2,
-                title: false,
+                title: '修改信息',
                 closeBtn: 1, //不显示关闭按钮
                 shade: [0],
                 area: ['740px', '400px'],
                 anim: 2,
                 maxmin: true,
-                content: [url, 'yes'] //iframe的url，no代表不显示滚动条
+                content: [url, 'yes'],
+
             });
+
         }
     </script>
 @endsection

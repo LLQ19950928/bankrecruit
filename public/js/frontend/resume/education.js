@@ -11,7 +11,11 @@ $(document).ready(function () {
             alert('请先保存教育信息');
         }
 
+    });
 
+    $('#cancelButton').click(function () {
+
+         $('.main_you22_3').hide();
     });
 
     $("#saveButton").click(function () {

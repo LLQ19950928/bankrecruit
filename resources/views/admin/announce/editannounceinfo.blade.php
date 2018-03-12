@@ -63,7 +63,7 @@
 
     $('#commitButton').click(function () {
         $.ajax({
-            url: 'http://bank.schoolrecruit.cn/admin/announce/editAnnounceInfo',
+            url: 'http://bank.recruit.cn/admin/announce/editAnnounceInfo',
             dataType: 'json',
             type: 'post',
             data: $('#announceAdd').serialize(),

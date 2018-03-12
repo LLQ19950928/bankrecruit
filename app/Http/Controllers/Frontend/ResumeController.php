@@ -9,18 +9,16 @@
 namespace App\Http\Controllers\Frontend;
 
 
-use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
-use App\Logic\Frontend\ResumeLogic;
 use App\Models\Bonus;
 use App\Models\Education;
 use App\Models\FamilyMember;
 
 use App\Models\Nation;
 use App\Models\Resume;
+use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WorkExperience;
-use App\Validations\ResumeValidation;
 use Illuminate\Http\Request;
 
 
@@ -40,9 +38,9 @@ class ResumeController extends Controller
      */
     public function previewResume()
     {
-        $resumeLogic = new ResumeLogic();
-        $data = $resumeLogic->acquireResumeInfo();
-        return response()->json(ApiException::success(ApiException::SUCCESS, $data));
+         $userId = session('userId');
+         $resumeId = Resume::findFirstByKey('user_id', $userId, ['id'], true)['id'];
+
     }
 
     /**
@@ -77,10 +75,19 @@ class ResumeController extends Controller
         return view('frontend/resume/edusituation', ['data' => $data ? $data : []]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 更新用户教育背景
+     */
     public function updateEduInfo(Request $request)
     {
-        return view('frontend/resume/updateeduinfo');
+
+        $id = $request->get('id');
+        $education = Education::findFirstById($id, ['*'], true);
+        return view('frontend/resume/updateeduinfo', ['data' => $education]);
     }
+
 
     /**
      * 显示工作经历
@@ -106,6 +113,17 @@ class ResumeController extends Controller
          return view('frontend/resume/bonusinfo', ['data' => $data ? $data : []]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 更新奖励信息
+     */
+    public function updateBonusInfo(Request $request)
+    {
+        $id = $request->get('id');
+        $bonus = Bonus::findFirstById($id, ['*'], true);
+        return view('frontend/resume/updatebounsinfo', ['data' => $bonus]);
+    }
 
     /**
      * @return \Illuminate\Http\JsonResponse
@@ -120,23 +138,14 @@ class ResumeController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * 显示指定的家庭成员信息
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * 更新家庭成员信息
      */
-    public function displayAppointedFamilyMember(Request $request)
+    public function updateFamilyMember(Request $request)
     {
-        $resumeValidation = new ResumeValidation();
-        $validator = $resumeValidation->validateId($request, 'familyId', 'familyId');
-        if ($validator->fails()) {
-            return response()->json(ApiException::error(ApiException::VALIDATION_FAILED,
-                $validator->errors()->first()));
-        }
-        $familyMember = FamilyMember::findFirstById($request->get('familyId'), ['id', 'call', 'name',
-            'broth_at', 'company', 'job'], true);
-        if (!$familyMember) {
-            return response()->json(ApiException::error(ApiException::FAILED));
-        }
-        return response()->json(ApiException::success(ApiException::SUCCESS, $familyMember));
+        $id = $request->get('id');
+        $familyMember = FamilyMember::findFirstById($id, ['*'], true);
+        return view('frontend/resume/updatefamilymember', ['data' => $familyMember]);
     }
 
 }

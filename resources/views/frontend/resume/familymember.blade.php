@@ -2,6 +2,8 @@
 
 @section('resumeStyle')
     <link rel="stylesheet" href="/css/common/resume.css">
+    <link rel="stylesheet" href="/layer/mobile/need/layer.css">
+    <script src="/layer/layer.js"></script>
     <script src="/js/frontend/resume/familymember.js"></script>
 @endsection
 
@@ -28,7 +30,11 @@
                             <td>{{ $family['company'] }}</td>
                             <td>{{ $family['phone_number'] }}</td>
                             <td>
-                                <a href="javascript:void(0)">修改</a>
+                                <a href="javascript:void(0)"
+                                   onclick="updateMember(
+                                       'http://bank.recruit.cn/frontend/resume/updateFamilyMember?id={{ $family['id'] }}')">
+                                    修改
+                                </a>
                                 <a href="javascript:void(0)">删除</a>
                             </td>
                         </tr>
@@ -76,4 +82,21 @@
             <button id="saveButton" class="button">保存</button>
         </div>
     </div>
+    <script type="application/javascript">
+        function updateMember(url) {
+
+            layer.open({
+                type: 2,
+                title: '修改信息',
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['740px', '400px'],
+                anim: 2,
+                maxmin: true,
+                content: [url, 'yes'],
+
+            });
+
+        }
+    </script>
 @endsection

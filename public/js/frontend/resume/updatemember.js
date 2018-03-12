@@ -1,12 +1,9 @@
 $(document).ready(function () {
 
-    $(".navi_resume").addClass('on');
-
-
-    $("#saveButton").click(function () {
+    $('#saveButton').click(function () {
 
         $.ajax({
-            url: 'http://bank.recruit.cn/backend/resume/editResumeBaseInfo',
+            url: 'http://bank.recruit.cn/backend/resume/updateFamilyMember',
             dataType: 'json',
             type: 'post',
             data: $("#resumeForm").serialize(),
@@ -14,10 +11,10 @@ $(document).ready(function () {
                 if (res.code == 10003) {
                     alert(res.msg);
                 }else {
-                    window.location.href = 'http://bank.recruit.cn/frontend/resume/getEduSituation';
+                    alert('修改成功');
+                    window.location.href = '';
                 }
             }
         });
     });
-
 });

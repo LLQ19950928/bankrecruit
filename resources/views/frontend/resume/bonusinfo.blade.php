@@ -3,6 +3,8 @@
 @section('resumeStyle')
     <link rel="stylesheet" href="/css/common/resume.css">
     <script src="/js/frontend/resume/bonusinfo.js"></script>
+    <link rel="stylesheet" href="/layer/mobile/need/layer.css">
+    <script src="/layer/layer.js"></script>
 @endsection
 
 @section('detail')
@@ -12,6 +14,7 @@
         </div>
         <div>
             <button class="add_button" id="addButton">继续添加</button>
+            <button class="cancel_button" id="cancelButton">取消添加</button>
         </div>
         <div>
             @if($data)
@@ -30,7 +33,8 @@
                             <td>{{ $bonus['bonus_company'] }}</td>
                             <td>{{ $bonus['bonus_type'] }}</td>
                             <td>
-                                <a href="javascript:void(0)">修改</a>
+                                <a href="javascript:void(0)"
+                                   onclick="updateBonus('http://bank.recruit.cn/frontend/resume/updateBonusInfo?id={{ $bonus['id'] }}')">修改</a>
                                 <a href="javascript:void(0)">删除</a>
                             </td>
                         </tr>
@@ -72,4 +76,21 @@
             <button id="saveButton" class="button">保存</button>
         </div>
     </div>
+    <script type="application/javascript">
+        function updateBonus(url) {
+
+            layer.open({
+                type: 2,
+                title: '修改信息',
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['740px', '400px'],
+                anim: 2,
+                maxmin: true,
+                content: [url, 'yes'],
+
+            });
+
+        }
+    </script>
 @endsection
