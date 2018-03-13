@@ -4,7 +4,9 @@
 
 @section('style')
     <link rel="stylesheet" href="/css/frontend/resume/index.css">
+    <link rel="stylesheet" href="/layer/mobile/need/layer.css">
     <script src="/js/frontend/homepage/display.js"></script>
+    <script src="/layer/layer.js"></script>
     <script src="/js/frontend/myrecruit/myrecruit.js"></script>
 @endsection
 
@@ -47,11 +49,26 @@
                             <td align="center">
                                 <a href="http://bank.recruit.cn/frontend/resume/getResumeBaseInfo" style="color: #2281d9">编辑</a>
                                 <span style="color: #2281d9">&nbsp;|&nbsp;</span>
-                                <a href="#" style="color: #2281d9">预览</a>
+                                <a href="javascript:void(0)"
+                                   style="color: #2281d9"
+                                   onclick="previewResume('http://bank.recruit.cn/frontend/resume/previewResume')">预览</a>
                             </td>
                         </tr>
                     </table>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function previewResume(url) {
+
+            var index = layer.open({
+                type: 2,
+                title: '简历预览',
+                area: ['840px', '600px'],
+                content: url,
+            });
+
+            layer.full(index);
+        }
+    </script>
 @endsection

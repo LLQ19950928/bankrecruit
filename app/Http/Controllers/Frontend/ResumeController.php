@@ -40,7 +40,19 @@ class ResumeController extends Controller
     {
          $userId = session('userId');
          $resumeId = Resume::findFirstByKey('user_id', $userId, ['id'], true)['id'];
-
+         $bonusArr = Bonus::findMoreByKey('resume_id', $resumeId, ['*'], true);
+         $eduArr = Education::findMoreByKey('resume_id', $resumeId, ['*'], true);
+         $familyArr = FamilyMember::findMoreByKey('resume_id', $resumeId, ['*'], true);
+         $workArr = WorkExperience::findMoreByKey('resume_id', $resumeId, ['*'], true);
+         $userInfo = UserInfo::findFirstByKey('user_id', $userId, ['*'], true);
+         $data = [
+             'bonus' => $bonusArr ? $bonusArr : [],
+             'education'   => $eduArr ? $eduArr : [],
+             'family' => $familyArr ? $familyArr : [],
+             'work'   => $workArr ? $workArr : [],
+             'userInfo' => $userInfo ? $userInfo : []
+         ];
+         return view('frontend/resume/previewresume', ['data' => $data]);
     }
 
     /**

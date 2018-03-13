@@ -37,13 +37,13 @@
     </div>
     <div class="about_bank">
         <div id="introduction">
-             {{ $data['introduction'] }}
+             <?php echo $data['introduction'];?>
         </div>
         <div id="culture">
-             {{ $data['culture'] }}
+             <?php echo $data['culture'];?>
         </div>
         <div id="train">
-             {{ $data['train'] }}
+            <?php echo $data['train'];?>
         </div>
     </div>
 @endsection

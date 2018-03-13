@@ -10,10 +10,11 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Handlers\ApiException;
+use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
-class RecruitController
+class RecruitController extends Controller
 {
     public function getSchoolRecruitInfo()
     {

@@ -22,8 +22,9 @@ class ApplyForController extends Controller
          $applyArr = Apply::findMoreByKey('user_id', $userId, ['*'], true);
          foreach ($applyArr as &$apply)
          {
-             $job = Job::findFirstByKey('job_name', $apply['job_id'], ['company'], true);
+             $job = Job::findFirstById($apply['job_id'], ['job_name', 'company'], true);
              $apply['company'] = $job['company'];
+             $apply['job_name'] = $job['job_name'];
          }
          return view('frontend/applyfor/applyinfo',
              ['data' => $applyArr ? $applyArr : []]);

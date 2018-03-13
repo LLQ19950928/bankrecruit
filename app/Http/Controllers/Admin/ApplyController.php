@@ -18,8 +18,24 @@ class ApplyController extends Controller
 {
     public function applyJob(Request $request)
     {
-        $apply = Apply::create($request->post());
-        if ($apply) {
+        $post = $request->post();
+        try {
+            $apply = Apply::where('user_id', session('userId'))
+                ->where('job_id', $post['job_id'])->firstOrFail();
+        }catch (\Exception $exception) {
+            $apply = false;
+        }
+        if ($post['is_update']) {
+
+            $result = $apply->update($post);
+        }else {
+            if (!$apply) {
+                $result = Apply::create($request->post());
+            }else {
+                return ApiException::error(ApiException::REPEAT_APPLY);
+            }
+        }
+        if ($result) {
             return ApiException::success(ApiException::SUCCESS);
         }else {
             return ApiException::error(ApiException::FAILED);

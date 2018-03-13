@@ -26,6 +26,7 @@ class ApiException
      const REGISTER_FAILED = 10006;
      const RESUME_NOT_EXISTS = 10007;
      const REGISTER_SUCCESS = 10008;
+     const REPEAT_APPLY = 10008;
 
      protected static $_codeList = [
          
@@ -39,7 +40,8 @@ class ApiException
          self::USER_NOT_EXISTS   => '用户不存在',
          self::PASSWORD_ERROR    => '密码不正确',
          self::REGISTER_FAILED   => '注册失败',
-         self::RESUME_NOT_EXISTS => '用户简历不存在'
+         self::RESUME_NOT_EXISTS => '用户简历不存在',
+         self::REPEAT_APPLY => '您已申请该职位，请勿重复申请'
      ];
 
      public static function success($code=self::SUCCESS, $data=[])

@@ -61,7 +61,7 @@ Route::group(['namespace' => 'Frontend',
         Route::get('display', 'HomePageController@display');
     });
 
-    Route::group(['prefix' => 'resume'], function () {
+    Route::group(['prefix' => 'resume', 'middleware' => 'resume'], function () {
 
         Route::get('index', 'ResumeController@index');
         Route::get('preview', 'ResumeController@previewResume');
@@ -93,7 +93,7 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getBankInfo', 'AboutBankController@getBankInfo');
     });
 
-    Route::group(['prefix' => 'applyfor'], function () {
+    Route::group(['prefix' => 'applyfor', 'middleware' => 'resume'], function () {
 
         Route::get('applyInfo', 'ApplyForController@applyInfo');
     });

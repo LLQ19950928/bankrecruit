@@ -29,7 +29,7 @@
         <div class="form-group">
             <label for="exampleInputName2">笔试地点</label>
             &nbsp;
-            <select class="form-control" style="width: 100px" name="exam_place">
+            <select class="form-control" style="width: 140px" name="exam_place">
                 <option selected="selected">----请选择---</option>
                 @foreach($data['exam_place'] as $exam)
                     <option value="{{ $exam }}">{{ $exam }}</option>
@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="exampleInputEmail2">面试地点</label>
             &nbsp;
-            <select class="form-control" style="width: 100px" name="interview_place">
+            <select class="form-control" style="width: 140px" name="interview_place">
                 <option selected="selected">----请选择---</option>
                 @foreach($data['interview_place'] as $interview)
                     <option value="{{ $interview }}">{{ $interview }}</option>
@@ -48,6 +48,7 @@
             </select>
             <input type="hidden" value="{{ $data['id'] }}" name="job_id">
             <input type="hidden" value="{{ session('userId') }}" name="user_id">
+            <input type="hidden" value="{{ $data['is_update'] }}" name="is_update">
         </div>
     </form>
     <div class="table_style">
@@ -70,19 +71,19 @@
         <div class="panel panel-primary">
             <div class="panel-heading">主要职责</div>
             <div class="panel-body">
-                {{ $data['duty'] }}
+                <?php echo $data['duty']?>
             </div>
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">基本应聘条件</div>
             <div class="panel-body">
-                {{ $data['condition'] }}
+               <?php echo $data['condition']?>
             </div>
         </div>
         <div class="panel panel-primary">
             <div class="panel-heading">职位具体要求</div>
             <div class="panel-body">
-                {{ $data['requirement'] }}
+                <?php echo $data['requirement']?>
             </div>
         </div>
         <div class="btn_style">

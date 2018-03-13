@@ -21,12 +21,6 @@ class Apply extends BaseModel
          return $user['email'];
     }
 
-    public function getJobIdAttribute($key)
-    {
-         $job = Job::findFirstById($key, ['job_name'], true);
-         return $job['job_name'];
-    }
-
     public function getCreatedAtAttribute($key)
     {
         return date('Y-m-d H:i', $key);

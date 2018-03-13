@@ -23,9 +23,12 @@ class SchoolRecruitController
     public function getSchoolRecruitDetail(Request $request)
     {
         $jobId = $request->get('id');
+        $isUpdate = $request->get('is_update', 0);
+
         $job = Job::findFirstById($jobId, ['*'], true);
         $job['exam_place'] = explode(',', $job['exam_place']);
         $job['interview_place'] = explode(',', $job['interview_place']);
+        $job['is_update'] = $isUpdate;
         return view('frontend/schoolrecruit/schoolrecruitdetail', ['data' => $job ? $job : '']);
     }
 

@@ -25,7 +25,7 @@
     <div class="announce_desc">
         <h3 style="text-align: center">{{ $announce['title'] }}</h3>
         <div>
-            {{ $announce['content'] }}
+           <?php echo $announce['content'];?>
         </div>
     </div>
 @endsection
