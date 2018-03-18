@@ -46,4 +46,15 @@ class RecruitController extends Controller
         }
 
     }
+
+    public function getSocialRecruitInfo()
+    {
+        $jobs = Job::findAll(['*'], true);
+        return view('admin/socialrecruit/socialrecruit', ['data' => $jobs ? $jobs : []]);
+    }
+
+    public function editSocialRecruitInfo(Request $request)
+    {
+        return view('admin/socialrecruit/editsocialrecruitinfo');
+    }
 }

@@ -12,10 +12,15 @@ $(document).ready(function () {
         }
     });
 
+    $('#cancelButton').click(function () {
+
+        $(".main_you22_3").hide();
+    });
+
     $("#saveButton").click(function () {
 
         $.ajax({
-            url: 'http://bank.schoolrecruit.cn/backend/resume/editWorkExperienceInfo',
+            url: 'http://bank.recruit.cn/backend/resume/editWorkExperienceInfo',
             dataType: 'json',
             type: 'post',
             data: $("#resumeForm").serialize(),

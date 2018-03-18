@@ -39,6 +39,8 @@ Route::group(['namespace' => 'Backend',
         Route::any('updateBonusInfo', 'ResumeController@updateBonusInfo');
 
         Route::any('updateFamilyMember', 'ResumeController@updateFamilyMember');
+        Route::any('updateWorkExperience', 'ResumeController@updateWorkExperience');
+
     });
 
 
@@ -68,6 +70,7 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getResumeBaseInfo', 'ResumeController@getResumeBaseInfo');
         Route::get('getEduSituation', 'ResumeController@getEduSituation');
         Route::get('getWorkExperienceInfo', 'ResumeController@getWorkExperienceInfo');
+        Route::get('updateWorkExperienceInfo', 'ResumeController@updateWorkExperienceInfo');
         Route::get('getBonusInfo', 'ResumeController@getBonusInfo');
         Route::get('getFamilyMember', 'ResumeController@getFamilyMember');
         Route::get('updateEduInfo', 'ResumeController@updateEduInfo');
@@ -87,6 +90,13 @@ Route::group(['namespace' => 'Frontend',
         Route::get('getSchoolRecruitInfo', 'SchoolRecruitController@getSchoolRecruitInfo');
         Route::get('getSchoolRecruitDetail', 'SchoolRecruitController@getSchoolRecruitDetail');
     });
+
+    Route::group(['prefix' => 'socialrecruit'], function () {
+
+        Route::get('getSocialRecruitInfo', 'SocialRecruitController@getSocialRecruitInfo');
+        Route::get('getSocialRecruitDetail', 'SocialRecruitController@getSocialRecruitDetail');
+    });
+
 
     Route::group(['prefix' => 'aboutbank'], function () {
 
@@ -120,6 +130,8 @@ Route::group(['namespace' => 'Frontend',
 
             Route::get('getAnnounceInfo', 'AnnounceController@getAnnounceInfo');
             Route::any('editAnnounceInfo', 'AnnounceController@editAnnounceInfo');
+            Route::any('updateAnnounceInfo', 'AnnounceController@updateAnnounceInfo');
+            Route::any('updateAnnounceStatus', 'AnnounceController@updateAnnounceStatus');
         });
 
         Route::group(['prefix' => 'schoolrecruit'], function () {
@@ -128,6 +140,11 @@ Route::group(['namespace' => 'Frontend',
             Route::any('editSchoolRecruitInfo', 'RecruitController@editSchoolRecruitInfo');
         });
 
+        Route::group(['prefix' => 'socialrecruit'], function () {
+
+            Route::get('getSocialRecruitInfo', 'RecruitController@getSocialRecruitInfo');
+            Route::any('editSocialRecruitInfo', 'RecruitController@editSocialRecruitInfo');
+        });
 
         Route::group(['prefix' => 'apply'], function () {
 
@@ -140,6 +157,8 @@ Route::group(['namespace' => 'Frontend',
             Route::any('editBankInfo', 'AboutBankController@editBankInfo');
             Route::get('getBankInfo', 'AboutBankController@getBankInfo');
         });
+
+
 });
 
 

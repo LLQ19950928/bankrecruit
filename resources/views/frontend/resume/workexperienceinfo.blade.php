@@ -2,6 +2,8 @@
 
 @section('resumeStyle')
     <link rel="stylesheet" href="/css/common/resume.css">
+    <link rel="stylesheet" href="/layer/mobile/need/layer.css">
+    <script src="/layer/layer.js"></script>
     <script src="/js/frontend/resume/workexperienceinfo.js"></script>
 @endsection
 
@@ -12,6 +14,8 @@
         </div>
         <div>
             <button class="add_button" id="addButton">继续添加</button>
+            &nbsp;&nbsp;
+            <button class="cancel_button" id="cancelButton">取消添加</button>
         </div>
         <div>
             @if($data)
@@ -28,7 +32,8 @@
                         <td>{{ $work['job_name'] }}</td>
                         <td>{{ $work['start_date'] }}</td>
                         <td>
-                            <a href="javascript:void(0)">修改</a>
+                            <a href="javascript:void(0)"
+                               onclick="updateWork('http://bank.recruit.cn/frontend/resume/updateWorkExperienceInfo?id={{ $work['id'] }}')">修改</a>
                             <a href="javascript:void(0)">删除</a>
                         </td>
                     </tr>
@@ -71,7 +76,7 @@
                     <tr>
                         <td width="115">用工形式</td>
                         <td>
-                            <select name="work_style">
+                            <select name="work_status">
                                 <option selected="selected">-------请选择------</option>
                                 <option value="1">正式员工</option>
                                 <option value="2">实习生</option>
@@ -90,4 +95,21 @@
             <button id="saveButton" class="button">保存</button>
         </div>
     </div>
+    <script type="text/javascript">
+        function updateWork(url) {
+
+            layer.open({
+                type: 2,
+                title: '修改信息',
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['740px', '400px'],
+                anim: 2,
+                maxmin: true,
+                content: [url, 'yes'],
+
+            });
+
+        }
+    </script>
 @endsection

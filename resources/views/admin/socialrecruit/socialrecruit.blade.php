@@ -6,9 +6,9 @@
     <section class="Hui-article-box">
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
             <span class="c-gray en">&gt;</span>
-            校园招聘管理
+            社会招聘管理
             <span class="c-gray en">&gt;</span>
-            校园招聘列表
+            社会招聘列表
             <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
                href="javascript:location.replace(location.href);" title="刷新" >
                 <i class="Hui-iconfont">&#xe68f;</i>

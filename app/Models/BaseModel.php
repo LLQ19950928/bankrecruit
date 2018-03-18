@@ -60,6 +60,21 @@ class BaseModel extends Model
 
     }
 
+    public static function findFirstByKeys($where , $column=['*'], $toArray=false)
+    {
+         $select = [];
+         foreach ($where as $key => $value)
+         {
+             $select[] = [$key, $value];
+         }
+         $model = self::where($select)->get($column);
+         if ($model) {
+             return $toArray ? $model->all() : $model;
+         }
+
+         return false;
+    }
+
     public static function findAll($columns=['*'], $toArray=false)
     {
         $models = self::all($columns);

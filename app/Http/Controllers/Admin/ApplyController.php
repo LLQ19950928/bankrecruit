@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class ApplyController extends Controller
@@ -45,6 +46,10 @@ class ApplyController extends Controller
     public function getApplyInfo()
     {
         $apply = Apply::findAll(['*'], true);
+        foreach ($apply as &$a) {
+            $jobName = (Job::findFirstById($a['job_id'], ['job_name'], true))['job_name'];
+            $a['job_name'] = $jobName;
+        }
         return view('admin/apply/applyinfo', ['data' => $apply ? $apply : '']);
     }
 }

@@ -44,7 +44,8 @@
                class="text-color">校园招聘</a>
         </li>
         <li>
-            <a href="#" class="text-color">社会招聘</a>
+            <a href="http://bank.recruit.cn/frontend/socialrecruit/getSocialRecruitInfo"
+               class="text-color">社会招聘</a>
         </li>
         <li>
             <a href="http://bank.recruit.cn/frontend/aboutbank/getBankInfo"

@@ -113,6 +113,14 @@ class ResumeController extends Controller
         return view('frontend/resume/workexperienceinfo', ['data' => $data ? $data : []]);
     }
 
+    public function updateWorkExperienceInfo(Request $request)
+    {
+        $id = $request->get('id');
+        $workExperience = WorkExperience::findFirstById($id, ['*'], true);
+        return view('frontend/resume/updatework',
+            ['data' => $workExperience ? $workExperience : []]);
+    }
+
 
     /**
      * @return \Illuminate\Http\JsonResponse

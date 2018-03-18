@@ -40,7 +40,7 @@
                     <table width="730" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                         <tr height="40" bgcolor="#114D8B" style="color: #FFF; font-size: 14px">
                             <td width="100" align="center">编号</td>
-                            <td width="210" align="center">内容</td>
+                            <td width="210" align="center">简历内容</td>
                             <td width="210" align="center">操作</td>
                         </tr>
                         <tr height="40">

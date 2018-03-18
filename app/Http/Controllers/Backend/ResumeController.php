@@ -184,4 +184,16 @@ class ResumeController extends Controller
          }
     }
 
+    public function updateWorkExperience(Request $request)
+    {
+        $id = $request->post('id');
+        $workExperience = WorkExperience::findFirstById($id, ['*']);
+        $result = $workExperience->update($request->post());
+        if ($result) {
+            return response()->json(ApiException::success(ApiException::SUCCESS));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+    }
+
 }

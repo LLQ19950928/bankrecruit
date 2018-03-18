@@ -1,7 +1,7 @@
 @extends('layouts.recruit')
 
 @section('title')
-    校园招聘
+    社会招聘
 @endsection
 
 @section('style')
@@ -77,7 +77,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">基本应聘条件</div>
             <div class="panel-body">
-               <?php echo $data['condition']?>
+                <?php echo $data['condition']?>
             </div>
         </div>
         <div class="panel panel-primary">

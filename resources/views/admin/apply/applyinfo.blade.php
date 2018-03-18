@@ -39,7 +39,7 @@
                                         <span>{{ $apply['user_id'] }}</span>
                                     </td>
                                     <td>{{ $apply['created_at'] }}</td>
-                                    <td>{{ $apply['job_id'] }}</td>
+                                    <td>{{ $apply['job_name'] }}</td>
                                     <td>{{ $apply['exam_place'] }}</td>
                                     <td>{{ $apply['interview_place'] }}</td>
                                     <td class="td-status">
