@@ -45,6 +45,12 @@
                         家庭信息
                     </div>
                 </div>
+                <div class="navi_certificate">
+                    <div class="txt">
+                        <span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;
+                        证书信息
+                    </div>
+                </div>
             </div>
         </div>
         @yield('detail')

@@ -19,4 +19,8 @@ $(document).ready(function () {
     $('.navi_family').click(function () {
         window.location.href = 'http://bank.recruit.cn/frontend/resume/getFamilyMember';
     });
+
+    $('.navi_certificate').click(function () {
+        window.location.href = 'http://bank.recruit.cn/frontend/resume/getCertificateInfo';
+    });
 });

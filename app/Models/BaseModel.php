@@ -35,7 +35,8 @@ class BaseModel extends Model
         return $toArray ? $models->all() : $models;
     }
 
-    public static function findFirstByKey($key, $value, $columns=['*'], $toArray=false, $condition='=')
+    public static function findFirstByKey($key, $value, $columns=['*'],
+                                          $toArray=false, $condition='=')
     {
          try {
              $model = self::where($key, $condition, $value)->firstOrFail($columns);
@@ -73,6 +74,21 @@ class BaseModel extends Model
          }
 
          return false;
+    }
+
+    public static function findMoreByKeys($where, $columns=['*'], $toArray=false)
+    {
+        $select = [];
+        foreach ($where as $key => $value)
+        {
+            $select[] = [$key, $value];
+        }
+        $models = self::where($select)->get($columns);
+        if ($models) {
+            return $toArray ? $models->all() : $models;
+        }
+
+        return false;
     }
 
     public static function findAll($columns=['*'], $toArray=false)

@@ -9,8 +9,11 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 use App\Models\Bonus;
+use App\Models\ComputerCertificateName;
+use App\Models\ComputerCertificateType;
 use App\Models\Education;
 use App\Models\FamilyMember;
 
@@ -166,6 +169,26 @@ class ResumeController extends Controller
         $id = $request->get('id');
         $familyMember = FamilyMember::findFirstById($id, ['*'], true);
         return view('frontend/resume/updatefamilymember', ['data' => $familyMember]);
+    }
+
+    public function getCertificateInfo()
+    {
+        $data = ComputerCertificateType::findAll(['id',
+            'type_name'], true);
+        return view('frontend/resume/certificate', ['data' => $data ? $data : []]);
+    }
+
+    public function updateCertificateInfo(Request $request)
+    {
+
+    }
+
+    public function getCertificateName(Request $request)
+    {
+        $id = $request->get('id');
+        $data =  ComputerCertificateName::findMoreByKey(
+            'type_id', $id, ['*'], true);
+        return ApiException::success(ApiException::SUCCESS, $data);
     }
 
 }

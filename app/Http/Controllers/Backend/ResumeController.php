@@ -196,4 +196,9 @@ class ResumeController extends Controller
         }
     }
 
+    public function editUserCertificate(Request $request)
+    {
+
+    }
+
 }

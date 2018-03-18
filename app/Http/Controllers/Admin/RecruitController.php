@@ -18,7 +18,7 @@ class RecruitController extends Controller
 {
     public function getSchoolRecruitInfo()
     {
-          $jobs = Job::findAll(['*'], true);
+          $jobs = Job::findMoreByKey('recruit_type', 1, ['*'], true);
           return view('admin/schoolrecruit/schoolrecruit', ['data' => $jobs ? $jobs : []]);
     }
 
@@ -42,14 +42,13 @@ class RecruitController extends Controller
                 return response()->json(ApiException::success(ApiException::SUCCESS));
             }
 
-
         }
 
     }
 
     public function getSocialRecruitInfo()
     {
-        $jobs = Job::findAll(['*'], true);
+        $jobs = Job::findMoreByKey('recruit_type', 2, ['*'], true);
         return view('admin/socialrecruit/socialrecruit', ['data' => $jobs ? $jobs : []]);
     }
 

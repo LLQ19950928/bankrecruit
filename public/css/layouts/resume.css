@@ -38,7 +38,7 @@ div {
     background-color: #EBEBEB;
 }
 
-.navi_resume, .navi_education, .navi_bonus, .navi_work_experience, .navi_family {
+.navi_resume, .navi_education, .navi_bonus, .navi_work_experience, .navi_family, .navi_certificate {
     width: 240px;
     height: 45px;
     line-height: 45px;
