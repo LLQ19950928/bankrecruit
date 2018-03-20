@@ -182,7 +182,7 @@
                 @endforeach
             </div>
             <div class="resumeCon3 w2">
-                <div class="resumeTit1 w2" style="cursor:auto;">6.获奖情况</div>
+                <div class="resumeTit1 w2" style="cursor:auto;">5.获奖情况</div>
                 @foreach($data['bonus'] as $bonus)
                     <table class="resumeTab w2" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
@@ -191,6 +191,33 @@
                             <td class="e_name">奖项名称：{{ $bonus['bonus_name'] }}</td>
                             <td class="e_type">奖项类别：{{ $bonus['bonus_type'] }}</td>
                             <td class="e_other">奖励单位：{{ $bonus['bonus_company'] }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="previewLine"></div>
+                @endforeach
+            </div>
+            <div class="resumeCon3 w2">
+                <div class="resumeTit1 w2" style="cursor:auto;">5.证书情况</div>
+                @foreach($data['userForeign'] as $foreign)
+                    <table class="resumeTab w2" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td class="e_date">获证时间：{{ $foreign['date'] }}</td>
+                            <td class="e_name">证书类别：{{ $foreign['foreign_type'] }}</td>
+                            <td class="e_type">证书名称：{{ $foreign['level_name'] }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="previewLine"></div>
+                @endforeach
+                @foreach($data['userCertificate'] as $certificate)
+                    <table class="resumeTab w2" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td class="e_date">获证时间：{{ $certificate['date'] }}</td>
+                            <td class="e_name">证书类别：{{ $certificate['type_name'] }}</td>
+                            <td class="e_type">证书名称：{{ $certificate['certificate_name'] }}</td>
                         </tr>
                         </tbody>
                     </table>

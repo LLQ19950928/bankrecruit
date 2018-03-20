@@ -17,9 +17,13 @@ use App\Models\ComputerCertificateType;
 use App\Models\Education;
 use App\Models\FamilyMember;
 
+use App\Models\ForeignName;
+use App\Models\ForeignType;
 use App\Models\Nation;
 use App\Models\Resume;
 use App\Models\User;
+use App\Models\UserCertificate;
+use App\Models\UserForeign;
 use App\Models\UserInfo;
 use App\Models\WorkExperience;
 use Illuminate\Http\Request;
@@ -48,12 +52,38 @@ class ResumeController extends Controller
          $familyArr = FamilyMember::findMoreByKey('resume_id', $resumeId, ['*'], true);
          $workArr = WorkExperience::findMoreByKey('resume_id', $resumeId, ['*'], true);
          $userInfo = UserInfo::findFirstByKey('user_id', $userId, ['*'], true);
+         $userCertificate = UserCertificate::findMoreByKey('user_id',
+            session('userId'), ['*'], true);
+         if ($userCertificate) {
+
+            foreach ($userCertificate as &$user)
+            {
+                $user['certificate_type'] = ComputerCertificateType::findFirstById(
+                    $user['certificate_type_id'], ['type_name'], true)['type_name'];
+                $user['certificate_name'] = ComputerCertificateName::findFirstById(
+                    $user['certificate_name_id'], ['certificate_name'], true)['certificate_name'];
+            }
+         }
+         $userForeign = UserForeign::findMoreByKey('user_id',
+            session('userId'), ['*'], true);
+         if ($userForeign) {
+
+            foreach ($userForeign as &$foreign)
+            {
+                $foreign['foreign_type'] = ForeignType::findFirstById(
+                    $foreign['foreign_type_id'], ['type_name'], true)['type_name'];
+                $foreign['level_name'] = ForeignName::findFirstById(
+                    $foreign['foreign_name_id'], ['level_name'], true)['level_name'];
+            }
+         }
          $data = [
              'bonus' => $bonusArr ? $bonusArr : [],
              'education'   => $eduArr ? $eduArr : [],
              'family' => $familyArr ? $familyArr : [],
              'work'   => $workArr ? $workArr : [],
-             'userInfo' => $userInfo ? $userInfo : []
+             'userInfo' => $userInfo ? $userInfo : [],
+             'userForeign' => $userForeign ? $userForeign : [],
+             'userCertificate' => $userCertificate ? $userCertificate : []
          ];
          return view('frontend/resume/previewresume', ['data' => $data]);
     }
@@ -173,8 +203,39 @@ class ResumeController extends Controller
 
     public function getCertificateInfo()
     {
-        $data = ComputerCertificateType::findAll(['id',
+        $type = ComputerCertificateType::findAll(['id',
             'type_name'], true);
+        $foreignType = ForeignType::findAll(['id', 'type_name'], true);
+
+        $userCertificate = UserCertificate::findMoreByKey('user_id',
+            session('userId'), ['*'], true);
+        if ($userCertificate) {
+
+            foreach ($userCertificate as &$user)
+            {
+                $user['certificate_type'] = ComputerCertificateType::findFirstById(
+                    $user['certificate_type_id'], ['type_name'], true)['type_name'];
+                $user['certificate_name'] = ComputerCertificateName::findFirstById(
+                    $user['certificate_name_id'], ['certificate_name'], true)['certificate_name'];
+            }
+            $data['user'] = $userCertificate;
+        }
+        $userForeign = UserForeign::findMoreByKey('user_id',
+            session('userId'), ['*'], true);
+        if ($userForeign) {
+
+            foreach ($userForeign as &$foreign)
+            {
+                $foreign['foreign_type'] = ForeignType::findFirstById(
+                    $foreign['foreign_type_id'], ['type_name'], true)['type_name'];
+                $foreign['level_name'] = ForeignName::findFirstById(
+                    $foreign['foreign_name_id'], ['level_name'], true)['level_name'];
+            }
+            $data['userFn'] = $userForeign;
+        }
+
+        $data['type'] = $type;
+        $data['foreign'] = $foreignType;
         return view('frontend/resume/certificate', ['data' => $data ? $data : []]);
     }
 
@@ -183,11 +244,20 @@ class ResumeController extends Controller
 
     }
 
+
+
     public function getCertificateName(Request $request)
     {
         $id = $request->get('id');
         $data =  ComputerCertificateName::findMoreByKey(
             'type_id', $id, ['*'], true);
+        return ApiException::success(ApiException::SUCCESS, $data);
+    }
+
+    public function getForeignName(Request $request)
+    {
+        $id = $request->get('id');
+        $data = ForeignName::findMoreByKey('type_id', $id, ['*'], true);
         return ApiException::success(ApiException::SUCCESS, $data);
     }
 

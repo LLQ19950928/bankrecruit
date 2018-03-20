@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Backend',
         Route::any('updateFamilyMember', 'ResumeController@updateFamilyMember');
         Route::any('updateWorkExperience', 'ResumeController@updateWorkExperience');
         Route::any('editUserCertificate', 'ResumeController@editUserCertificate');
-
+        Route::any('editUserForeign', 'ResumeController@editUserForeign');
     });
 
 
@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Frontend',
         Route::get('previewResume', 'ResumeController@previewResume');
         Route::get('getCertificateInfo', 'ResumeController@getCertificateInfo');
         Route::get('getCertificateName', 'ResumeController@getCertificateName');
+        Route::get('getForeignName', 'ResumeController@getForeignName');
     });
 
     Route::group(['prefix' => 'announce'], function () {

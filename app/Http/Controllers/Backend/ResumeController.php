@@ -20,6 +20,8 @@ use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
 use App\Models\Punishment;
 use App\Models\Resume;
+use App\Models\UserCertificate;
+use App\Models\UserForeign;
 use App\Models\UserInfo;
 use App\Models\WorkExperience;
 use App\Validations\ResumeValidation;
@@ -198,7 +200,26 @@ class ResumeController extends Controller
 
     public function editUserCertificate(Request $request)
     {
+          $post = $request->post();
+          $post['user_id'] = session('userId');
+          $userCertificate = UserCertificate::create($post);
+          if ($userCertificate) {
+            return response()->json(ApiException::success(ApiException::SUCCESS));
+          }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+          }
+    }
 
+    public function editUserForeign(Request $request)
+    {
+        $post = $request->post();
+        $post['user_id'] = session('userId');
+        $userForeign = UserForeign::create($post);
+        if ($userForeign) {
+            return response()->json(ApiException::success(ApiException::SUCCESS));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
     }
 
 }
