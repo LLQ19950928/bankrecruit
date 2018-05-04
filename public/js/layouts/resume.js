@@ -27,4 +27,8 @@ $(document).ready(function () {
     $('.navi_project').click(function () {
        window.location.href = 'http://bank.recruit.cn/frontend/resume/getProject';
     });
+
+    $('.navi_evaluation').click(function () {
+        window.location.href = 'http://bank.recruit.cn/frontend/resume/getEval';
+    });
 });

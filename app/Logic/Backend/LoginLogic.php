@@ -11,6 +11,7 @@ namespace App\Logic\Backend;
 
 
 use App\Models\Admin;
+use App\Models\Resume;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,12 @@ class LoginLogic
         $email = $request->post('email');
         $password = $request->post('password');
         $user = User::findFirstByKey('email', $email);
+        $resume = Resume::findFirstByKey('user_id', $user->id, ['id']);
         $hash = $user->password;
         if (password_verify($password, $hash)) {
+            if ($resume) {
+                session(['resumeId' => $resume->id]);
+            }
             session(['userId' => $user->id]);
             session(['username' => $user->email]);
             return true;

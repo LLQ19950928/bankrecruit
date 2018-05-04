@@ -1,6 +1,6 @@
 @extends('layouts.recruit')
 
-@section('title', '我的招聘')
+@section('title', '关于银行')
 
 @section('style')
 

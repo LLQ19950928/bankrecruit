@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bonus;
 use App\Models\Credit;
 use App\Models\Education;
+use App\Models\Evaluation;
 use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
 use App\Models\Project;
@@ -243,6 +244,24 @@ class ResumeController extends Controller
         $result = $project->update(['resume_id' => $id]);
         if ($result) {
             return response()->json(ApiException::success(ApiException::SUCCESS, $project->toArray()));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+    }
+
+    public function editEval(Request $request)
+    {
+        $evaluation = Evaluation::findFirstByKey('resume_id',
+            session('resumeId'), ['*'], true);
+        if ($evaluation) {
+           $result = $evaluation->update($request->post());
+        }else {
+           $post = $request->post();
+           $post['resume_id'] = session('resumeId');
+           $result = Evaluation::create($post);
+        }
+        if ($result) {
+            return response()->json(ApiException::success(ApiException::SUCCESS));
         }else {
             return response()->json(ApiException::error(ApiException::FAILED));
         }

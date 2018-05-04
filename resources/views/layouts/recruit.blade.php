@@ -37,7 +37,7 @@
     <img src="/image/homepage/9.jpg">
     <ul>
         <li>
-           <a href="#" class="text-color">招聘首页</a>
+           <a href="http://bank.recruit.cn/frontend/homepage/display" class="text-color">招聘首页</a>
         </li>
         <li>
             <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitInfo"

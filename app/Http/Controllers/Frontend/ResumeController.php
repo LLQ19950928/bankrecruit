@@ -16,6 +16,7 @@ use App\Models\City;
 use App\Models\ComputerCertificateName;
 use App\Models\ComputerCertificateType;
 use App\Models\Education;
+use App\Models\Evaluation;
 use App\Models\FamilyMember;
 
 use App\Models\ForeignName;
@@ -291,6 +292,13 @@ class ResumeController extends Controller
         $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
         $data = Project::findMoreByKey('resume_id', $id,  ['*'], true);
         return view('frontend/resume/project', ['data' => $data ? $data : []]);
+    }
+
+    public function getEval(Request $request)
+    {
+        $eval = Evaluation::findFirstByKey('resume_id',
+            session('resumeId'), ['*'], true);
+        return view('frontend/resume/eval', ['data' => $eval ? $eval : []]);
     }
 
 }
