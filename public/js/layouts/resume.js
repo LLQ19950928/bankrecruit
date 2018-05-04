@@ -23,4 +23,8 @@ $(document).ready(function () {
     $('.navi_certificate').click(function () {
         window.location.href = 'http://bank.recruit.cn/frontend/resume/getCertificateInfo';
     });
+
+    $('.navi_project').click(function () {
+       window.location.href = 'http://bank.recruit.cn/frontend/resume/getProject';
+    });
 });

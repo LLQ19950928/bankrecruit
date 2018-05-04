@@ -3,6 +3,67 @@
 
 @section('resumeStyle')
     <script src="/js/frontend/resume/resumebaseinfo.js"></script>
+    <script type="text/javascript">
+        //图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+            var MAXWIDTH  = 120;
+            var MAXHEIGHT = 150;
+            var div = document.getElementById('preview');
+            if (file.files && file.files[0])
+            {
+                div.innerHTML ='<img id=imghead onclick=$("#previewImg").click()>';
+                var img = document.getElementById('imghead');
+                img.onload = function(){
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    img.width  =  rect.width;
+                    img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                    img.style.marginTop = rect.top+'px';
+                }
+                var reader = new FileReader();
+                reader.onload = function(evt){img.src = evt.target.result;}
+                reader.readAsDataURL(file.files[0]);
+            }
+            else //兼容IE
+            {
+                var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+                file.select();
+                var src = document.selection.createRange().text;
+                div.innerHTML = '<img id=imghead>';
+                var img = document.getElementById('imghead');
+                img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+                div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+            }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight ){
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+
+                if( rateWidth > rateHeight ){
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else{
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+    </script>
+    <style>
+        .select2 {
+            width: 90px;
+            padding: 5px 3px;
+            margin-right: 4px;
+        }
+    </style>
 @endsection
 
 
@@ -12,9 +73,24 @@
             <div style="float: left;margin-left: 10px;margin-top: 4px;">简历填写</div>
         </div>
         <div class="main_you22_3">
-            <form method="post" id="resumeForm">
+            <form method="post" id="resumeForm" enctype="multipart/form-data">
                 <table width="700" border="0" align="center" cellpadding="0"
                        cellspacing="0" id="info" style="border-collapse:separate; border-spacing: 0px 20px;">
+                    <tr>
+                        <div id="addCommodityIndex">
+                            <div class="input-group row">
+                                <div class="col-sm-9 big-photo">
+                                    <div id="preview">
+                                        <img id="imghead" border="0" src="/image/photo_icon.png"
+                                             width="120" height="150" onclick="$('#previewImg').click();">
+                                    </div>
+                                    <input type="file" style="display: none"
+                                           id="previewImg" name="photo" onchange="previewImage(this)">
+                                    <span style="padding-top: 10px">图片上传</span>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
                     <tr>
                         <td width="115">姓&nbsp;&nbsp;&nbsp;名</td>
                         <td>
@@ -125,7 +201,24 @@
                     <tr>
                         <td width="115">籍贯</td>
                         <td>
-                            <input type="text" name="place_of_origin" value="{{ $data['userInfo']['place_of_origin'] }}">
+                            <select class="select2" name="province" id="pSelect">
+                                <option value="0">请选择</option>
+                                @foreach($data['province'] as $province)
+                                    @if($province['id'] == $data['userInfo']['p_id'])
+                                        <option value="{{ $province['id'] }}" selected="selected">
+                                            {{ $province['province_name'] }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $province['id'] }}">
+                                            {{ $province['province_name'] }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <select class="select2" name="city" id="cSelect"
+                                    city="{{ $data['userInfo']['c_id'] }}">
+                                <option>请选择</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -169,10 +262,10 @@
                             <input type="text" id="broth"
                                    name="broth_at" value="{{ $data['userInfo']['broth_at'] }}" onClick="WdatePicker()">
                         </td>
-                        <td width="115">毕业时间</td>
+                        <td width="115">体重（kg）</td>
                         <td>
-                            <input type="text" id="graduate" name="graduate_at"
-                                   value="{{ $data['userInfo']['graduate_at'] }}" onClick="WdatePicker()">
+                            <input type="text" name="weight"
+                                   value="{{ $data['userInfo']['weight'] }}">
                         </td>
                     </tr>
                 </table>

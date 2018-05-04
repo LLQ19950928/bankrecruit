@@ -45,7 +45,7 @@
                          <tr>
                              <td class="ri_wherestudent">健康状况：{{ $data['userInfo']['healthy_status'] }}</td>
                              <td class="ri_ismarry">出生时间：{{ $data['userInfo']['broth_at'] }}</td>
-                             <td class="ri_issuercount">毕业时间：{{ $data['userInfo']['graduate_at'] }}</td>
+                             <td class="ri_issuercount">体重：{{ $data['userInfo']['weight'] }}</td>
                          </tr>
                          </tbody>
                      </table>
@@ -144,7 +144,7 @@
                          </tr>
                          <tr class="rwe_otherinfo">
                              <td colspan="4">
-                                 <div class="previewList"></div>工作业绩
+                                 <div class="previewList"></div>工作业绩：
                              </td>
                          </tr>
                          <tr class="rwe_otherinfo">
@@ -198,7 +198,7 @@
                 @endforeach
             </div>
             <div class="resumeCon3 w2">
-                <div class="resumeTit1 w2" style="cursor:auto;">5.证书情况</div>
+                <div class="resumeTit1 w2" style="cursor:auto;">6.证书情况</div>
                 @foreach($data['userForeign'] as $foreign)
                     <table class="resumeTab w2" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
@@ -218,6 +218,26 @@
                             <td class="e_date">获证时间：{{ $certificate['date'] }}</td>
                             <td class="e_name">证书类别：{{ $certificate['type_name'] }}</td>
                             <td class="e_type">证书名称：{{ $certificate['certificate_name'] }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="previewLine"></div>
+                @endforeach
+            </div>
+            <div class="resumeCon3 w2">
+                <div class="resumeTit1 w2" style="cursor:auto;">7.项目经验</div>
+                @foreach($data['project'] as $project)
+                    <table class="resumeTab w2" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td class="e_name">项目名称：{{ $project['project_name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="e_date">开始时间：{{ $project['start_date'] }}</td>
+                            <td class="e_date">结束时间：{{ $project['end_date'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="e_type">项目描述：{{ $project['project_desc'] }}</td>
                         </tr>
                         </tbody>
                     </table>

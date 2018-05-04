@@ -18,6 +18,7 @@ use App\Models\Credit;
 use App\Models\Education;
 use App\Models\FamilyMember;
 use App\Models\ForeignLanguage;
+use App\Models\Project;
 use App\Models\Punishment;
 use App\Models\Resume;
 use App\Models\UserCertificate;
@@ -39,11 +40,20 @@ class ResumeController extends Controller
     public function editResumeBaseInfo(Request $request)
     {
         $resume = Resume::findFirstByKey('user_id', session('userId'));
+
+        $post = $request->post();
+        $post['place_of_origin'] = $post['province'] . ',' . $post['city'];
+        unset($post['province']);
+        unset($post['city']);
+
+        //文件上传处理
+
+
         if ($resume->info_id == 0) {
-            $userInfo = UserInfo::create($request->post());
+            $userInfo = UserInfo::create($post);
             $result = $resume->update(['info_id' => $userInfo->id]);
         }else {
-            $result = UserInfo::findFirstById($resume->info_id)->update($request->post());
+            $result = UserInfo::findFirstById($resume->info_id)->update($post);
         }
         if ($result) {
             return response()->json(ApiException::success());
@@ -75,9 +85,10 @@ class ResumeController extends Controller
         }
     }
 
+
     /**
      * @param Request $request
-     * 修改用户教育背景
+     * @return array
      */
     public function updateEduInfo(Request $request)
     {
@@ -221,5 +232,21 @@ class ResumeController extends Controller
             return response()->json(ApiException::error(ApiException::FAILED));
         }
     }
+
+    public function editProject(Request $request)
+    {
+        $project = Project::create($request->post());
+        if (!$project) {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+        $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $result = $project->update(['resume_id' => $id]);
+        if ($result) {
+            return response()->json(ApiException::success(ApiException::SUCCESS, $project->toArray()));
+        }else {
+            return response()->json(ApiException::error(ApiException::FAILED));
+        }
+    }
+
 
 }

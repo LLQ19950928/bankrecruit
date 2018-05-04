@@ -18,7 +18,7 @@
                 <div class="navi_resume">
                     <div class="txt">
                         <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;
-                        简历填写
+                        基本信息
                     </div>
                 </div>
                 <div class="navi_education">
@@ -49,6 +49,18 @@
                     <div class="txt">
                         <span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;
                         证书信息
+                    </div>
+                </div>
+                <div class="navi_project">
+                    <div class="txt">
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+                        项目经验
+                    </div>
+                </div>
+                <div class="navi_evaluation">
+                    <div class="txt">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;
+                        自我评价
                     </div>
                 </div>
             </div>

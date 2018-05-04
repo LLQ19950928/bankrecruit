@@ -27,6 +27,7 @@ class ApiException
      const RESUME_NOT_EXISTS = 10007;
      const REGISTER_SUCCESS = 10008;
      const REPEAT_APPLY = 10008;
+     const UPLOAD_IMAGE_ERROR = 10009;
 
      protected static $_codeList = [
          
@@ -41,7 +42,8 @@ class ApiException
          self::PASSWORD_ERROR    => '密码不正确',
          self::REGISTER_FAILED   => '注册失败',
          self::RESUME_NOT_EXISTS => '用户简历不存在',
-         self::REPEAT_APPLY => '您已申请该职位，请勿重复申请'
+         self::REPEAT_APPLY => '您已申请该职位，请勿重复申请',
+         self::UPLOAD_IMAGE_ERROR => '图片格式错误'
      ];
 
      public static function success($code=self::SUCCESS, $data=[])

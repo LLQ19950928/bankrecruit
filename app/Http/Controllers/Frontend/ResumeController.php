@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
 use App\Models\Bonus;
+use App\Models\City;
 use App\Models\ComputerCertificateName;
 use App\Models\ComputerCertificateType;
 use App\Models\Education;
@@ -20,6 +21,8 @@ use App\Models\FamilyMember;
 use App\Models\ForeignName;
 use App\Models\ForeignType;
 use App\Models\Nation;
+use App\Models\Project;
+use App\Models\Province;
 use App\Models\Resume;
 use App\Models\User;
 use App\Models\UserCertificate;
@@ -52,8 +55,9 @@ class ResumeController extends Controller
          $familyArr = FamilyMember::findMoreByKey('resume_id', $resumeId, ['*'], true);
          $workArr = WorkExperience::findMoreByKey('resume_id', $resumeId, ['*'], true);
          $userInfo = UserInfo::findFirstByKey('user_id', $userId, ['*'], true);
-         $userCertificate = UserCertificate::findMoreByKey('user_id',
-            session('userId'), ['*'], true);
+         $userCertificate = UserCertificate::findMoreByKey('user_id', $userId,
+             ['*'], true);
+         $project = Project::findMoreByKey('resume_id', $resumeId, ['*'], true);
          if ($userCertificate) {
 
             foreach ($userCertificate as &$user)
@@ -83,7 +87,8 @@ class ResumeController extends Controller
              'work'   => $workArr ? $workArr : [],
              'userInfo' => $userInfo ? $userInfo : [],
              'userForeign' => $userForeign ? $userForeign : [],
-             'userCertificate' => $userCertificate ? $userCertificate : []
+             'userCertificate' => $userCertificate ? $userCertificate : [],
+             'project' => $project ? $project : []
          ];
          return view('frontend/resume/previewresume', ['data' => $data]);
     }
@@ -99,8 +104,12 @@ class ResumeController extends Controller
         $infoId = $resume->info_id;
         $data['userInfo'] = [];
         $data['nation'] = Nation::findAll(['id', 'nation'], true);
+        $data['province'] = Province::findAll(['id', 'province_name'], true);
         if ($infoId) {
             $userInfoArr = UserInfo::findFirstById($infoId, ['*'], true);
+            $arr = explode(',', $userInfoArr['place_of_origin']);
+            $userInfoArr['p_id'] = $arr[0];
+            $userInfoArr['c_id'] = $arr[1];
             $data['userInfo'] = $userInfoArr;
         }
 
@@ -245,7 +254,11 @@ class ResumeController extends Controller
     }
 
 
-
+    /**
+     * @param Request $request
+     * @return array
+     * 获取证书名称
+     */
     public function getCertificateName(Request $request)
     {
         $id = $request->get('id');
@@ -254,11 +267,30 @@ class ResumeController extends Controller
         return ApiException::success(ApiException::SUCCESS, $data);
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     * 获取城市名称
+     */
+    public function getCityName(Request $request)
+    {
+        $id = $request->get('id');
+        $data = City::findMoreByKey('province_id', $id, ['*'], true);
+        return ApiException::success(ApiException::SUCCESS, $data);
+    }
+
     public function getForeignName(Request $request)
     {
         $id = $request->get('id');
         $data = ForeignName::findMoreByKey('type_id', $id, ['*'], true);
         return ApiException::success(ApiException::SUCCESS, $data);
+    }
+
+    public function getProject(Request $request)
+    {
+        $id = (Resume::findFirstByKey('user_id', session('userId'), ['id']))->id;
+        $data = Project::findMoreByKey('resume_id', $id,  ['*'], true);
+        return view('frontend/resume/project', ['data' => $data ? $data : []]);
     }
 
 }
