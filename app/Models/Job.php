@@ -18,6 +18,6 @@ class Job extends BaseModel
 
     public function getPublishedAtAttribute($key)
     {
-        return date('Y-m-d H:i', $key);
+        return date('Y-m-d', $key);
     }
 }

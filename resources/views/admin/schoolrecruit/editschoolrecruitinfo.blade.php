@@ -44,17 +44,10 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>开始日期：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text"
-                           name="start_date">
-                </div>
-            </div>
-            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>截止日期：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="text" class="input-text"
-                           name="end_date">
+                           name="end_at" onClick="WdatePicker()">
                 </div>
             </div>
             <div class="row cl">
@@ -64,16 +57,6 @@
                     <input type="text" class="input-text"
                            name="company">
                 </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>是否发布：</label>
-                <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select name="status" class="select">
-					<option value="0">----请选择----</option>
-					<option value="1">是</option>
-					<option value="2">否</option>
-				</select>
-				</span> </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>招聘类型：</label>
@@ -110,8 +93,8 @@
             </div>
             <div class="row cl">
                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                  <button class="btn btn-primary radius" type="button" id='commitButton'><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-                  <button  class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                  <button class="btn btn-primary radius" type="button" id='saveButton' status='1'><i class="Hui-iconfont">&#xe632;</i> 保存为草稿</button>
+                  <button  class="btn btn-default radius" type="button" id='publishButton' status='2'>&nbsp;&nbsp;发布&nbsp;&nbsp;</button>
                </div>
             </div>
         </form>
@@ -138,9 +121,9 @@
                         var requirement = UE.getEditor('requirement');
                         var duty = UE.getEditor('duty');
 
-                        $('#commitButton').click(function () {
+                        $('#saveButton').click(function () {
                             $.ajax({
-                                url: 'http://bank.schoolrecruit.cn/admin/schoolrecruit/editSchoolRecruitInfo',
+                                url: 'http://bank.recruit.cn/admin/schoolrecruit/editSchoolRecruitInfo?status=' + $(this).attr('status'),
                                 dataType: 'json',
                                 type: 'post',
                                 data: $('#recruitAdd').serialize(),
@@ -148,7 +131,23 @@
                                     if (res.code != 201) {
                                         alert(res.msg);
                                     }else {
-                                        alert('添加成功');
+                                        alert('保存成功');
+                                    }
+                                }
+                            });
+                        });
+
+                        $('#publishButton').click(function () {
+                            $.ajax({
+                                url: 'http://bank.recruit.cn/admin/schoolrecruit/editSchoolRecruitInfo?status=' + $(this).attr('status'),
+                                dataType: 'json',
+                                type: 'post',
+                                data: $('#recruitAdd').serialize(),
+                                success: function (res) {
+                                    if (res.code != 201) {
+                                        alert(res.msg);
+                                    }else {
+                                        alert('发布成功');
                                     }
                                 }
                             });

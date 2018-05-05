@@ -23,7 +23,7 @@ class Apply extends BaseModel
 
     public function getCreatedAtAttribute($key)
     {
-        return date('Y-m-d H:i', $key);
+        return date('Y-m-d', $key);
     }
 
     public function getStatusAttribute($key)

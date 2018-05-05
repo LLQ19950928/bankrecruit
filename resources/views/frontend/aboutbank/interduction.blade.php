@@ -47,12 +47,12 @@
             </div>
         </div>
         <div class="about_boc_div_content_right_bellow">
-           <div class="about_boc_div_content_right_bellow1">
-               <div id="aboutBocRightContent_1" class="aboutBocRightContent"
-                    style="display: inline;">
-
-               </div>
-           </div>
+            <div class="about_boc_div_content_right_bellow1">
+                <div id="aboutBocRightContent_1" class="aboutBocRightContent"
+                     style="display: inline;">
+                     <?php echo $data['introduction'] ?>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

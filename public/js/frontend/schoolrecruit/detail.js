@@ -2,9 +2,10 @@ $(document).ready(function () {
 
     $("#applyBtn").click(function () {
 
-        if(!$(this).attr('username')) {
+        if($(this).attr('userId') == null || $(this).attr('userId') === '') {
             alert('请先登录');
         }else {
+
             $.ajax({
                 url: 'http://bank.recruit.cn/admin/apply/applyJob',
                 dataType: 'json',

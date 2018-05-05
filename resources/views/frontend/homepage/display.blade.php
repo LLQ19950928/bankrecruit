@@ -70,7 +70,7 @@
                                        <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitDetail?id={{ $schoolR['id'] }}"
                                           class="text_color">{{ $schoolR['job_name'] }}</a>
                                    </div>
-                                   <div class="news_createTime">{{ $schoolR['start_date'] }}</div>
+                                   <div class="news_createTime">{{ $schoolR['published_at'] }}</div>
                                </div>
                            @endforeach
                        </div>
@@ -82,7 +82,7 @@
                                        <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSocialRecruitDetail?id={{ $socialR['id'] }}"
                                           class="text_color">{{ $socialR['job_name'] }}</a>
                                    </div>
-                                   <div class="news_createTime">{{ $socialR['start_date'] }}</div>
+                                   <div class="news_createTime">{{ $socialR['published_at'] }}</div>
                                </div>
                            @endforeach
                        </div>

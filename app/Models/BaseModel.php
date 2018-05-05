@@ -48,9 +48,11 @@ class BaseModel extends Model
     }
 
 
-    public static function findMoreByKey($key, $value, $columns=['*'], $toArray=false)
+    public static function findMoreByKey($key, $value, $columns=['*'],
+                                         $toArray=false, $direction='desc')
     {
-        $models = self::where($key, $value)->get($columns);
+        $models = self::where($key, $value)
+                   ->orderBy('created_at', $direction)->get($columns);
 
         if ($models) {
 
@@ -76,14 +78,15 @@ class BaseModel extends Model
          return false;
     }
 
-    public static function findMoreByKeys($where, $columns=['*'], $toArray=false)
+    public static function findMoreByKeys($where, $columns=['*'], $toArray=false, $direction='desc')
     {
         $select = [];
         foreach ($where as $key => $value)
         {
             $select[] = [$key, $value];
         }
-        $models = self::where($select)->get($columns);
+        $models = self::where($select)
+                  ->orderBy('created_at', $direction)->get($columns);
         if ($models) {
             return $toArray ? $models->all() : $models;
         }

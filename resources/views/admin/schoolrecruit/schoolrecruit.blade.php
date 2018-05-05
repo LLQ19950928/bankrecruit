@@ -19,10 +19,10 @@
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 				<a class="btn btn-primary radius" data-title="添加资讯" _href=""
-                   onclick="article_add('添加公告','http://bank.recruit.cn/admin/schoolrecruit/editSchoolRecruitInfo')"
+                   onclick="article_add('添加校园招聘信息','http://bank.recruit.cn/admin/schoolrecruit/editSchoolRecruitInfo')"
                    href="javascript:;">
                     <i class="Hui-iconfont">&#xe600;</i>
-                    添加招聘公告
+                    添加校园招聘信息
                 </a>
 				</span>
                 </div>
@@ -31,8 +31,7 @@
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr class="text-c">
-                                <th width="80">ID</th>
-                                <th width="150">招聘职位</th>
+                                <th width="150">职位名称</th>
                                 <th width="150">招聘人数</th>
                                 <th width="120">创建时间</th>
                                 <th width="120">更新时间</th>
@@ -43,7 +42,6 @@
                             <tbody>
                             @foreach($data as $job)
                                 <tr class="text-c">
-                                    <td>{{ $job['id'] }}</td>
                                     <td class="text-l">
                                         <span>{{ $job['job_name'] }}</span>
                                     </td>
@@ -54,7 +52,7 @@
                                     <td>{{ $job['updated_at'] }}</td>
                                     <td class="td-status">
                                            <span class="label label-success radius">
-                                               @if($job['status'] == 2)
+                                               @if($job['status'] == 1)
                                                    未发布
                                                @else
                                                    已发布
@@ -62,8 +60,17 @@
                                            </span>
                                     </td>
                                     <td class="f-14 td-manage">
-                                        <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-                                        <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                                        @if($job['status'] == 1)
+                                            <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑',
+                                              'article-add.html','10001')" href="javascript:;" title="编辑">
+                                                <i class="Hui-iconfont">&#xe6df;</i>
+                                            </a>
+                                        @endif
+                                        <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')"
+                                           href="javascript:;" title="删除">
+                                            <i class="Hui-iconfont">&#xe6e2;</i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

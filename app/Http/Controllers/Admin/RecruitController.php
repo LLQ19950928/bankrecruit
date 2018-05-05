@@ -18,8 +18,9 @@ class RecruitController extends Controller
 {
     public function getSchoolRecruitInfo()
     {
-          $jobs = Job::findMoreByKey('recruit_type', 1, ['*'], true);
-          return view('admin/schoolrecruit/schoolrecruit', ['data' => $jobs ? $jobs : []]);
+          $jobs = Job::where('recruit_type', 1)->whereIn('status', [1, 2])->get();
+          $data = $jobs ? $jobs->all() : [];
+          return view('admin/schoolrecruit/schoolrecruit', ['data' => $data]);
     }
 
     public function editSchoolRecruitInfo(Request $request)
@@ -27,17 +28,14 @@ class RecruitController extends Controller
         if ($request->isMethod('get')) {
             return view('admin/schoolrecruit/editschoolrecruitinfo');
         } else {
-            $job = Job::create($request->post());
+            $all = $request->all();
+            if ($all['status'] == 2) {
+                $all['published_at'] = time();
+            }
+            $all['end_at'] = strtotime($all['end_at']);
+            $job = Job::create($all);
             if (!$job) {
                 return response()->json(ApiException::error(ApiException::FAILED));
-            }
-            if ($job->status == 1) {
-                $result = $job->update(['published_at' => time()]);
-                if ($result) {
-                    return response()->json(ApiException::success(ApiException::SUCCESS));
-                }else {
-                    return response()->json(ApiException::error(ApiException::FAILED));
-                }
             }else {
                 return response()->json(ApiException::success(ApiException::SUCCESS));
             }
@@ -48,12 +46,28 @@ class RecruitController extends Controller
 
     public function getSocialRecruitInfo()
     {
-        $jobs = Job::findMoreByKey('recruit_type', 2, ['*'], true);
-        return view('admin/socialrecruit/socialrecruit', ['data' => $jobs ? $jobs : []]);
+        $jobs = Job::where('recruit_type', 2)->whereIn('status', [1, 2])->get();
+        $data = $jobs ? $jobs->all() : [];
+        return view('admin/socialrecruit/socialrecruit', ['data' => $data]);
     }
 
     public function editSocialRecruitInfo(Request $request)
     {
-        return view('admin/socialrecruit/editsocialrecruitinfo');
+        if ($request->isMethod('get')) {
+            return view('admin/socialrecruit/editsocialrecruit');
+        } else {
+            $all = $request->all();
+            if ($all['status'] == 2) {
+                $all['published_at'] = time();
+            }
+            $all['end_at'] = strtotime($all['end_at']);
+            $job = Job::create($all);
+            if (!$job) {
+                return response()->json(ApiException::error(ApiException::FAILED));
+            }else {
+                return response()->json(ApiException::success(ApiException::SUCCESS));
+            }
+
+        }
     }
 }

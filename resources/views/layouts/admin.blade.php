@@ -86,7 +86,7 @@
                     <li>
                         <a href="http://bank.recruit.cn/admin/schoolrecruit/getSchoolRecruitInfo"
                            title="图片管理">
-                            校园招聘公告列表
+                            校园招聘列表
                         </a>
                     </li>
                 </ul>
@@ -103,7 +103,7 @@
                     <li>
                         <a href="http://bank.recruit.cn/admin/socialrecruit/getSocialRecruitInfo"
                            title="社会招聘">
-                            社会招聘公告列表
+                            社会招聘列表
                         </a>
                     </li>
                 </ul>

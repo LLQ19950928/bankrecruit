@@ -15,7 +15,7 @@
     <div class="v_navi">
         <div class="title-resume">关于银行</div>
         <div class="li_box">
-            <div class="navi_resume on">
+            <div class="navi_resume">
                 <div class="txt">
                     <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;
                     企业简介
@@ -27,7 +27,7 @@
                     企业文化
                 </div>
             </div>
-            <div class="navi_work_experience">
+            <div class="navi_work_experience on">
                 <div class="txt">
                     <span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;
                     培训发展
@@ -40,19 +40,19 @@
             <div id="aboutBocRightTagText"
                  style="color:#114D8A;font-size:18px;
                  float:left; margin-top:5px; margin-left: 30px">
-                企业简介
+                培训发展
             </div>
             <div>
                 <img alt="" src="/image/BocRightTagBottomLine.jpg" style="margin-left:30px;">
             </div>
         </div>
         <div class="about_boc_div_content_right_bellow">
-           <div class="about_boc_div_content_right_bellow1">
-               <div id="aboutBocRightContent_1" class="aboutBocRightContent"
-                    style="display: inline;">
-
-               </div>
-           </div>
+            <div class="about_boc_div_content_right_bellow1">
+                <div id="aboutBocRightContent_1" class="aboutBocRightContent"
+                     style="display: inline;">
+                      <?php echo $data['train'] ?>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

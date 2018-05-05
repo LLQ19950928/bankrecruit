@@ -16,8 +16,11 @@ class SchoolRecruitController
 {
     public function getSchoolRecruitInfo()
     {
-        $jobs = Job::findFirstByKeys(['status' => 1, 'recruit_type' => 1], ['*'], true);
-        return view('frontend/schoolrecruit/schoolrecruit', ['data' => $jobs ? $jobs : []]);
+        $schoolRecruit = Job::where('status', 2)->where('recruit_type', 1)
+               ->where('end_at', '>', time())->get();
+        $schoolRecruit = $schoolRecruit ? $schoolRecruit->all() : [];
+        return view('frontend/schoolrecruit/schoolrecruit',
+            ['data' => $schoolRecruit ? $schoolRecruit : []]);
     }
 
     public function getSchoolRecruitDetail(Request $request)

@@ -30,7 +30,7 @@
                         <td>{{ $job['company'] }}</td>
                         <td>{{ $job['work_place'] }}</td>
                         <td>{{ $job['number'] }}</td>
-                        <td>{{ $job['end_date'] }}</td>
+                        <td>{{ date('Y-m-d', $job['end_at']) }}</td>
                         <td>
                             <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitDetail?id={{ $job['id'] }}">查看详情</a>
                         </td>

@@ -16,9 +16,10 @@ class AnnounceController
 {
     public function getAnnounceInfo(Request $request)
     {
-        $announceArr = Announce::findMoreByKey('status', 1, ['*'], true);
-        return view('frontend/announce/announceinfo',
-            ['data' => $announceArr ? $announceArr : []]);
+        $announce = Announce::where('status', 2)->where('end_at', '>', time())
+                       ->get();
+        $announceArr = $announce ? $announce->all() : [];
+        return view('frontend/announce/announceinfo', ['data' => $announceArr]);
     }
 
     public function getAnnounceDetail(Request $request)

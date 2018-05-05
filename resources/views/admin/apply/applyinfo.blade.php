@@ -21,8 +21,7 @@
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr class="text-c">
-                                <th width="80">ID</th>
-                                <th>申请者</th>
+                                <th width="150">申请者</th>
                                 <th width="120">申请时间</th>
                                 <th width="120">岗位名称</th>
                                 <th width="120">笔试地点</th>
@@ -34,7 +33,6 @@
                             <tbody>
                             @foreach($data as $apply)
                                 <tr class="text-c">
-                                    <td>{{ $apply['id'] }}</td>
                                     <td class="text-l">
                                         <span>{{ $apply['user_id'] }}</span>
                                     </td>

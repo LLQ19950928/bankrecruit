@@ -48,7 +48,6 @@
             </select>
             <input type="hidden" value="{{ $data['id'] }}" name="job_id">
             <input type="hidden" value="{{ session('userId') }}" name="user_id">
-            <input type="hidden" value="{{ $data['is_update'] }}" name="is_update">
         </div>
     </form>
     <div class="table_style">
@@ -64,7 +63,7 @@
                 <td>{{ $data['job_name'] }}</td>
                 <td>{{ $data['published_at'] }}</td>
                 <td>{{ $data['work_place'] }}</td>
-                <td>{{ $data['end_date'] }}</td>
+                <td>{{ date('Y-m-d', $data['end_at']) }}</td>
                 <td>{{ $data['company'] }}</td>
             </tr>
         </table>
@@ -88,7 +87,7 @@
         </div>
         <div class="btn_style">
             <button class="btn btn-primary" type="button"
-                    id="applyBtn" username="{{ session('username') }}">我要申请</button>
+                    id="applyBtn" userId="{{ session('userId') }}">我要申请</button>
         </div>
     </div>
 @endsection

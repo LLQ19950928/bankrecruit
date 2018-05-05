@@ -17,8 +17,12 @@ class SocialRecruitController extends Controller
 {
     public function getSocialRecruitInfo()
     {
-        $jobs = Job::findFirstByKeys(['status' => 1, 'recruit_type' => 2], ['*'], true);
-        return view('frontend/socialrecruit/socialrecruit', ['data' => $jobs ? $jobs : []]);
+        $socialRecruit = Job::where('status', 2)->where('recruit_type', 2)
+            ->where('end_at', '>', time())
+            ->get(['id', 'job_name', 'published_at']);
+        $socialRecruit = $socialRecruit ? $socialRecruit->all() : [];
+        return view('frontend/socialrecruit/socialrecruit',
+            ['data' => $socialRecruit ? $socialRecruit : []]);
     }
 
     public function getSocialRecruitDetail(Request $request)

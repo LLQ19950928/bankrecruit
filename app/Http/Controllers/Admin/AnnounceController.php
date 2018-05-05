@@ -18,9 +18,9 @@ class AnnounceController extends Controller
 {
     public function getAnnounceInfo()
     {
-       $announce = Announce::where('status');
-
-       return view('admin/announce/announceinfo', ['data' => $announce ? $announce : []]);
+       $announce = Announce::whereIn('status', [1, 2])->get();
+       $data = $announce ? $announce->all() : false;
+       return view('admin/announce/announceinfo', ['data' => $data ? $data : []]);
     }
 
     public function editAnnounceInfo(Request $request)

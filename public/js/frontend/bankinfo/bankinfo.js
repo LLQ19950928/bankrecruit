@@ -2,23 +2,17 @@ $(document).ready(function () {
 
      $('.navi_resume').click(function () {
 
-         $('#introduction').css('display', 'block');
-         $('#culture').css('display', 'none');
-         $('#train').css('display', 'none');
+        window.location.href = 'http://bank.recruit.cn/frontend/aboutbank/getIntroductionInfo';
      });
 
     $('.navi_education').click(function () {
 
-        $('#introduction').css('display', 'none');
-        $('#culture').css('display', 'block');
-        $('#train').css('display', 'none');
+        window.location.href = 'http://bank.recruit.cn/frontend/aboutbank/getCultureInfo';
     });
 
     $('.navi_work_experience').click(function () {
 
-        $('#introduction').css('display', 'none');
-        $('#culture').css('display', 'none');
-        $('#train').css('display', 'block');
+        window.location.href = 'http://bank.recruit.cn/frontend/aboutbank/getTrainInfo';
     });
 
 });

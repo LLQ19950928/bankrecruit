@@ -110,7 +110,9 @@ Route::group(['namespace' => 'Frontend',
 
     Route::group(['prefix' => 'aboutbank'], function () {
 
-        Route::get('getBankInfo', 'AboutBankController@getBankInfo');
+        Route::get('getIntroductionInfo', 'AboutBankController@getIntroductionInfo');
+        Route::get('getCultureInfo', 'AboutBankController@getCultureInfo');
+        Route::get('getTrainInfo', 'AboutBankController@getTrainInfo');
     });
 
     Route::group(['prefix' => 'applyfor', 'middleware' => 'resume'], function () {

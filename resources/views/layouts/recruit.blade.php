@@ -48,7 +48,7 @@
                class="text-color">社会招聘</a>
         </li>
         <li>
-            <a href="http://bank.recruit.cn/frontend/aboutbank/getBankInfo"
+            <a href="http://bank.recruit.cn/frontend/aboutbank/getIntroductionInfo"
                class="text-color">关于银行</a>
         </li>
         <li>
