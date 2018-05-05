@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="/h-ui/static/h-ui.admin/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="/h-ui/static/h-ui.admin/css/style.css" />
+
+    <script src="/js/frontend/resume/workexperienceinfo.js"></script>
 <!--/meta 作为公共模版分离出去-->
 
 

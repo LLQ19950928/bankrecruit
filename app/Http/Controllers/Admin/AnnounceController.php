@@ -18,7 +18,8 @@ class AnnounceController extends Controller
 {
     public function getAnnounceInfo()
     {
-       $announce = Announce::findMoreByKey('status', [1, 2], ['*'], true);
+       $announce = Announce::where('status');
+
        return view('admin/announce/announceinfo', ['data' => $announce ? $announce : []]);
     }
 
@@ -27,17 +28,14 @@ class AnnounceController extends Controller
         if ($request->isMethod('get')) {
             return view('admin/announce/editannounceinfo');
         } else {
-            $announce = Announce::create($request->post());
+            $all = $request->all();
+            $all['end_at'] = strtotime($all['end_at']);
+            if ($all['status'] == 2) {
+                $all['published_at'] = time();
+            }
+            $announce = Announce::create($all);
             if (!$announce) {
                 return response()->json(ApiException::error(ApiException::FAILED));
-            }
-            if ($announce->status == 1) {
-                $result = $announce->update(['published_at' => time()]);
-                if ($result) {
-                    return response()->json(ApiException::error(ApiException::SUCCESS));
-                }else {
-                    return response()->json(ApiException::error(ApiException::FAILED));
-                }
             }else {
                 return response()->json(ApiException::error(ApiException::SUCCESS));
             }

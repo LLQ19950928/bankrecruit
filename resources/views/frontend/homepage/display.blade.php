@@ -45,25 +45,47 @@
        </div>
        <div class="cell" style="margin-left: 20px">
            <div class="title_font">
-               <a href="#">热门招聘</a>
+               <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitInfo">热门招聘</a>
            </div>
            <div class="cell_2">
-               <div class="cell_li">
-                   <div class="icon_new"></div>
-                   <div class="new_title">
-                       <a href="#" class="text_color">交通银行2018校园招聘公告</a>
-                   </div>
-                   <div class="news_createTime">
-                       2017-09-18
-                   </div>
-               </div>
-               <div class="cell_li">
-                   <div class="icon_new"></div>
-                   <div class="new_title">
-                       <a href="#" class="text_color">交通银行2018校园招聘公告</a>
-                   </div>
-                   <div class="news_createTime">
-                       2017-09-18
+               <div>
+                   <ul class="nav nav-tabs" role="tablist">
+                       <li class="active">
+                           <a href="#school" aria-controls="school" role="tab"
+                              data-toggle="tab">校园招聘</a>
+                       </li>
+                       <li>
+                           <a href="#social" aria-controls="social" role="tab"
+                              data-toggle="tab">
+                               社会招聘
+                           </a>
+                       </li>
+                   </ul>
+                   <div class="tab-content">
+                       <div role="tabpanel" class="tab-pane active" id="school">
+                           @foreach($data['schoolR'] as $schoolR)
+                               <div class="cell_li">
+                                   <div class="icon_new"></div>
+                                   <div class="new_title">
+                                       <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitDetail?id={{ $schoolR['id'] }}"
+                                          class="text_color">{{ $schoolR['job_name'] }}</a>
+                                   </div>
+                                   <div class="news_createTime">{{ $schoolR['start_date'] }}</div>
+                               </div>
+                           @endforeach
+                       </div>
+                       <div role="tabpanel" class="tab-pane" id="social">
+                           @foreach($data['socialR'] as $socialR)
+                               <div class="cell_li">
+                                   <div class="icon_new"></div>
+                                   <div class="new_title">
+                                       <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSocialRecruitDetail?id={{ $socialR['id'] }}"
+                                          class="text_color">{{ $socialR['job_name'] }}</a>
+                                   </div>
+                                   <div class="news_createTime">{{ $socialR['start_date'] }}</div>
+                               </div>
+                           @endforeach
+                       </div>
                    </div>
                </div>
            </div>
