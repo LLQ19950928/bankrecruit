@@ -15,7 +15,7 @@
         <div class="v_navi">
             <div class="title">我的招聘</div>
             <div class="li_box">
-                <div class="navi_resume on">
+                <div class="navi_resume">
                     <div class="txt">
                         <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;
                         简历信息
@@ -27,7 +27,7 @@
                         应聘信息
                     </div>
                 </div>
-                <div class="navi_account">
+                <div class="navi_account on">
                     <div class="txt">
                         <span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;
                         通知消息
@@ -37,42 +37,30 @@
         </div>
         <div class="main_you2">
             <div class="main_you2_3">
+                @if($data)
                     <table width="730" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                         <tr height="40" bgcolor="#114D8B" style="color: #FFF; font-size: 14px">
-                            <td width="100" align="center">编号</td>
-                            <td width="210" align="center">简历内容</td>
+                            <td width="100" align="center">通知发布机构</td>
+                            <td width="210" align="center">通知类型</td>
+                            <td width="100" align="center">日期</td>
                             <td width="210" align="center">操作</td>
                         </tr>
                         <tr height="40">
-                            <td align="center" style="color: #333333">1</td>
-                            <td align="center" style="color: #333333">我的简历</td>
+                            <td align="center" style="color: #333333">{{ $data['company'] }}</td>
+                            <td align="center" style="color: #333333">{{ $data['type_value'] }}</td>
+                            <td align="center" style="color: #333333">{{ $data['updated_at'] }}</td>
                             <td align="center">
-                                <a href="http://bank.recruit.cn/frontend/resume/getResumeBaseInfo" style="color: #2281d9">编辑</a>
-                                <span style="color: #2281d9">&nbsp;|&nbsp;</span>
-                                <a href="javascript:void(0)" userId="{{ session('userId') }}"
-                                   style="color: #2281d9"
-                                   onclick="previewResume('http://bank.recruit.cn/frontend/resume/previewResume?userId='
-                                      + $(this).attr('userId'))">预览</a>
+                                <a href="javascript:void(0)" style="color: #2281d9"
+                                   onclick="displayDetail('http://bank.recruit.cn/frontend/notice/getNoticeDetail?type=1')">查看详细</a>
                             </td>
                         </tr>
                     </table>
+                @endif
             </div>
         </div>
     </div>
     <script type="text/javascript">
-        function noticeInfo(url) {
-
-            var index = layer.open({
-                type: 2,
-                title: '简历预览',
-                area: ['640px', '400px'],
-                content: url,
-            });
-
-            layer.full(index);
-        }
-
-        function previewResume(url) {
+        function displayDetail(url) {
 
             var index = layer.open({
                 type: 2,

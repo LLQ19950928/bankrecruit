@@ -15,34 +15,10 @@ class Apply extends BaseModel
     protected $guarded = [];
     protected $dateFormat = 'U';
 
-    public function getUserIdAttribute($key)
-    {
-         $user = User::findFirstById($key, ['email'], true);
-         return $user['email'];
-    }
 
     public function getCreatedAtAttribute($key)
     {
         return date('Y-m-d', $key);
     }
 
-    public function getStatusAttribute($key)
-    {
-        $status = '';
-        switch ($key) {
-            case 0:
-                $status = '待审核';
-                break;
-            case 1:
-                $status = '通知笔试';
-                break;
-            case 2:
-                $status = '通知面试';
-                break;
-            case 3:
-                $status = '录用';
-                break;
-        }
-        return $status;
-    }
 }

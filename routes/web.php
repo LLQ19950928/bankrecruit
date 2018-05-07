@@ -119,10 +119,24 @@ Route::group(['namespace' => 'Frontend',
 
         Route::get('applyInfo', 'ApplyForController@applyInfo');
     });
+
+    Route::group(['prefix' => 'notice'], function () {
+
+        Route::get('getNoticeInfo', 'NoticeController@getNoticeInfo');
+        Route::get('getNoticeDetail', 'NoticeController@getNoticeDetail');
+    });
 });
 
     Route::group(['namespace' => 'Admin',
          'prefix' => 'admin'], function () {
+
+       Route::group(['prefix' => 'notice'], function () {
+
+           Route::get('noticeManage', 'NoticeController@noticeManage');
+           Route::get('editEmail', 'NoticeController@editEmail');
+           Route::get('displayEmail', 'NoticeController@displayEmail');
+           Route::any('sendEmail', 'NoticeController@sendEmail');
+       });
 
        Route::group(['prefix' => 'register'], function () {
 
@@ -162,6 +176,7 @@ Route::group(['namespace' => 'Frontend',
 
             Route::any('applyJob', 'ApplyController@applyJob');
             Route::get('getApplyInfo', 'ApplyController@getApplyInfo');
+            Route::get('updateApplyStatus', 'ApplyController@updateApplyStatus');
         });
 
         Route::group(['prefix' => 'aboutbank'], function () {

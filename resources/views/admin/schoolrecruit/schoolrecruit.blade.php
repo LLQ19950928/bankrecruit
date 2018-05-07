@@ -31,7 +31,8 @@
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr class="text-c">
-                                <th width="150">职位名称</th>
+                                <th width="150">招聘单位</th>
+                                <th width="100">职位名称</th>
                                 <th width="150">招聘人数</th>
                                 <th width="120">创建时间</th>
                                 <th width="120">更新时间</th>
@@ -42,6 +43,9 @@
                             <tbody>
                             @foreach($data as $job)
                                 <tr class="text-c">
+                                    <td class="text-l">
+                                        <span>{{ $job['company'] }}</span>
+                                    </td>
                                     <td class="text-l">
                                         <span>{{ $job['job_name'] }}</span>
                                     </td>
@@ -63,6 +67,11 @@
                                         @if($job['status'] == 1)
                                             <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑',
                                               'article-add.html','10001')" href="javascript:;" title="编辑">
+                                                <i class="Hui-iconfont">&#xe6df;</i>
+                                            </a>
+                                            @else
+                                            <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑',
+                                              'article-add.html','10001')" href="javascript:;" title="查看">
                                                 <i class="Hui-iconfont">&#xe6df;</i>
                                             </a>
                                         @endif

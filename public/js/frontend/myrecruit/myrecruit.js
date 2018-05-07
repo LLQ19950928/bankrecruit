@@ -12,6 +12,6 @@ $(document).ready(function () {
 
     $('.navi_account').click(function () {
 
-        window.location.href = '';
+        window.location.href = 'http://bank.recruit.cn/frontend/notice/getNoticeInfo';
     });
 });

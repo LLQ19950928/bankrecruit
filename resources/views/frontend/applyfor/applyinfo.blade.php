@@ -39,16 +39,15 @@
                        <tr height="40" bgcolor="#114D8B" style="color: #FFF; font-size: 14px">
                           <td width="100" align="center">机构名称</td>
                           <td width="210" align="center">职位名称</td>
-                          <td width="210" align="center">招聘进度</td>
+
                           <td width="210" align="center">申请日期</td>
                           <td width="200" align="center">操作</td>
                         </tr>
                     @foreach($data as $apply)
                         <tr height="40">
-                            <td width="100" align="center">{{ $apply['company'] }}</td>
-                            <td width="210" align="center">{{ $apply['job_name'] }}</td>
-                            <td width="210" align="center">{{ $apply['status'] }}</td>
-                            <td width="210" align="center">{{ $apply['created_at'] }}</td>
+                            <td width="150" align="center" style="font-size: 14px">{{ $apply['company'] }}</td>
+                            <td width="210" align="center" style="font-size: 14px">{{ $apply['job_name'] }}</td>
+                            <td width="210" align="center" style="font-size: 14px">{{ $apply['created_at'] }}</td>
                             <td width="200" align="center">
                                 <a href="#" style="text-decoration: none">删除</a>
                             </td>

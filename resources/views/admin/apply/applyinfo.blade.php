@@ -34,20 +34,28 @@
                             @foreach($data as $apply)
                                 <tr class="text-c">
                                     <td class="text-l">
-                                        <span>{{ $apply['user_id'] }}</span>
+                                        <span>{{ $apply['username'] }}</span>
                                     </td>
                                     <td>{{ $apply['created_at'] }}</td>
                                     <td>{{ $apply['job_name'] }}</td>
                                     <td>{{ $apply['exam_place'] }}</td>
                                     <td>{{ $apply['interview_place'] }}</td>
                                     <td class="td-status">
-                                       <span class="label label-success radius">
-                                           {{ $apply['status'] }}
-                                       </span>
+                                        <select name="status" style="width: 60px"
+                                                applyId="{{ $apply['id'] }}">
+                                            <option selected="selected">请选择</option>
+                                            <option value="0">未通过</option>
+                                            <option value="1">通知笔试</option>
+                                            <option value="2">通知面试</option>
+                                            <option value="3">通知体检</option>
+                                            <option value="4">录用</option>
+                                        </select>
                                     </td>
                                     <td class="f-14 td-manage">
-                                        <a style="text-decoration:none" class="ml-5"
-                                           onClick="article_edit('资讯编辑','article-add.html','10001')"
+                                        <a style="text-decoration:none" class="ml-5" userId="{{ $apply['user_id'] }}"
+                                           onClick="article_edit('简历浏览',
+                                           'http://bank.recruit.cn/frontend/resume/previewResume?userId='
+                                              + $(this).attr('userId'),'10001')"
                                            href="javascript:;" title="编辑">
                                             <i class="Hui-iconfont">&#xe6df;</i>
                                             查看简历
@@ -67,6 +75,7 @@
     <script type="text/javascript" src="/h-ui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
     <script type="text/javascript" src="/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/h-ui/lib/laypage/1.2/laypage.js"></script>
+    <script src="/js/admin/apply/applyinfo.js"></script>
     <script type="text/javascript">
 
 
@@ -129,30 +138,5 @@
                 });
         }
 
-        /*资讯-下架*/
-        function article_stop(obj,id){
-            layer.confirm('确认要下架吗？',function(index){
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
-                $(obj).remove();
-                layer.msg('已下架!',{icon: 5,time:1000});
-            });
-        }
-
-        /*资讯-发布*/
-        function article_start(obj,id){
-            layer.confirm('确认要发布吗？',function(index){
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-                $(obj).remove();
-                layer.msg('已发布!',{icon: 6,time:1000});
-            });
-        }
-        /*资讯-申请上线*/
-        function article_shenqing(obj,id){
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
-            $(obj).parents("tr").find(".td-manage").html("");
-            layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
-        }
     </script>
 @endsection

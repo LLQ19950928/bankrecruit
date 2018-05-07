@@ -16,6 +16,21 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">
+                    <span class="c-red">*</span>招聘单位：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <select name="company" class="select">
+                        <option value="0" selected="selected">----请选择----</option>
+                        @foreach($data as $bank)
+                            <option value="{{ $bank['id'] }}">{{ $bank['bank_name'] }}</option>
+                            @foreach($bank['pid'] as $branch)
+                                <option value="{{ $branch['id'] }}">---{{ $branch['bank_name'] }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>过期时间</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <input type="text" name="end_at" class="input-text" onClick="WdatePicker()">

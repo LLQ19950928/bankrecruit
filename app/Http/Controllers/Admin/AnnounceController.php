@@ -11,22 +11,41 @@ namespace App\Http\Controllers\Admin;
 
 use App\Handlers\ApiException;
 use App\Http\Controllers\Controller;
+use App\Logic\Backend\CateLogic;
 use App\Models\Announce;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 
 class AnnounceController extends Controller
 {
     public function getAnnounceInfo()
     {
-       $announce = Announce::whereIn('status', [1, 2])->get();
-       $data = $announce ? $announce->all() : false;
+       $announces = Announce::whereIn('status', [1, 2])->get();
+        foreach ($announces as &$announce)
+        {
+            $announce['company'] = (Bank::findFirstById($announce['company'],
+                ['bank_name'], true))['bank_name'];
+        }
+       $data = $announces ? $announces->all() : false;
        return view('admin/announce/announceinfo', ['data' => $data ? $data : []]);
+
     }
 
     public function editAnnounceInfo(Request $request)
     {
         if ($request->isMethod('get')) {
-            return view('admin/announce/editannounceinfo');
+            $banks = Bank::findAll(['id', 'bank_name', 'pid'], true);
+            $bankArr = [];
+            foreach ($banks as $k => $bank)
+            {
+                $bankArr[$k] = [
+                    'id' => $bank['id'],
+                    'bank_name' => $bank['bank_name'],
+                    'pid' => $bank['pid']];
+            }
+
+            $arr = CateLogic::getCategory($bankArr, 0);
+            return view('admin/announce/editannounceinfo', ['data' => $arr]);
         } else {
             $all = $request->all();
             $all['end_at'] = strtotime($all['end_at']);

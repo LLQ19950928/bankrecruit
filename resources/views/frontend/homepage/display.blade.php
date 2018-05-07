@@ -15,10 +15,10 @@
    <div class="main_content">
        <div class="cell">
            <div class="title_font">
-               <a href="http://bank.recruit.cn/frontend/aboutbank/getBankInfo">银行介绍</a>
+               <a href="http://bank.recruit.cn/frontend/aboutbank/getIntroductionInfo">银行介绍</a>
            </div>
            <div class="cell_1">
-               <a href="http://bank.recruit.cn/frontend/aboutbank/getBankInfo">
+               <a href="http://bank.recruit.cn/frontend/aboutbank/getIntroductionInfo">
                    <img alt="交行简介" src="/image/homepage/bank.gif">
                </a>
                <div class="cell_1_1">
@@ -68,7 +68,7 @@
                                    <div class="icon_new"></div>
                                    <div class="new_title">
                                        <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSchoolRecruitDetail?id={{ $schoolR['id'] }}"
-                                          class="text_color">{{ $schoolR['job_name'] }}</a>
+                                          class="text_color">{{ $schoolR['company'] }}</a>
                                    </div>
                                    <div class="news_createTime">{{ $schoolR['published_at'] }}</div>
                                </div>
@@ -80,7 +80,7 @@
                                    <div class="icon_new"></div>
                                    <div class="new_title">
                                        <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSocialRecruitDetail?id={{ $socialR['id'] }}"
-                                          class="text_color">{{ $socialR['job_name'] }}</a>
+                                          class="text_color">{{ $socialR['company'] }}</a>
                                    </div>
                                    <div class="news_createTime">{{ $socialR['published_at'] }}</div>
                                </div>

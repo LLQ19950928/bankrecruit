@@ -47,9 +47,9 @@ class ResumeController extends Controller
     /**
      * 预览简历
      */
-    public function previewResume()
+    public function previewResume(Request $request)
     {
-         $userId = session('userId');
+         $userId = $request->get('userId');
          $resumeId = Resume::findFirstByKey('user_id', $userId, ['id'], true)['id'];
          $bonusArr = Bonus::findMoreByKey('resume_id', $resumeId, ['*'], true);
          $eduArr = Education::findMoreByKey('resume_id', $resumeId, ['*'], true);
@@ -300,5 +300,7 @@ class ResumeController extends Controller
             session('resumeId'), ['*'], true);
         return view('frontend/resume/eval', ['data' => $eval ? $eval : []]);
     }
+
+
 
 }

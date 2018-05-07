@@ -135,6 +135,20 @@
                 </ul>
             </dd>
         </dl>
+        <dl id="menu-comments">
+            <dt>
+                <i class="Hui-iconfont">&#xe622;</i> 通知管理
+                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
+            <dd>
+                <ul>
+                    <li>
+                        <a href="http://bank.recruit.cn/admin/notice/noticeManage"
+                           title="评论列表">群发邮件</a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
     </div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

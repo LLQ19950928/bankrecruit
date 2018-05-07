@@ -17,8 +17,8 @@
         <div class="position_title">
             <table class="table_style">
                 <tr class="table_head">
+                    <td>招聘单位</td>
                     <td>职位名称</td>
-                    <td>部门</td>
                     <td>工作地点</td>
                     <td>招聘人数</td>
                     <td>截止日期</td>
@@ -26,11 +26,11 @@
                 </tr>
                 @foreach($data as $job)
                     <tr>
-                        <td>{{ $job['job_name'] }}</td>
                         <td>{{ $job['company'] }}</td>
+                        <td>{{ $job['job_name'] }}</td>
                         <td>{{ $job['work_place'] }}</td>
                         <td>{{ $job['number'] }}</td>
-                        <td>{{ $job['end_date'] }}</td>
+                        <td>{{ $job['end_at'] }}</td>
                         <td>
                             <a href="http://bank.recruit.cn/frontend/socialrecruit/getSocialRecruitDetail?id={{ $job['id'] }}">查看详情</a>
                         </td>
