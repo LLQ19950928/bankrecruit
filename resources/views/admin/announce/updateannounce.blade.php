@@ -9,23 +9,38 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公告标题：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" name="title" value="{{ $data['title'] }}">
-                    <input type="hidden" name="id" value="{{ $data['id'] }}">
+                    <input type="text" class="input-text" name="title" value="{{ $data['announce']['title'] }}">
+                    <input type="hidden" name="id" value="{{ $data['announce']['id'] }}">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>是否发布：</label>
-                <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select name="status" class="select">
-					<option value="0">----请选择----</option>
-					<option value="1" @if($data['status'] == 1)
-                           selected="selected" @endif>是</option>
-					<option value="2" @if($data['status'] == 2)
-                           selected="selected" @endif>否</option>
-				</select>
-				</span> </div>
+                <label class="form-label col-xs-4 col-sm-2">
+                    <span class="c-red">*</span>招聘单位：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <select name="company" class="select">
+                        <option value="0">----请选择----</option>
+                        @foreach($data['bank'] as $bank)
+                            @if($data['announce']['company'] == $bank['id'])
+                                <option value="{{ $bank['id'] }}" selected="selected">
+                                    {{ $bank['bank_name'] }}
+                                </option>
+                            @else
+                                <option value="{{ $bank['id'] }}">{{ $bank['bank_name'] }}</option>
+                            @endif
+                            @foreach($bank['pid'] as $branch)
+                                <option value="{{ $branch['id'] }}">---{{ $branch['bank_name'] }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div class="row cl" announce="{{ $data['content'] }}" id="contentDiv">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>过期时间</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" name="end_at" class="input-text" onClick="WdatePicker()" value="{{ date('Y-m-d', $data['announce']['end_at']) }}">
+                </div>
+            </div>
+            <div class="row cl" announce="{{ $data['announce']['content'] }}" id="contentDiv">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>公告内容：</label>
                 <div class="formControls col-xs-8 col-sm-9">
 
@@ -34,8 +49,8 @@
                     </div>
                     <div class="row cl">
                         <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                        <button class="btn btn-primary radius" type="button" id='commitButton'><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-                    <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                        <button class="btn btn-primary radius" type="button" id='saveButton'><i class="Hui-iconfont">&#xe632;</i> 保存为草稿</button>
+                    <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;发布&nbsp;&nbsp;</button>
                     </div>
                     </div>
                     </form>
@@ -67,7 +82,7 @@
                             ue.setContent(content);
                         });
 
-                        $('#commitButton').click(function () {
+                        $('#saveButton').click(function () {
                             $.ajax({
                                 url: 'http://bank.recruit.cn/admin/announce/updateAnnounceInfo',
                                 dataType: 'json',

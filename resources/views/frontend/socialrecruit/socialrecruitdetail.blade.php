@@ -48,7 +48,6 @@
             </select>
             <input type="hidden" value="{{ $data['id'] }}" name="job_id">
             <input type="hidden" value="{{ session('userId') }}" name="user_id">
-            <input type="hidden" value="{{ $data['is_update'] }}" name="is_update">
         </div>
     </form>
     <div class="table_style">
@@ -64,7 +63,7 @@
                 <td>{{ $data['job_name'] }}</td>
                 <td>{{ $data['published_at'] }}</td>
                 <td>{{ $data['work_place'] }}</td>
-                <td>{{ $data['end_date'] }}</td>
+                <td>{{ $data['end_at'] }}</td>
                 <td>{{ $data['company'] }}</td>
             </tr>
         </table>

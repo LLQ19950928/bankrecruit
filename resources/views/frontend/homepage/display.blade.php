@@ -79,7 +79,7 @@
                                <div class="cell_li">
                                    <div class="icon_new"></div>
                                    <div class="new_title">
-                                       <a href="http://bank.recruit.cn/frontend/schoolrecruit/getSocialRecruitDetail?id={{ $socialR['id'] }}"
+                                       <a href="http://bank.recruit.cn/frontend/socialrecruit/getSocialRecruitDetail?id={{ $socialR['id'] }}"
                                           class="text_color">{{ $socialR['company'] }}</a>
                                    </div>
                                    <div class="news_createTime">{{ $socialR['published_at'] }}</div>

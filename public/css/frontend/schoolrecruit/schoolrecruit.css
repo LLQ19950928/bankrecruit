@@ -47,3 +47,9 @@
 .table_style a {
     text-decoration: none;
 }
+
+.search_style {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 40%;
+}

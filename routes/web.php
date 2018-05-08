@@ -99,6 +99,7 @@ Route::group(['namespace' => 'Frontend',
     Route::group(['prefix' => 'schoolrecruit'], function () {
 
         Route::get('getSchoolRecruitInfo', 'SchoolRecruitController@getSchoolRecruitInfo');
+        Route::get('getDesignatedInfo', 'SchoolRecruitController@getDesignatedInfo');
         Route::get('getSchoolRecruitDetail', 'SchoolRecruitController@getSchoolRecruitDetail');
     });
 
@@ -130,6 +131,7 @@ Route::group(['namespace' => 'Frontend',
     Route::group(['namespace' => 'Admin',
          'prefix' => 'admin'], function () {
 
+
        Route::group(['prefix' => 'notice'], function () {
 
            Route::get('noticeManage', 'NoticeController@noticeManage');
@@ -158,6 +160,7 @@ Route::group(['namespace' => 'Frontend',
             Route::any('editAnnounceInfo', 'AnnounceController@editAnnounceInfo');
             Route::any('updateAnnounceInfo', 'AnnounceController@updateAnnounceInfo');
             Route::any('updateAnnounceStatus', 'AnnounceController@updateAnnounceStatus');
+            Route::get('getAnnounceDetail', 'AnnounceController@getAnnounceDetail');
         });
 
         Route::group(['prefix' => 'schoolrecruit'], function () {

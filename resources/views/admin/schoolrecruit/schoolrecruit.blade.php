@@ -34,8 +34,8 @@
                                 <th width="150">招聘单位</th>
                                 <th width="100">职位名称</th>
                                 <th width="150">招聘人数</th>
-                                <th width="120">创建时间</th>
-                                <th width="120">更新时间</th>
+                                <th width="120">工作地点</th>
+                                <th width="120">截止时间</th>
                                 <th width="60">发布状态</th>
                                 <th width="120">操作</th>
                             </tr>
@@ -52,8 +52,8 @@
                                     <td class="text-l">
                                         <span>{{ $job['number'] }}</span>
                                     </td>
-                                    <td>{{ $job['created_at'] }}</td>
-                                    <td>{{ $job['updated_at'] }}</td>
+                                    <td>{{ $job['work_place'] }}</td>
+                                    <td>{{ date('Y-m-d', $job['end_at']) }}</td>
                                     <td class="td-status">
                                            <span class="label label-success radius">
                                                @if($job['status'] == 1)
