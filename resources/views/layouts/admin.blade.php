@@ -144,7 +144,7 @@
                 <ul>
                     <li>
                         <a href="http://bank.recruit.cn/admin/notice/noticeManage"
-                           title="评论列表">群发邮件</a>
+                           title="评论列表">编辑通知消息</a>
                     </li>
                 </ul>
             </dd>

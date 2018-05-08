@@ -7,7 +7,7 @@
         <button class="cancel_button" id="cancelForeign">取消添加</button>
     </div>
     <div>
-        @if($data)
+        @if($data['userFn'])
             <table class="table_style">
                 <tr>
                     <th>类别</th>

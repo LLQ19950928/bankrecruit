@@ -21,7 +21,7 @@ $(document).ready(function () {
     $("#saveButton").click(function () {
 
         $.ajax({
-            url: 'http://bank.recruit.cn/backend/resume/editWorkExperienceInfo',
+            url: 'http://bank.recruit.cn/backend/resume/editEduSituation',
             dataType: 'json',
             type: 'post',
             data: $("#resumeForm").serialize(),

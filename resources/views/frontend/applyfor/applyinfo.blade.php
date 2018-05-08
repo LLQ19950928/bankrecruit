@@ -43,16 +43,16 @@
                           <td width="210" align="center">申请日期</td>
                           <td width="200" align="center">操作</td>
                         </tr>
-                    @foreach($data as $apply)
+                        @if($data)
                         <tr height="40">
-                            <td width="150" align="center" style="font-size: 14px">{{ $apply['company'] }}</td>
-                            <td width="210" align="center" style="font-size: 14px">{{ $apply['job_name'] }}</td>
-                            <td width="210" align="center" style="font-size: 14px">{{ $apply['created_at'] }}</td>
+                            <td width="180" align="center" style="font-size: 14px">{{ $data['company'] }}</td>
+                            <td width="210" align="center" style="font-size: 14px">{{ $data['job_name'] }}</td>
+                            <td width="210" align="center" style="font-size: 14px">{{ $data['created_at'] }}</td>
                             <td width="200" align="center">
                                 <a href="#" style="text-decoration: none">删除</a>
                             </td>
                         </tr>
-                    @endforeach
+                        @endif
                 </table>
             </div>
         </div>

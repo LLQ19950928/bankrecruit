@@ -16,7 +16,7 @@
                    onclick="article_add('发送邮件','http://bank.recruit.cn/admin/notice/displayEmail')"
                    href="javascript:;">
                     <i class="Hui-iconfont">&#xe600;</i>
-                    群发邮件
+                    发送通知
                 </a>
 				</span>
                 </div>

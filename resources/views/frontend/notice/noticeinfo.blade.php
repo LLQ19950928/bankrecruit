@@ -37,7 +37,6 @@
         </div>
         <div class="main_you2">
             <div class="main_you2_3">
-                @if($data)
                     <table width="730" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                         <tr height="40" bgcolor="#114D8B" style="color: #FFF; font-size: 14px">
                             <td width="100" align="center">通知发布机构</td>
@@ -45,6 +44,7 @@
                             <td width="100" align="center">日期</td>
                             <td width="210" align="center">操作</td>
                         </tr>
+                        @if($data)
                         <tr height="40">
                             <td align="center" style="color: #333333">{{ $data['company'] }}</td>
                             <td align="center" style="color: #333333">{{ $data['type_value'] }}</td>

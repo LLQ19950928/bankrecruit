@@ -47,13 +47,10 @@ class NoticeController extends Controller
          }else {
              $notice = Notice::create($post);
          }
-         //发送邮件
-         $apply = Apply::findMoreByKey('status', $post['type'], ['user_id'], true);
-         $users = [];
-         foreach ($apply as $a) {
-              $users[] = (User::findFirstById($a['user_id'],
-                  ['username'], true))['username'];
+         if ($notice) {
+             return response()->json(ApiException::success(ApiException::SUCCESS));
+         }else {
+             return response()->json(ApiException::error(ApiException::FAILED));
          }
-         Mail::to($users[0]['username'])->send(new \App\Mail\Notice($notice['content']));
      }
 }

@@ -87,7 +87,7 @@
         </div>
         <div class="btn_style">
             <button class="btn btn-primary" type="button"
-                    id="applyBtn" username="{{ session('username') }}">我要申请</button>
+                    id="applyBtn" userId="{{ session('userId') }}">我要申请</button>
         </div>
     </div>
 @endsection

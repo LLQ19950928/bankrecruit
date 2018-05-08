@@ -33,6 +33,7 @@ $(document).ready(function () {
                 if (res.code == 10003) {
                     alert(res.msg);
                 }else {
+
                     for(var i = 0; i < res.data.length; i++)
                     {
                         if($('#cSelect').attr('city') == res.data[i]['id']) {

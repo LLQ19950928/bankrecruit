@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apply;
+use App\Models\Bank;
 use App\Models\Job;
 use App\Models\Notice;
 use Illuminate\Http\Request;
@@ -23,8 +24,9 @@ class NoticeController extends Controller
              session('userId'), ['*'], true);
         $result = [];
         if ($apply['status'] != 0) {
-            $company = (Job::findFirstById($apply['job_id'],
+            $bankId = (Job::findFirstById($apply['job_id'],
                 ['company'], true))['company'];
+            $company = (Bank::findFirstById($bankId, ['bank_name'], true))['bank_name'];
             $notice = Notice::findFirstByKey('email_type', $apply['status'],
                 ['updated_at', 'email_type'], true);
             $typeValue = '';

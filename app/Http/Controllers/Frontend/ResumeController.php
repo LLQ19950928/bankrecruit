@@ -114,7 +114,7 @@ class ResumeController extends Controller
             $data['userInfo'] = $userInfoArr;
         }
 
-        return view('frontend/resume/resumebaseinfo', ['data' => $data]);
+        return view('frontend/resume/resumebaseinfo', ['data' => $data ? $data : []]);
 
     }
 
@@ -229,6 +229,8 @@ class ResumeController extends Controller
                     $user['certificate_name_id'], ['certificate_name'], true)['certificate_name'];
             }
             $data['user'] = $userCertificate;
+        }else {
+            $data['user'] = [];
         }
         $userForeign = UserForeign::findMoreByKey('user_id',
             session('userId'), ['*'], true);
@@ -242,8 +244,9 @@ class ResumeController extends Controller
                     $foreign['foreign_name_id'], ['level_name'], true)['level_name'];
             }
             $data['userFn'] = $userForeign;
+        }else {
+            $data['userFn'] = [];
         }
-
         $data['type'] = $type;
         $data['foreign'] = $foreignType;
         return view('frontend/resume/certificate', ['data' => $data ? $data : []]);

@@ -54,6 +54,7 @@ class ResumeController extends Controller
             $userInfo = UserInfo::create($post);
             $result = $resume->update(['info_id' => $userInfo->id]);
         }else {
+//            $post['user_id'] = session('userId');
             $result = UserInfo::findFirstById($resume->info_id)->update($post);
         }
         if ($result) {

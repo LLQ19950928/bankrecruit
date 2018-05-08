@@ -11,7 +11,7 @@
         <form class="form form-horizontal" id="notice" method="post" action="">
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
-                    <span class="c-red">*</span>邮件类型：</label>
+                    <span class="c-red">*</span>通知类型：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                     <select name="email_type" id="emailType">
                         <option selected="selected">请选择</option>
@@ -25,7 +25,7 @@
             <input type="hidden" id="ec">
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2">
-                   <span class="c-red">*</span>编辑邮件：</label>
+                   <span class="c-red">*</span>编辑通知：</label>
                    <div class="formControls col-xs-8 col-sm-9">
                        <script id="content" type="text/plain" style="width:100%;height:300px;"
                                name="content"></script>
@@ -35,7 +35,7 @@
                 <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                    <button class="btn btn-primary radius"
                            type="button" id='sendButton'>
-                       <i class="Hui-iconfont">&#xe632;</i>发送邮件
+                       <i class="Hui-iconfont">&#xe632;</i>发送通知
                    </button>
                 </div>
             </div>

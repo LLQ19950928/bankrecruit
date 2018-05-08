@@ -17,7 +17,7 @@ $(document).ready(function () {
     $("#saveButton").click(function () {
 
         $.ajax({
-            url: 'http://bank.schoolrecruit.cn/backend/resume/editFamilyMember',
+            url: 'http://bank.recruit.cn/backend/resume/editFamilyMember',
             dataType: 'json',
             type: 'post',
             data: $("#resumeForm").serialize(),
